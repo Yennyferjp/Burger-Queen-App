@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Questrial&display=swap');
+
+body {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.92) 0%, rgba(34, 3, 30, 0.92) 25%, rgba(95, 40, 87, 0.92) 48.44%, rgba(34, 3, 30, 0.92) 70.31%, rgba(0, 0, 0, 0.92) 100%);
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+}
+
+.titulo {
+  color: #E6E6E6;
+  text-align: center;
+  font-family: Kavoon;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.logo-login {
+  display: flex;
+  width: 325px;
+  height: 329.369px;
+  margin-top: -325px;
+}

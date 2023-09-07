@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import Modal from "react-modal";
-
+import "./products.css";
 
 export function Products() {
   // Estado para almacenar los productos creados

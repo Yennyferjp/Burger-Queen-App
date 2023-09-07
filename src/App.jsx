@@ -28,7 +28,7 @@ function App() {
           />
 
           {/* Ruta para la página de productos */}
-          <Route path="/productos" element={<Products />}
+          <Route path="/products" element={<Products />}
           /> 
 
           {/* Redirección predeterminada a la página de inicio de sesión */}

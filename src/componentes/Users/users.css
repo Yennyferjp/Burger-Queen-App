@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Questrial&family=Quicksand&family=Rammetto+One&display=swap');
+
+.navbar-user {
+    padding: 10px 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-image-logout {
+    width: 79px;
+    height: 73px;
+    margin-right: 10px;
+}
+
+.navbar-logout {
+    color: #FFF;
+    font-family: Rammetto One;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-image-logo {
+    width: 142px;
+    height: 143.909px;
+    margin-left: 10px;
+}
+
+/* Estilo para el botón cuando está activo */
+.active-button {
+    background: #AD59A1;
+}
+
+.nav-button{
+    border-radius: 16.136px;
+    border: 3px solid #FF6584;
+    color: #FFF;
+    text-align: center;
+    font-family: Quicksand;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    padding: 10px;
+    margin: 0 2rem;
+}
+
+.h1Users {
+    margin-top: 34px;
+    color: #E6E6E6;
+    text-align: center;
+    font-family: Kavoon;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.div-formulario-users {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-users {
+    width: 181px;
+    height: 47px;
+    border-radius: 16.136px;
+    border: 3px solid #AD59A1;
+    background: #FFF;
+    color: rgba(30, 30, 30, 0.67);
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+    font-family: Quicksand;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 10px;
+    padding-left: 10px;
+
+}
+
+.div-pass-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-add-user {
+    width: 105px;
+    height: 47px;
+    border-radius: 16.136px;
+    border: 1px solid #E6E6E6;
+    background: #E02181;
+    color: #FFF;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+    font-family: Quicksand;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 10px;
+    padding-left: 10px;
+}
+
+.h2-users {
+    color: #E6E6E6;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+    font-family: Quicksand;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+
+
+.input-users {
+    /* Estilos para el select */
+  }
+  
+  .input-users option {
+    /* Estilos para las opciones */
+    background-color: #FFF; /* Color de fondo */
+    color: #333; /* Color del texto */
+    padding: 5px 10px; /* Espaciado interno */
+    font-size: 14px; /* Tamaño de fuente */
+    border: none; /* Elimina el borde predeterminado de las opciones */
+  }
+  
+  .input-users option:hover {
+    /* Estilos cuando el mouse está sobre una opción */
+    background-color: #AD59A1; /* Cambia el color de fondo al pasar el mouse */
+    color: #FFF; /* Cambia el color del texto al pasar el mouse */
+  }
+  

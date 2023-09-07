@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { Login } from './componentes/Login/login';
 import { Orden } from './componentes/Orden/orden';
-import { Usuarios } from './componentes/Usuarios/usuarios';
+import { Users } from './componentes/Users/users';
 import { useState } from 'react'
 import './App.css'
 
@@ -23,7 +23,7 @@ function App() {
           />
           
           {/* Ruta para la página de usuarios */}
-          <Route path="/usuarios" element={<Usuarios />} 
+          <Route path="/users" element={<Users />} 
           />
           
           {/* Redirección predeterminada a la página de inicio de sesión */}

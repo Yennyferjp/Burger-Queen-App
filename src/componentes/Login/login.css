@@ -24,8 +24,10 @@ body {
 }
 
 .logo-login {
-  display: flex;
+  margin-top: 7rem;
   width: 325px;
   height: 329.369px;
-  margin-top: -325px;
+  justify-content: center;
+  align-items: center;
+
 }

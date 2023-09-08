@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import Modal from "react-modal";
+import { useNavigate } from "react-router-dom";
 import "./products.css";
+import { Link, useMatch } from "react-router-dom";
+
+import logout from "./images/flecha-logout.png";
+import logo from "./images/logo_bq.png";
+
 
 export function Products() {
   // Estado para almacenar los productos creados
@@ -123,42 +129,94 @@ export function Products() {
     setProducts(newProducts);
   }
 
+  const navigate = useNavigate();
+  const handleLogoutClick = () => {
+    navigate("/login");
+  };
+
+  const usuariosMatch = useMatch("/users");
+  const productosMatch = useMatch("/products");
 
   return (
     <div>
-      <button onClick={() => window.location.href = "/productos"}>Productos</button>
-      <button onClick={() => window.location.href = "/usuarios"}>Usuarios</button>
-      <div>
-        <h1>Gestión de Productos</h1>
-        <div>
-          <input type="text"
-            placeholder="Nombre del producto"
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)} />
-        </div>
-        <div>
-          <input type="text"
-            placeholder="Tipo"
-            value={productType}
-            onChange={(e) => setProductType(e.target.value)} />
-        </div>
-        <div>
-          <input type="text"
-            placeholder="ID"
-            value={productId}
-            onChange={(e) => setProductId(e.target.value)} />
-        </div>
-        <div>
-          <input type="text"
-            placeholder="Precio"
-            value={productPrice}
-            onChange={(e) => setProductPrice(e.target.value)} />
-        </div>
-        <button onClick={addNewProduct}>Agregar</button>
+      <div className="navbar-products">
+        <nav>
+          <div className="navbar-products-left">
+            <img
+              src={logout}
+              alt="logout"
+              className="navbar-image-logout"
+            />
+            <p className="navbar-logout" onClick={handleLogoutClick}>
+              Salir
+            </p>
+          </div>
+          <div className="navbar-products-right">
+            <img
+              src={logo}
+              alt="Imagen 2"
+              className="navbar-image-logo"
+            />
+          </div>
+        </nav>
       </div>
       <div>
-        <h2>Lista de Productos</h2>
-        <table>
+        <Link
+          to="/users"
+          className={`nav-button ${usuariosMatch ? "active-button" : ""}`}
+        >Usuarios
+        </Link>
+        <Link
+          to="/products"
+          className={`nav-button ${productosMatch ? "active-button" : ""}`}
+        > Productos
+        </Link>
+      </div>
+      <div>
+        <h1 className="h1Products">Gestión de Productos</h1>
+        <div className="div-formulario-products">
+          <div>
+            <input type="text"
+              placeholder="Nombre del producto"
+              value={productName}
+              onChange={(e) => setProductName(e.target.value)}
+              className="input-products" />
+          </div>
+          <div>
+            <input type="text"
+              placeholder="ID"
+              value={productId}
+              onChange={(e) => setProductId(e.target.value)}
+              className="input-products" />
+          </div>
+          <div>
+            <input type="text"
+              placeholder="Precio"
+              value={productPrice}
+              onChange={(e) => setProductPrice(e.target.value)}
+              className="input-products" />
+          </div>
+          <div className="div-type-btn">
+            <h2 className="h2-products">Elige el tipo</h2>
+            <div>
+              <select
+                value={productType} onChange={(e) => setProductType(e.target.value)}
+                className="input-products">
+                <option value="Desayuno">Desayuno</option>
+                <option value="Almuerzo">Almuerzo</option>
+                <option value="Acompañamientos">Acompañamientos</option>
+              </select>
+            </div>
+            <button onClick={addNewProduct}
+              className="btn-add-product"
+            >Agregar
+            </button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2 className="h2-products">Lista de Productos</h2>
+        <table className="products-table">
           <thead>
             <tr>
               <th>Nombre</th>
@@ -170,14 +228,16 @@ export function Products() {
           </thead>
           <tbody>
             {products.map((product, index) => (
-              <tr key={index}>
+              <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
                 <td>{product.productName}</td>
                 <td>{product.productType}</td>
                 <td>{product.productId}</td>
                 <td>{product.productPrice}</td>
                 <td>
-                  <button onClick={() => deleteProduct(index)}>Eliminar</button>
-                  <button onClick={() => openProductModal(index)}>Editar</button>
+                  <div className="products-actions">
+                  <button onClick={() => deleteProduct(index)} className="delete-btn"></button>
+                  <button onClick={() => openProductModal(index)} className="edit-btn"></button>
+                </div>
                 </td>
               </tr>
             ))}

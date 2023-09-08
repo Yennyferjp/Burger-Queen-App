@@ -163,8 +163,9 @@ nav {
   .products-table thead tr {
     font-family: Quicksand;
     font-size: 20px;
-    background-color: #B57FAD;
-    color: white;
+    background-color: #E1CB74;
+    color: #5F2857;
+    /*falta poner en bold el encabezado, font-weight no funciona*/
   }
 
   .even-row {
@@ -173,7 +174,7 @@ nav {
   }
 
   .odd-row {
-    background: #B57FAD;
+    background: #E1CB74;
     height: 40px;
   }
 

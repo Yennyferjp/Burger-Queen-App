@@ -276,43 +276,57 @@ export function Users() {
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 contentLabel="Editar Usuario"
+                className="custom-modal"
             >
-                <h1>Editar Usuario</h1>
-                <div>
-                    <label>Nombre:</label>
-                    <input type="text"
+                <h1 className="h1Users">Editar Usuario</h1>
+                <div className="form-group">
+                    <label className="label-style">Nombre:</label>
+                    <input
+                        type="text"
                         placeholder="Nombre"
                         value={name}
-                        onChange={(e) => setName(e.target.value)} />
+                        onChange={(e) => setName(e.target.value)}
+                        className="input-field"
+                    />
                 </div>
-                <div>
-                    <label>Correo:</label>
-                    <input type="text"
+                <div className="form-group">
+                    <label className="label-style">Correo:</label>
+                    <input
+                        type="text"
                         value={email}
                         placeholder="Correo"
-                        onChange={(e) => setEmail(e.target.value)} />
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="input-field"
+                    />
                 </div>
-                <div>
-                    <label>Rol:</label>
-                    <select value={rol} onChange={(e) => setRol(e.target.value)}>
+                <div className="form-group">
+                    <label className="label-style">Rol:</label>
+                    <select
+                        value={rol}
+                        onChange={(e) => setRol(e.target.value)}
+                        className="input-field"
+                    >
                         <option value="Administrador">Administrador</option>
                         <option value="Mesero">Mesero</option>
                         <option value="Chef">Chef</option>
                     </select>
                 </div>
-                <div>
-                    <label>Contraseña:</label>
+
+                <div className="form-group">
+                    <label className="label-style">Contraseña:</label>
                     <input type="text"
                         value={password}
                         placeholder="Contraseña"
-                        onChange={(e) => setPassword(e.target.value)} />
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="input-field"
+                    />
                 </div>
-                <div>
-                    <label>Activo:</label>
+                <div >
+                    <label className="label-style">Activo:</label>
                     <input type="checkbox" checked={active} onChange={(e) => setActive(e.target.checked)} />
                 </div>
-                <button onClick={saveChanges}>Guardar Cambios</button>
-                <button onClick={closeModal}>Cancelar</button>
+                <button className="btn-saveChanges" onClick={saveChanges}>Guardar Cambios</button>
+                <button className="btn-closeModal" onClick={closeModal}>Cancelar</button>
             </Modal>
         </div>
     );

@@ -2,8 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { Login } from './componentes/Login/login';
 import { Orden } from './componentes/Orden/orden';
-import { Usuarios } from './componentes/Usuarios/usuarios';
+import { Users } from './componentes/Users/users';
 import { Products } from './componentes/Products/products';
+
 import { useState } from 'react'
 import './App.css'
 
@@ -24,7 +25,7 @@ function App() {
           />
 
           {/* Ruta para la página de usuarios */}
-          <Route path="/usuarios" element={<Usuarios />}
+          <Route path="/users" element={<Users />} 
           />
 
           {/* Ruta para la página de productos */}

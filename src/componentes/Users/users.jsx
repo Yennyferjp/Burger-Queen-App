@@ -242,7 +242,7 @@ export function Users() {
             </div>
             <div>
                 <h2 className="h2-users">Lista de Usuarios</h2>
-                <table>
+                <table className="users-table">
                     <thead>
                         <tr>
                             <th>Nombre</th>
@@ -254,14 +254,16 @@ export function Users() {
                     </thead>
                     <tbody>
                         {users.map((user, index) => (
-                            <tr key={index}>
+                            <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
                                 <td>{user.nombre}</td>
                                 <td>{user.correo}</td>
                                 <td>{user.rol}</td>
                                 <td>{user.activo ? "Sí" : "No"}</td>
                                 <td>
-                                    <button onClick={() => deleteUser(index)}>Eliminar</button>
-                                    <button onClick={() => openModal(index)}>Editar</button>
+                                <div className="users-actions"> 
+                                    <button onClick={() => deleteUser(index)} className="delete-btn"></button>
+                                    <button onClick={() => openModal(index)} className="edit-btn"></button>
+                                </div>
                                 </td>
                             </tr>
                         ))}

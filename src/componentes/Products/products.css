@@ -131,25 +131,6 @@ nav {
     line-height: normal;
 }
 
-.input-users {
-    /* Estilos para el select */
-  }
-  
-  .input-users option {
-    /* Estilos para las opciones */
-    background-color: #FFF; /* Color de fondo */
-    color: #333; /* Color del texto */
-    padding: 5px 10px; /* Espaciado interno */
-    font-size: 14px; /* Tamaño de fuente */
-    border: none; /* Elimina el borde predeterminado de las opciones */
-  }
-  
-  .input-users option:hover {
-    /* Estilos cuando el mouse está sobre una opción */
-    background-color: #AD59A1; /* Cambia el color de fondo al pasar el mouse */
-    color: #FFF; /* Cambia el color del texto al pasar el mouse */
-  }
-
   .products-table {
     font-family: Quicksand;
     font-size: 15px;

@@ -49,7 +49,7 @@ nav {
     background: #AD59A1;
 }
 
-.nav-button{
+.nav-button {
     border-radius: 16.136px;
     border: 3px solid #FF6584;
     color: #FFF;
@@ -103,9 +103,14 @@ nav {
     align-items: center;
     justify-content: center;
 }
-
-.btn-add-user {
-    width: 105px;
+.user-management{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-add-user
+{
+    width: 200px;
     height: 47px;
     border-radius: 16.136px;
     border: 1px solid #E6E6E6;
@@ -118,8 +123,15 @@ nav {
     font-weight: 700;
     line-height: normal;
     margin: 10px;
-    padding-left: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+
 }
+
+
 
 .h2-users {
     color: #E6E6E6;
@@ -131,28 +143,7 @@ nav {
     line-height: normal;
 }
 
-
-
-.input-users {
-    /* Estilos para el select */
-  }
-  
-  .input-users option {
-    /* Estilos para las opciones */
-    background-color: #FFF; /* Color de fondo */
-    color: #333; /* Color del texto */
-    padding: 5px 10px; /* Espaciado interno */
-    font-size: 14px; /* Tamaño de fuente */
-    border: none; /* Elimina el borde predeterminado de las opciones */
-  }
-  
-  .input-users option:hover {
-    /* Estilos cuando el mouse está sobre una opción */
-    background-color: #AD59A1; /* Cambia el color de fondo al pasar el mouse */
-    color: #FFF; /* Cambia el color del texto al pasar el mouse */
-  }
-  
-  .users-table {
+.users-table {
     font-family: Quicksand;
     font-size: 15px;
     color: black;
@@ -160,47 +151,169 @@ nav {
     border: hidden;
     margin: 0 auto;
     border-collapse: collapse;
-  }
+}
 
-  .users-table thead tr {
+.users-table thead tr {
     font-family: Quicksand;
     font-size: 20px;
     background-color: #B57FAD;
     color: white;
     /*falta poner en bold el encabezado, font-weight no funciona*/
-  }
+}
 
-  .even-row {
+.even-row {
     background: #D9D9D9;
     height: 40px;
-  }
+}
 
-  .odd-row {
+.odd-row {
     background: #B57FAD;
     height: 40px;
-  }
+}
 
-  .users-actions {
+.users-actions {
     display: flex;
     justify-content: space-evenly;
-  }
+}
 
-  .delete-btn {
+.delete-btn {
     background-color: transparent;
     background-image: url('./images/delete.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
     height: 25px;
+    width: 25px;
     border: none;
-  }
+}
 
-  .edit-btn {
+.edit-btn {
     background-color: transparent;
     background-image: url('./images/edit.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
     height: 25px;
+    width: 25px;
     border: none;
-  }
+}
+
+/*Modal*/
+
+.custom-modal-edituser {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.92) 0%, rgba(34, 3, 30, 0.92) 25%, rgba(95, 40, 87, 0.92) 48.44%, rgba(34, 3, 30, 0.92) 70.31%, rgba(0, 0, 0, 0.92) 100%);
+    border: 2px solid #333;
+    border-radius: 5px;
+    max-width: 400px;
+    margin: 15% auto;
+}
+
+.custom-modal-adduser {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.92) 0%, rgba(34, 3, 30, 0.92) 25%, rgba(95, 40, 87, 0.92) 48.44%, rgba(34, 3, 30, 0.92) 70.31%, rgba(0, 0, 0, 0.92) 100%);
+    border: 2px solid #333;
+    border-radius: 5px;
+    max-width: 400px;
+    margin: 15% auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: space-around;
+}
+
+.input-field {
+    flex: 2;
+    width: 200px;
+    height: 27px;
+    border-radius: 11.135999999999996px;
+    border: 2px solid #AD59A1;
+    background: #FFF;
+    font-size: 1rem;
+    font-family: Quicksand;
+    font-weight: 700;
+    margin: 0 20px;
+    outline: none;
+
+}
+
+.label-style {
+    flex: 1;
+    margin-right: 10px;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Quicksand;
+    margin-left: 20px;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    cursor: pointer;
+
+}
+
+/* Estilo base para el checkbox */
+input[type="checkbox"] {
+    width: 177px;
+    height: 20px;
+    cursor: pointer;
+}
+
+/* Estilo para el checkbox cuando está marcado */
+input[type="checkbox"]:checked {
+    background-color: #3498db;
+    border: 1px solid #3498db;
+}
+
+.btn-saveChanges {
+    height: 47px;
+    border-radius: 16.136px;
+    border: 1px solid #E6E6E6;
+    background: #E02181;
+    color: #FFF;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+    font-family: Quicksand;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left: 70px;
+}
+
+.btn-closeModal {
+    height: 47px;
+    border-radius: 16.136px;
+    border: 1px solid #E6E6E6;
+    background: #E02181;
+    color: #FFF;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+    font-family: Quicksand;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 10px;
+}
+/*Termina Modal*/
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button.cancel {
+    background-color: #ccc;
+    /* Cambia el color de fondo del botón Cancelar */
+    color: #333;
+}
+
+button.cancel:hover {
+    background-color: #999;
+    /* Cambia el color de fondo del botón Cancelar al pasar el mouse */
+}
+

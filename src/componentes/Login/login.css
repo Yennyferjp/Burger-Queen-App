@@ -2,6 +2,7 @@
 
 body {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.92) 0%, rgba(34, 3, 30, 0.92) 25%, rgba(95, 40, 87, 0.92) 48.44%, rgba(34, 3, 30, 0.92) 70.31%, rgba(0, 0, 0, 0.92) 100%);
+
 }
 
 .login {
@@ -30,4 +31,44 @@ body {
   justify-content: center;
   align-items: center;
 
+}
+
+.input-field-login {
+  width: 250px;
+  height: 47px;
+  border-radius: 16.136px;
+  border: 3px solid #AD59A1;
+  color: rgba(30, 30, 30, 0.67);
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  font-family: Quicksand;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding-left: 10px;
+
+}
+
+.btn-continue {
+  width: 200px;
+  height: 50px;
+  border-radius: 16.136px;
+  border: 1px solid #E6E6E6;
+  background: #E02181;
+  color: #FFF;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  margin: 10px;
+  text-align: center;
+  font-family: Rammetto One;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.p-error{
+  color: #FFF;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  font-family: Quicksand;
+  font-size: 20px;
+  font-style: normal;
 }

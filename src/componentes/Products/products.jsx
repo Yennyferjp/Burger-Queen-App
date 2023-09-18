@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import "./products.css";
 import { Link, useMatch } from "react-router-dom";
+import { addProductToBackend } from "../../services/products-services";
 
 import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
@@ -39,7 +40,7 @@ export function Products() {
     setProductModalIsOpen(false);
   };
 
-  const saveProductsChanges = () => {
+  const saveProductsChanges = async () => {
     if (productName === "" || productType === "" || productId === "" || productPrice === "") {
       Swal.fire({
         icon: "error",
@@ -56,19 +57,15 @@ export function Products() {
       productPrice
     };
 
-    if (editingProduct !== null) {
-      const newProducts = [...products];
-      newProducts[editingProduct] = newProduct;
-      setProducts(newProducts);
+    const newProducts = [...products];
+    newProducts[editingProduct] = newProduct;
+    setProducts(newProducts);
 
-      Swal.fire({
-        icon: "success",
-        title: "Producto Editado",
-        text: "El producto ha sido editado exitosamente.",
-      });
-    } else {
-      setProducts([...products, newProduct]);
-    }
+    Swal.fire({
+      icon: "success",
+      title: "Producto Editado",
+      text: "El producto ha sido editado exitosamente.",
+    });
 
     setProductName("");
     setProductType("");
@@ -77,7 +74,7 @@ export function Products() {
     closeProductModal();
   };
 
-  const addNewProduct = () => {
+  const addNewProduct = async () => {
     if (productName === "" || productType === "" || productId === "" || productPrice === "") {
 
       Swal.fire({
@@ -89,32 +86,22 @@ export function Products() {
     }
 
     const newProduct = {
-      productName,
-      productType,
-      productId,
-      productPrice
+      name: productName,
+      type: productType,
+      price: productPrice
     };
 
-    if (editingProduct !== null) {
-      // Si estamos en modo de edición, actualiza el producto seleccionado
-      const newProducts = [...products];
-      newProducts[editingProduct] = newProduct;
-      setProducts(newProducts);
-
-      Swal.fire({
-        icon: "success",
-        title: "Producto Añadido",
-        text: "El producto ha sido editado exitosamente.",
-      });
-    } else {
-      setProducts([...products, newProduct]);
-
-      Swal.fire({
-        icon: "success",
-        title: "Producto Agregado",
-        text: "El producto ha sido agregado exitosamente.",
-      });
+    try {
+      const savedProduct = await addProductToBackend(newProduct);
+    } catch (error) {
+      console.log(error); // agregar Swal para error
     }
+
+    Swal.fire({
+      icon: "success",
+      title: "Producto Agregado",
+      text: "El producto ha sido agregado exitosamente.",
+    });
 
     setProductName("");
     setProductType("");
@@ -235,9 +222,9 @@ export function Products() {
                 <td>{product.productPrice}</td>
                 <td>
                   <div className="products-actions">
-                  <button onClick={() => deleteProduct(index)} className="delete-btn"></button>
-                  <button onClick={() => openProductModal(index)} className="edit-btn"></button>
-                </div>
+                    <button onClick={() => deleteProduct(index)} className="delete-btn"></button>
+                    <button onClick={() => openProductModal(index)} className="edit-btn"></button>
+                  </div>
                 </td>
               </tr>
             ))}

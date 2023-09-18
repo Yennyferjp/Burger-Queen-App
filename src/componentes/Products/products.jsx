@@ -74,6 +74,17 @@ export function Products() {
     closeProductModal();
   };
 
+  const refreshProductsList = async () => {
+    let productsList = await getProductsFromBackend();
+    productsList = productsList.map(product => ({
+      productName: product.name,
+      productPrice: product.price,
+      productId: product._id,
+      productType: product.type,
+    }));
+    setProducts(productsList);
+  }
+
   const addNewProduct = async () => {
     if (productName === "" || productType === "" || productId === "" || productPrice === "") {
 
@@ -93,14 +104,7 @@ export function Products() {
 
     try {
       const savedProduct = await addProductToBackend(newProduct);
-      let productsList = await getProductsFromBackend();
-      productsList = productsList.map(product => ({
-        productName: product.name,
-        productPrice: product.price,
-        productId: product._id,
-        productType: product.type,
-      }));
-      setProducts(productsList);
+      refreshProductsList();
 
       Swal.fire({
         icon: "success",

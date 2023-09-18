@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +23,10 @@ export function Products() {
 
   const [editingProduct, setEditingProduct] = useState(null);
 
+  useEffect(() => {  // se utiliza para manejar el ciclo de vida de la aplicación
+    refreshProductsList();
+  },
+  []);
 
   const openProductModal = (index) => {
     setEditingProduct(index);

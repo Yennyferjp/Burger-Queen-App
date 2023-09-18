@@ -93,21 +93,27 @@ export function Products() {
 
     try {
       const savedProduct = await addProductToBackend(newProduct);
+
+      Swal.fire({
+        icon: "success",
+        title: "Producto Agregado",
+        text: "El producto ha sido agregado exitosamente.",
+      });
+
+      setProductName("");
+      setProductType("");
+      setProductId("");
+      setProductPrice("");
+      closeProductModal();
+
     } catch (error) {
-      console.log(error); // agregar Swal para error
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Ha habido un error al agregar el producto.",
+      });
     }
-
-    Swal.fire({
-      icon: "success",
-      title: "Producto Agregado",
-      text: "El producto ha sido agregado exitosamente.",
-    });
-
-    setProductName("");
-    setProductType("");
-    setProductId("");
-    setProductPrice("");
-    closeProductModal();
   };
 
   const deleteProduct = (index) => {

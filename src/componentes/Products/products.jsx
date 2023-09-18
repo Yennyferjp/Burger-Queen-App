@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import "./products.css";
 import { Link, useMatch } from "react-router-dom";
+import {
+  addProductToBackend,
+  getProductsFromBackend,
+  updateProductToBackend,
+  deleteProductFromBackend
+} from "../../services/products-services";
 
 import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
@@ -22,6 +28,10 @@ export function Products() {
 
   const [editingProduct, setEditingProduct] = useState(null);
 
+  useEffect(() => {  // se utiliza para manejar el ciclo de vida de la aplicación
+    refreshProductsList();
+  },
+    []);
 
   const openProductModal = (index) => {
     setEditingProduct(index);
@@ -39,7 +49,7 @@ export function Products() {
     setProductModalIsOpen(false);
   };
 
-  const saveProductsChanges = () => {
+  const saveProductsChanges = async () => {
     if (productName === "" || productType === "" || productId === "" || productPrice === "") {
       Swal.fire({
         icon: "error",
@@ -49,35 +59,49 @@ export function Products() {
       return;
     }
 
-    const newProduct = {
-      productName,
-      productType,
-      productId,
-      productPrice
+    const editedProduct = {
+      name: productName,
+      type: productType,
+      price: productPrice
     };
 
-    if (editingProduct !== null) {
-      const newProducts = [...products];
-      newProducts[editingProduct] = newProduct;
-      setProducts(newProducts);
+    try {
+      await updateProductToBackend(productId, editedProduct);
+      refreshProductsList();
 
       Swal.fire({
         icon: "success",
         title: "Producto Editado",
         text: "El producto ha sido editado exitosamente.",
       });
-    } else {
-      setProducts([...products, newProduct]);
-    }
 
-    setProductName("");
-    setProductType("");
-    setProductId("");
-    setProductPrice("");
-    closeProductModal();
+      setProductName("");
+      setProductType("");
+      setProductId("");
+      setProductPrice("");
+      closeProductModal();
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Ha habido un error al editar el producto.",
+      });
+    }
   };
 
-  const addNewProduct = () => {
+  const refreshProductsList = async () => {
+    let productsList = await getProductsFromBackend();
+    productsList = productsList.map(product => ({
+      productName: product.name,
+      productPrice: product.price,
+      productId: product._id,
+      productType: product.type,
+    }));
+    setProducts(productsList);
+  }
+
+  const addNewProduct = async () => {
     if (productName === "" || productType === "" || productId === "" || productPrice === "") {
 
       Swal.fire({
@@ -89,44 +113,57 @@ export function Products() {
     }
 
     const newProduct = {
-      productName,
-      productType,
-      productId,
-      productPrice
+      name: productName,
+      type: productType,
+      price: productPrice
     };
 
-    if (editingProduct !== null) {
-      // Si estamos en modo de edición, actualiza el producto seleccionado
-      const newProducts = [...products];
-      newProducts[editingProduct] = newProduct;
-      setProducts(newProducts);
-
-      Swal.fire({
-        icon: "success",
-        title: "Producto Añadido",
-        text: "El producto ha sido editado exitosamente.",
-      });
-    } else {
-      setProducts([...products, newProduct]);
+    try {
+      const savedProduct = await addProductToBackend(newProduct);
+      refreshProductsList();
 
       Swal.fire({
         icon: "success",
         title: "Producto Agregado",
         text: "El producto ha sido agregado exitosamente.",
       });
-    }
 
-    setProductName("");
-    setProductType("");
-    setProductId("");
-    setProductPrice("");
-    closeProductModal();
+      setProductName("");
+      setProductType("");
+      setProductId("");
+      setProductPrice("");
+      closeProductModal();
+
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Ha habido un error al agregar el producto.",
+      });
+    }
   };
 
-  const deleteProduct = (index) => {
-    const newProducts = [...products];
-    newProducts.splice(index, 1);
-    setProducts(newProducts);
+  const deleteProduct = async (productId) => {
+
+    try {
+      await deleteProductFromBackend(productId);
+      refreshProductsList();
+
+      Swal.fire({
+        icon: "success",
+        title: "Producto Eliminado",
+        text: "El producto ha sido eliminado exitosamente.",
+      });
+
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Ha habido un error al eliminar el producto.",
+      });
+    }
   }
 
   const navigate = useNavigate();
@@ -235,9 +272,9 @@ export function Products() {
                 <td>{product.productPrice}</td>
                 <td>
                   <div className="products-actions">
-                  <button onClick={() => deleteProduct(index)} className="delete-btn"></button>
-                  <button onClick={() => openProductModal(index)} className="edit-btn"></button>
-                </div>
+                    <button onClick={() => deleteProduct(product.productId)} className="delete-btn"></button>
+                    <button onClick={() => openProductModal(index)} className="edit-btn"></button>
+                  </div>
                 </td>
               </tr>
             ))}

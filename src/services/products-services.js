@@ -21,6 +21,23 @@ export async function addProductToBackend(newProductData) {
       const errorData = await response.json();
       throw new Error(errorData.message);
     }
+}
 
+export async function getProductsFromBackend() {
+  const response = await fetch(`${BASE_URL}/products`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': getAuthorizationHeader()
+    },
+  });
+
+  if (response.ok) {
+    const productsList = await response.json();
+    return productsList; 
+  } else {
+    const errorData = await response.json();
+    throw new Error(errorData.message);
+  }
 }
 

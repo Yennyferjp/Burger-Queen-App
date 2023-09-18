@@ -4,7 +4,7 @@ import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import "./products.css";
 import { Link, useMatch } from "react-router-dom";
-import { addProductToBackend } from "../../services/products-services";
+import { addProductToBackend, getProductsFromBackend } from "../../services/products-services";
 
 import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
@@ -93,6 +93,14 @@ export function Products() {
 
     try {
       const savedProduct = await addProductToBackend(newProduct);
+      let productsList = await getProductsFromBackend();
+      productsList = productsList.map(product => ({
+        productName: product.name,
+        productPrice: product.price,
+        productId: product._id,
+        productType: product.type,
+      }));
+      setProducts(productsList);
 
       Swal.fire({
         icon: "success",

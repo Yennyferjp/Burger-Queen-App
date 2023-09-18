@@ -59,3 +59,21 @@ export async function updateProductToBackend(productId, editedProduct) {
     throw new Error(errorData.message);
   }
 }
+
+export async function deleteProductFromBackend(productId) {
+  const response = await fetch(`${BASE_URL}/products/${productId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': getAuthorizationHeader()
+    },
+  });
+
+  if (response.ok) {
+    const deletedProduct = await response.json();
+    return deletedProduct;
+  } else {
+    const errorData = await response.json();
+    throw new Error(errorData.message);
+  }
+}

@@ -4,7 +4,12 @@ import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import "./products.css";
 import { Link, useMatch } from "react-router-dom";
-import { addProductToBackend, getProductsFromBackend, updateProductToBackend } from "../../services/products-services";
+import {
+  addProductToBackend,
+  getProductsFromBackend,
+  updateProductToBackend,
+  deleteProductFromBackend
+} from "../../services/products-services";
 
 import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
@@ -139,10 +144,26 @@ export function Products() {
     }
   };
 
-  const deleteProduct = (index) => {
-    const newProducts = [...products];
-    newProducts.splice(index, 1);
-    setProducts(newProducts);
+  const deleteProduct = async (productId) => {
+
+    try {
+      await deleteProductFromBackend(productId);
+      refreshProductsList();
+
+      Swal.fire({
+        icon: "success",
+        title: "Producto Eliminado",
+        text: "El producto ha sido eliminado exitosamente.",
+      });
+
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Ha habido un error al eliminar el producto.",
+      });
+    }
   }
 
   const navigate = useNavigate();
@@ -251,7 +272,7 @@ export function Products() {
                 <td>{product.productPrice}</td>
                 <td>
                   <div className="products-actions">
-                    <button onClick={() => deleteProduct(index)} className="delete-btn"></button>
+                    <button onClick={() => deleteProduct(product.productId)} className="delete-btn"></button>
                     <button onClick={() => openProductModal(index)} className="edit-btn"></button>
                   </div>
                 </td>

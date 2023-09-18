@@ -41,3 +41,21 @@ export async function getProductsFromBackend() {
   }
 }
 
+export async function updateProductToBackend(productId, editedProduct) {
+  const response = await fetch(`${BASE_URL}/products/${productId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': getAuthorizationHeader()
+    },
+    body: JSON.stringify(editedProduct),
+  });
+
+  if (response.ok) {
+    const updatedProduct = await response.json();
+    return updatedProduct; 
+  } else {
+    const errorData = await response.json();
+    throw new Error(errorData.message);
+  }
+}

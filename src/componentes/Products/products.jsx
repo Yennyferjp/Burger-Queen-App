@@ -4,7 +4,7 @@ import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import "./products.css";
 import { Link, useMatch } from "react-router-dom";
-import { addProductToBackend, getProductsFromBackend } from "../../services/products-services";
+import { addProductToBackend, getProductsFromBackend, updateProductToBackend } from "../../services/products-services";
 
 import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
@@ -26,7 +26,7 @@ export function Products() {
   useEffect(() => {  // se utiliza para manejar el ciclo de vida de la aplicación
     refreshProductsList();
   },
-  []);
+    []);
 
   const openProductModal = (index) => {
     setEditingProduct(index);
@@ -54,28 +54,35 @@ export function Products() {
       return;
     }
 
-    const newProduct = {
-      productName,
-      productType,
-      productId,
-      productPrice
+    const editedProduct = {
+      name: productName,
+      type: productType,
+      price: productPrice
     };
 
-    const newProducts = [...products];
-    newProducts[editingProduct] = newProduct;
-    setProducts(newProducts);
+    try {
+      await updateProductToBackend(productId, editedProduct);
+      refreshProductsList();
 
-    Swal.fire({
-      icon: "success",
-      title: "Producto Editado",
-      text: "El producto ha sido editado exitosamente.",
-    });
+      Swal.fire({
+        icon: "success",
+        title: "Producto Editado",
+        text: "El producto ha sido editado exitosamente.",
+      });
 
-    setProductName("");
-    setProductType("");
-    setProductId("");
-    setProductPrice("");
-    closeProductModal();
+      setProductName("");
+      setProductType("");
+      setProductId("");
+      setProductPrice("");
+      closeProductModal();
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Ha habido un error al editar el producto.",
+      });
+    }
   };
 
   const refreshProductsList = async () => {

@@ -23,14 +23,13 @@ nav {
 }
 
 .navbar-logout {
-    color: #FFF;
-    font-family: Rammetto One;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    cursor: pointer;
-    font-weight: bold;
+  color: #FFF;
+  font-family: Quicksand;
+  font-size: 22px;
+  font-style: normal;
+  line-height: normal;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .navbar-products-right {
@@ -49,18 +48,22 @@ nav {
     background: #AD59A1;
 }
 
-.nav-button{
-    border-radius: 16.136px;
-    border: 3px solid #FF6584;
-    color: #FFF;
-    text-align: center;
-    font-family: Quicksand;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 20px;
-    padding: 10px;
-    margin: 0 2rem;
+.nav-button {
+  border-radius: 16.136px;
+  border: 3px solid #FF6584;
+  color: #FFF;
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  margin: 0 2rem;
+  width: 145px;
+  height: 46px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 .h1Products {
@@ -150,14 +153,14 @@ nav {
   }
 
   .even-row {
-    background: #D9D9D9;
+    background: rgba(200, 173, 196, 0.88);
     height: 40px;
-  }
+}
 
-  .odd-row {
-    background: #E1CB74;
+.odd-row {
+    background: rgba(181, 127, 173, 0.30);
     height: 40px;
-  }
+}
 
   .products-actions {
     display: flex;

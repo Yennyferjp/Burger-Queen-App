@@ -1,6 +1,26 @@
 import { getAuthorizationHeader } from './auth-services';
 const BASE_URL = import.meta.env.VITE_APP_API_URL;
 
+const userRoles = {
+  admin: 'Administrador',
+  chef: 'Cocinero',
+  waiter: 'Mesero',
+}
+
+
+export function getRoleName(roleName){
+  return userRoles[roleName];
+}
+
+export function getRoles(){
+  const roles = [];
+  for (const key in userRoles) {
+      const role = userRoles[key];
+      roles.push({ key, role })
+  }
+  return roles;
+}
+
 // Función para agregar un nuevo usuario
 export async function addUserToBackend(newUserData) {
   const response = await fetch(`${BASE_URL}/users`, {
@@ -81,4 +101,5 @@ export async function deleteUserFromBackend(userId) {
     throw new Error(errorData.message);
   }
 }
+
 

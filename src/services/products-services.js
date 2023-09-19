@@ -1,6 +1,25 @@
 import { getAuthorizationHeader } from './auth-services';
 const BASE_URL = import.meta.env.VITE_APP_API_URL;
 
+const productTypes = {
+  lunch: 'Almuerzo',
+  breakfast: 'Desayuno',
+  accompaniments: 'Acompañamientos',
+}
+
+export function getTypeName(productType){
+  return productTypes[productType];
+}
+
+export function getTypes(){
+  const types = [];
+  for (const key in productTypes) {
+      const type = productTypes[key];
+      types.push({ key, type })
+  }
+  return types;
+}
+
 // Función para agregar un nuevo producto
 export async function addProductToBackend(newProductData) {
     const response = await fetch(`${BASE_URL}/products`, {

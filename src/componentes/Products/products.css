@@ -44,9 +44,6 @@ nav {
 }
 
 /* Estilo para el botón cuando está activo */
-.active-button {
-    background: #AD59A1;
-}
 
 .nav-button {
   border-radius: 16.136px;
@@ -67,14 +64,13 @@ nav {
 }
 
 .h1Products {
-    margin-top: 34px;
-    color: #E6E6E6;
-    text-align: center;
-    font-family: Kavoon;
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  margin-top: 0;
+  color: #E6E6E6;
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 36px;
+  font-style: normal;
+  line-height: normal;
 }
 
 .div-formulario-products {
@@ -98,7 +94,6 @@ nav {
     line-height: normal;
     margin: 10px;
     padding-left: 10px;
-
 }
 
 .div-type-btn {
@@ -107,21 +102,31 @@ nav {
     justify-content: center;
 }
 
+.product-management {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 .btn-add-product {
-    width: 105px;
-    height: 47px;
-    border-radius: 16.136px;
-    border: 1px solid #E6E6E6;
-    background: #E02181;
-    color: #FFF;
-    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
-    font-family: Quicksand;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    margin: 10px;
-    padding-left: 10px;
+  width: 145px;
+  height: 47px;
+  border-radius: 16.136px;
+  border: 1px solid #E6E6E6;
+  background: #E02181;
+  color: #FFF;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  font-family: Quicksand;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
 .h2-products {
@@ -136,20 +141,25 @@ nav {
 
   .products-table {
     font-family: Quicksand;
-    font-size: 15px;
+    font-size: 17px;
     color: black;
     min-width: 700px;
     border: hidden;
     margin: 0 auto;
     border-collapse: collapse;
+    font-weight: 900;
+    line-height: 42px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-top: 35px;
   }
 
   .products-table thead tr {
     font-family: Quicksand;
     font-size: 20px;
-    background-color: #E1CB74;
-    color: #5F2857;
-    /*falta poner en bold el encabezado, font-weight no funciona*/
+    background-color: rgba(181, 127, 173, 0.30);
+    color: white;
+    height: 50px;
   }
 
   .even-row {
@@ -174,6 +184,8 @@ nav {
     background-position: center center;
     background-size: contain;
     height: 25px;
+    width: 25px;
+    border: none;
   }
 
   .edit-btn {
@@ -183,5 +195,100 @@ nav {
     background-position: center center;
     background-size: contain;
     height: 25px;
+    width: 25px;
+    border: none;
   }
   
+  /*Modal*/
+
+.custom-modal-editProduct {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.92) 0%, rgba(34, 3, 30, 0.92) 25%, rgba(95, 40, 87, 0.92) 48.44%, rgba(34, 3, 30, 0.92) 70.31%, rgba(0, 0, 0, 0.92) 100%);
+  border: 2px solid #333;
+  border-radius: 5px;
+  max-width: 400px;
+  margin: 15% auto;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.custom-modal-addProduct {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.92) 0%, rgba(34, 3, 30, 0.92) 25%, rgba(95, 40, 87, 0.92) 48.44%, rgba(34, 3, 30, 0.92) 70.31%, rgba(0, 0, 0, 0.92) 100%);
+  border: 2px solid #333;
+  border-radius: 5px;
+  max-width: 400px;
+  margin: 15% auto;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: space-around;
+}
+
+.input-field {
+  flex: 2;
+  width: 200px;
+  height: 27px;
+  border-radius: 11.135999999999996px;
+  border: 2px solid #AD59A1;
+  background: #FFF;
+  font-size: 1rem;
+  font-family: Quicksand;
+  font-weight: 700;
+  margin: 0 20px;
+  outline: none;
+}
+
+.label-style {
+  flex: 1;
+  margin-right: 10px;
+  color: #FFF;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: Quicksand;
+  margin-left: 20px;
+}
+
+.btn-saveChanges {
+  height: 47px;
+  border-radius: 16.136px;
+  border: 1px solid #E6E6E6;
+  background: #E02181;
+  color: #FFF;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  font-family: Quicksand;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-left: 70px;
+}
+
+.btn-closeModal {
+  height: 47px;
+  border-radius: 16.136px;
+  border: 1px solid #E6E6E6;
+  background: #E02181;
+  color: #FFF;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  font-family: Quicksand;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 10px;
+}
+
+/*Termina Modal*/
+
+.btn-routes {
+  display: flex;
+  margin-top: 30px;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row-reverse;
+}

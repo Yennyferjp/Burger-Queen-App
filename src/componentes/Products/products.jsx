@@ -8,12 +8,16 @@ import {
   addProductToBackend,
   getProductsFromBackend,
   updateProductToBackend,
-  deleteProductFromBackend
+  deleteProductFromBackend,
+  getTypeName,
+  getTypes,
 } from "../../services/products-services";
 
 import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
+import iconAdd from "./images/add.png";
 
+Modal.setAppElement('#root');
 
 export function Products() {
   // Estado para almacenar los productos creados
@@ -47,6 +51,15 @@ export function Products() {
   const closeProductModal = () => {
     setEditingProduct(null);
     setProductModalIsOpen(false);
+  };
+
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const openAddModal = () => {
+    setIsAddModalOpen(true);
+  };
+
+  const closeAddModal = () => {
+    setIsAddModalOpen(false);
   };
 
   const saveProductsChanges = async () => {
@@ -172,7 +185,6 @@ export function Products() {
   };
 
   const usuariosMatch = useMatch("/users");
-  const productosMatch = useMatch("/products");
 
   return (
     <div>
@@ -198,67 +210,64 @@ export function Products() {
         </nav>
       </div>
       <div>
-        <Link
-          to="/users"
-          className={`nav-button ${usuariosMatch ? "active-button" : ""}`}
-        >Usuarios
-        </Link>
-        <Link
-          to="/products"
-          className={`nav-button ${productosMatch ? "active-button" : ""}`}
-        > Productos
-        </Link>
-      </div>
-      <div>
+
         <h1 className="h1Products">Gestión de Productos</h1>
-        <div className="div-formulario-products">
-          <div>
-            <input type="text"
-              placeholder="Nombre del producto"
+
+        {/* Modal para agregar producto */}
+
+        <Modal
+          isOpen={isAddModalOpen}
+          onRequestClose={closeAddModal}
+          contentLabel="Agregar Producto"
+          className="custom-modal-addProduct"
+          ariaHideApp={true}
+        >
+          <h1 className="h1Products">Agregar Producto</h1>
+          <div className="form-group">
+            <label className="label-style">Nombre:</label>
+            <input
+              type="text"
+              placeholder="Nombre"
               value={productName}
               onChange={(e) => setProductName(e.target.value)}
-              className="input-products" />
+              className="input-field"
+            />
           </div>
-          <div>
-            <input type="text"
-              placeholder="ID"
-              value={productId}
-              onChange={(e) => setProductId(e.target.value)}
-              className="input-products" />
-          </div>
-          <div>
-            <input type="text"
-              placeholder="Precio"
+          <div className="form-group">
+            <label className="label-style">Precio:</label>
+            <input
+              type="text"
               value={productPrice}
+              placeholder="Precio"
               onChange={(e) => setProductPrice(e.target.value)}
-              className="input-products" />
+              className="input-field"
+            />
           </div>
-          <div className="div-type-btn">
-            <h2 className="h2-products">Elige el tipo</h2>
-            <div>
-              <select
-                value={productType} onChange={(e) => setProductType(e.target.value)}
-                className="input-products">
-                <option value="Desayuno">Desayuno</option>
-                <option value="Almuerzo">Almuerzo</option>
-                <option value="Acompañamientos">Acompañamientos</option>
-              </select>
-            </div>
-            <button onClick={addNewProduct}
-              className="btn-add-product"
-            >Agregar
-            </button>
+          <div className="form-group">
+            <label className="label-style">Tipo:</label>
+            <select
+              value={productType}
+              onChange={(e) => setProductType(e.target.value)}
+              className="input-field"
+            >
+              {getTypes().map((item, index) => <option key={index} value={item.key}>{item.type}</option>)}
+            </select>
           </div>
-        </div>
+          <button className="btn-saveChanges" onClick={addNewProduct}>
+            Guardar Producto
+          </button>
+          <button className="btn-closeModal" onClick={closeAddModal}>
+            Cancelar
+          </button>
+        </Modal>
       </div>
       <div>
-        <h2 className="h2-products">Lista de Productos</h2>
+
         <table className="products-table">
           <thead>
             <tr>
               <th>Nombre</th>
               <th>Tipo</th>
-              <th>ID</th>
               <th>Precio</th>
               <th>Acciones</th>
             </tr>
@@ -268,7 +277,6 @@ export function Products() {
               <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
                 <td>{product.productName}</td>
                 <td>{product.productType}</td>
-                <td>{product.productId}</td>
                 <td>{product.productPrice}</td>
                 <td>
                   <div className="products-actions">
@@ -281,43 +289,69 @@ export function Products() {
           </tbody>
         </table>
       </div>
+      <div className="btn-routes">
+        <button onClick={openAddModal} className="btn-add-product">
+          <img
+            src={iconAdd}
+            alt="Icon add Product"
+            className="Icon-Add-Product"
+          />
+          Nuevo
+        </button>
+        <Link
+          to="/users"
+          className={`nav-button ${usuariosMatch ? "active-button" : ""}`}
+        >Ir a Usuarios
+        </Link>
+      </div>
+
+      {/* Modal para editar producto */}
 
       <Modal
         isOpen={productModalIsOpen}
         onRequestClose={closeProductModal}
         contentLabel="Editar producto"
+        className="custom-modal-editProduct"
       >
-        <h1>Editar producto</h1>
-        <div>
-          <label>Nombre:</label>
+        <h1 className="h1Products">Editar producto</h1>
+        <div className="form-group">
+          <label className="label-style">Nombre:</label>
           <input type="text"
             placeholder="Nombre"
             value={productName}
-            onChange={(e) => setProductName(e.target.value)} />
+            onChange={(e) => setProductName(e.target.value)}
+            className="input-field"
+          />
         </div>
-        <div>
-          <label>Tipo:</label>
+        <div className="form-group">
+          <label className="label-style">Tipo:</label>
           <input type="text"
             placeholder="Tipo"
             value={productType}
-            onChange={(e) => setProductType(e.target.value)} />
+            onChange={(e) => setProductType(e.target.value)}
+            className="input-field"
+          />
         </div>
-        <div>
-          <label>ID:</label>
+        <div className="form-group">
+          <label className="label-style">ID:</label>
           <input type="text"
             placeholder="ID"
             value={productId}
-            onChange={(e) => setProductId(e.target.value)} />
+            onChange={(e) => setProductId(e.target.value)}
+            className="input-field"
+          />
         </div>
-        <div>
-          <label>Precio:</label>
+        <div className="form-group">
+          <label className="label-style">Precio:</label>
           <input type="text"
             placeholder="Precio"
             value={productPrice}
-            onChange={(e) => setProductPrice(e.target.value)} />
+            onChange={(e) => setProductPrice(e.target.value)}
+            className="input-field"
+          />
         </div>
-        <button onClick={saveProductsChanges}>Guardar cambios</button>
-        <button onClick={closeProductModal}>Cancelar</button>
+        <button className="btn-saveChanges" onClick={saveProductsChanges}>Guardar cambios</button>
+        <button className="btn-closeModal" onClick={closeProductModal}>Cancelar</button>
       </Modal>
     </div>
   );

@@ -207,6 +207,8 @@ nav {
   border-radius: 5px;
   max-width: 400px;
   margin: 15% auto;
+  border-radius: 20px;
+  padding: 20px;
 }
 
 .custom-modal-addProduct {
@@ -215,6 +217,8 @@ nav {
   border-radius: 5px;
   max-width: 400px;
   margin: 15% auto;
+  border-radius: 20px;
+  padding: 20px;
 }
 
 .form-group {

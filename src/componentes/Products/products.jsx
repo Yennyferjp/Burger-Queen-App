@@ -268,7 +268,6 @@ export function Products() {
             <tr>
               <th>Nombre</th>
               <th>Tipo</th>
-              <th>ID</th>
               <th>Precio</th>
               <th>Acciones</th>
             </tr>
@@ -278,7 +277,6 @@ export function Products() {
               <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
                 <td>{product.productName}</td>
                 <td>{product.productType}</td>
-                <td>{product.productId}</td>
                 <td>{product.productPrice}</td>
                 <td>
                   <div className="products-actions">

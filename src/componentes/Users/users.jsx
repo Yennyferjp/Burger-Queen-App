@@ -46,12 +46,21 @@ export function Users() {
     setModalIsOpen(true);
 
     // Obtener los datos del usuario seleccionado
-    const user = users[index];
-    setName(user.name);
-    setEmail(user.email);
-    setRol(user.role);
-    setPassword(user.password);
-    setActive(user.active);
+    if (users && users[index]) {
+      const user = users[index];
+      setName(user.name || "");
+      setEmail(user.email || "");
+      setRol(user.role || "Administrador");
+      setPassword(user.password || "");
+      setActive(user.active || true);
+    } else {
+      // Manejar el caso en el que el usuario no se encuentra
+      setName("");
+      setEmail("");
+      setRol("Administrador");
+      setPassword("");
+      setActive(true);
+    }
   };
 
   // Función para cerrar el modal de edición
@@ -82,7 +91,6 @@ export function Users() {
       if (userEditing !== null) {
         // Si estamos en modo de edición, actualiza el usuario en el backend
         const updatedUserResponse = await updateUserToBackend(users[userEditing]._id, updatedUser);
-
         // Actualiza la lista de usuarios en el estado
         const newUsers = [...users];
         newUsers[userEditing] = updatedUserResponse;
@@ -363,7 +371,7 @@ export function Users() {
                 <td>
                   <div className="users-actions">
                     <button onClick={() => deleteUser(user._id)} className="delete-btn"></button>
-                    <button onClick={() => openModal(user._id)} className="edit-btn"></button>
+                    <button onClick={() => openModal(index)} className="edit-btn"></button>
                   </div>
                 </td>
               </tr>

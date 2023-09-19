@@ -326,8 +326,8 @@ export function Users() {
                 <td>{user.activo ? "Sí" : "No"}</td>
                 <td>
                   <div className="users-actions">
-                    <button onClick={() => deleteUser(index)} className="delete-btn"></button>
-                    <button onClick={() => openModal(index)} className="edit-btn"></button>
+                    <button onClick={() => deleteUser(user._id)} className="delete-btn"></button>
+                    <button onClick={() => openModal(user._id)} className="edit-btn"></button>
                   </div>
                 </td>
               </tr>

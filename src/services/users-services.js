@@ -84,9 +84,8 @@ export async function updateUserToBackend(userId, updatedUser) {
   }
 }
 
-
-export async function deleteUserFromBackend(id) {
-  const response = await fetch(`${BASE_URL}/users/${id}`, {
+export async function deleteUserFromBackend(userId) {
+  const response = await fetch(`${BASE_URL}/users/${userId}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -95,7 +94,8 @@ export async function deleteUserFromBackend(id) {
   });
 
   if (response.ok) {
-    return { message: 'Usuario eliminado exitosamente' };
+    const deletedUser = await response.json();
+    return deletedUser;
   } else {
     const errorData = await response.json();
     throw new Error(errorData.message);

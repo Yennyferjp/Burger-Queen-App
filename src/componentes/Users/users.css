@@ -170,7 +170,7 @@ nav {
 }
 
 .odd-row {
-    background: rgba(181, 127, 173, 0.30);
+    background: #B57FAD;
     height: 40px;
 }
 
@@ -202,6 +202,17 @@ nav {
 }
 
 /*Modal*/
+
+.close-modal-button {
+    position: relative;
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #fff;
+    outline: none;
+    margin-left: 375px;
+}
 
 .custom-modal-edituser {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.92) 0%, rgba(34, 3, 30, 0.92) 25%, rgba(95, 40, 87, 0.92) 48.44%, rgba(34, 3, 30, 0.92) 70.31%, rgba(0, 0, 0, 0.92) 100%);
@@ -271,14 +282,15 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-/* Estilo para el checkbox cuando está marcado */
+
 input[type="checkbox"]:checked {
-    background-color: #3498db;
-    border: 1px solid #3498db;
+    background-color: #E02181;
+    border: 1px solid #E02181;
 }
 
 .btn-saveChanges {
     height: 47px;
+    width: 100px;
     border-radius: 16.136px;
     border: 1px solid #E6E6E6;
     background: #E02181;
@@ -289,7 +301,7 @@ input[type="checkbox"]:checked {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin-left: 70px;
+    margin: 25px 0px 10px 150px;
 }
 
 .btn-closeModal {
@@ -306,6 +318,7 @@ input[type="checkbox"]:checked {
     line-height: normal;
     margin: 10px;
 }
+
 
 /*Termina Modal*/
 

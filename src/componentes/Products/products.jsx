@@ -214,7 +214,6 @@ export function Products() {
         <h1 className="h1Products">Gestión de Productos</h1>
 
         {/* Modal para agregar producto */}
-
         <Modal
           isOpen={isAddModalOpen}
           onRequestClose={closeAddModal}
@@ -222,6 +221,10 @@ export function Products() {
           className="custom-modal-addProduct"
           ariaHideApp={true}
         >
+          {/* Botón "x" para cerrar el modal */}
+          <button className="close-modal-button" onClick={closeAddModal}>
+            &times;
+          </button>
           <h1 className="h1Products">Agregar Producto</h1>
           <div className="form-group">
             <label className="label-style">Nombre:</label>
@@ -254,11 +257,9 @@ export function Products() {
             </select>
           </div>
           <button className="btn-saveChanges" onClick={addNewProduct}>
-            Guardar Producto
+            Guardar 
           </button>
-          <button className="btn-closeModal" onClick={closeAddModal}>
-            Cancelar
-          </button>
+
         </Modal>
       </div>
       <div>
@@ -313,6 +314,10 @@ export function Products() {
         contentLabel="Editar producto"
         className="custom-modal-editProduct"
       >
+        <button className="close-modal-button" onClick={closeProductModal}>
+          &times;
+        </button>
+
         <h1 className="h1Products">Editar producto</h1>
         <div className="form-group">
           <label className="label-style">Nombre:</label>
@@ -350,8 +355,7 @@ export function Products() {
             className="input-field"
           />
         </div>
-        <button className="btn-saveChanges" onClick={saveProductsChanges}>Guardar cambios</button>
-        <button className="btn-closeModal" onClick={closeProductModal}>Cancelar</button>
+        <button className="btn-saveChanges" onClick={saveProductsChanges}>Guardar</button>
       </Modal>
     </div>
   );

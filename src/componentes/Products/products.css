@@ -1,25 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Questrial&family=Quicksand&family=Rammetto+One&display=swap');
 
 .navbar-products {
-    padding: 10px 0;
+  padding: 10px 0;
 }
 
 nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
 }
 
 .navbar-products-left {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .navbar-image-logout {
-    width: 79px;
-    height: 73px;
-    margin-right: 10px;
+  width: 79px;
+  height: 73px;
+  margin-right: 10px;
 }
 
 .navbar-logout {
@@ -33,14 +33,14 @@ nav {
 }
 
 .navbar-products-right {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .navbar-image-logo {
-    width: 142px;
-    height: 143.909px;
-    margin-left: 10px;
+  width: 142px;
+  height: 143.909px;
+  margin-left: 10px;
 }
 
 /* Estilo para el botón cuando está activo */
@@ -74,32 +74,32 @@ nav {
 }
 
 .div-formulario-products {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .input-products {
-    width: 181px;
-    height: 47px;
-    border-radius: 16.136px;
-    border: 3px solid #AD59A1;
-    background: #FFF;
-    color: rgba(30, 30, 30, 0.67);
-    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
-    font-family: Quicksand;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    margin: 10px;
-    padding-left: 10px;
+  width: 181px;
+  height: 47px;
+  border-radius: 16.136px;
+  border: 3px solid #AD59A1;
+  background: #FFF;
+  color: rgba(30, 30, 30, 0.67);
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  font-family: Quicksand;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 10px;
+  padding-left: 10px;
 }
 
 .div-type-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .product-management {
@@ -130,76 +130,86 @@ nav {
 }
 
 .h2-products {
-    color: #E6E6E6;
-    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
-    font-family: Quicksand;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
+  color: #E6E6E6;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  font-family: Quicksand;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 
-  .products-table {
-    font-family: Quicksand;
-    font-size: 17px;
-    color: black;
-    min-width: 700px;
-    border: hidden;
-    margin: 0 auto;
-    border-collapse: collapse;
-    font-weight: 900;
-    line-height: 42px;
-    border-radius: 15px;
-    overflow: hidden;
-    margin-top: 35px;
-  }
+.products-table {
+  font-family: Quicksand;
+  font-size: 17px;
+  color: black;
+  min-width: 700px;
+  border: hidden;
+  margin: 0 auto;
+  border-collapse: collapse;
+  font-weight: 900;
+  line-height: 42px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-top: 35px;
+}
 
-  .products-table thead tr {
-    font-family: Quicksand;
-    font-size: 20px;
-    background-color: rgba(181, 127, 173, 0.30);
-    color: white;
-    height: 50px;
-  }
+.products-table thead tr {
+  font-family: Quicksand;
+  font-size: 20px;
+  background-color: rgba(181, 127, 173, 0.30);
+  color: white;
+  height: 50px;
+}
 
-  .even-row {
-    background: rgba(200, 173, 196, 0.88);
-    height: 40px;
+.even-row {
+  background: rgba(200, 173, 196, 0.88);
+  height: 40px;
 }
 
 .odd-row {
-    background: rgba(181, 127, 173, 0.30);
-    height: 40px;
+  background: rgba(181, 127, 173, 0.30);
+  height: 40px;
 }
 
-  .products-actions {
-    display: flex;
-    justify-content: space-evenly;
-  }
+.products-actions {
+  display: flex;
+  justify-content: space-evenly;
+}
 
-  .delete-btn {
-    background-color: transparent;
-    background-image: url('./images/delete.png');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: contain;
-    height: 25px;
-    width: 25px;
-    border: none;
-  }
+.delete-btn {
+  background-color: transparent;
+  background-image: url('./images/delete.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  height: 25px;
+  width: 25px;
+  border: none;
+}
 
-  .edit-btn {
-    background-color: transparent;
-    background-image: url('./images/edit.png');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: contain;
-    height: 25px;
-    width: 25px;
-    border: none;
-  }
-  
-  /*Modal*/
+.edit-btn {
+  background-color: transparent;
+  background-image: url('./images/edit.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  height: 25px;
+  width: 25px;
+  border: none;
+}
+
+/*Modal*/
+.close-modal-button {
+  position: relative;
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: #fff;
+  outline: none;
+  margin-left: 375px;
+}
 
 .custom-modal-editProduct {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.92) 0%, rgba(34, 3, 30, 0.92) 25%, rgba(95, 40, 87, 0.92) 48.44%, rgba(34, 3, 30, 0.92) 70.31%, rgba(0, 0, 0, 0.92) 100%);
@@ -255,6 +265,7 @@ nav {
 
 .btn-saveChanges {
   height: 47px;
+  width: 100px;
   border-radius: 16.136px;
   border: 1px solid #E6E6E6;
   background: #E02181;
@@ -265,7 +276,7 @@ nav {
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-left: 70px;
+  margin: 25px 0px 10px 150px;
 }
 
 .btn-closeModal {

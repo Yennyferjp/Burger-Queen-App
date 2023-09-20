@@ -220,11 +220,11 @@ export function Users() {
     try {
       // Eliminar el usuario en el backend
       await deleteUserFromBackend(userId);
-  
+
       // Actualizar la lista de usuarios localmente
       const updatedUsers = users.filter(user => user._id !== userId);
       setUsers(updatedUsers);
-  
+
       Swal.fire({
         icon: "success",
         title: "Usuario Eliminado",
@@ -239,7 +239,7 @@ export function Users() {
       });
     }
   };
-  
+
 
 
   // Realiza la redirección a la ruta de login cuando se hace clic en "Salir"
@@ -283,13 +283,17 @@ export function Users() {
 
 
         {/* Modal para agregar usuario */}
-        <Modal
-          isOpen={isAddModalOpen}
-          onRequestClose={closeAddModal}
-          contentLabel="Agregar Usuario"
-          className="custom-modal-adduser"
-          ariaHideApp={true}
-        >
+          <Modal
+        isOpen={isAddModalOpen}
+        onRequestClose={closeAddModal}
+        contentLabel="Agregar Usuario"
+        className="custom-modal-adduser"
+        ariaHideApp={true}
+      >
+        {/* Botón "x" para cerrar el modal */}
+        <button className="close-modal-button" onClick={closeAddModal}>
+          &times;
+        </button>
           <h1 className="h1Users">Agregar Usuario</h1>
           <div className="form-group">
             <label className="label-style">Nombre:</label>
@@ -342,11 +346,9 @@ export function Users() {
             />
           </div>
           <button className="btn-saveChanges" onClick={saveNewUser}>
-            Guardar Usuario
+            Guardar 
           </button>
-          <button className="btn-closeModal" onClick={closeAddModal}>
-            Cancelar
-          </button>
+          
         </Modal>
 
       </div>
@@ -406,6 +408,10 @@ export function Users() {
         contentLabel="Editar Usuario"
         className="custom-modal-edituser"
       >
+        {/* Botón "x" para cerrar el modal */}
+        <button className="close-modal-button" onClick={closeModal}>
+          &times;
+        </button>
         <h1 className="h1Users">Editar Usuario</h1>
         <div className="form-group">
           <label className="label-style">Nombre:</label>
@@ -456,8 +462,7 @@ export function Users() {
             onChange={(e) => setActive(e.target.checked)}
           />
         </div>
-        <button className="btn-saveChanges" onClick={saveChanges}>Guardar Cambios</button>
-        <button className="btn-closeModal" onClick={closeModal}>Cancelar</button>
+        <button className="btn-saveChanges" onClick={saveChanges}>Guardar</button>
       </Modal>
     </div>
   );

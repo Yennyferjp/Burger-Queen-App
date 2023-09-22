@@ -75,6 +75,9 @@ export function Users() {
         icon: "error",
         title: "Error",
         text: "Todos los campos son obligatorios",
+        customClass: {
+          title: 'swal-title',
+        }
       });
       return;
     }
@@ -100,6 +103,9 @@ export function Users() {
           icon: "success",
           title: "Usuario Editado",
           text: "El usuario ha sido editado exitosamente.",
+          customClass: {
+            title: 'swal-title',
+          }
         });
       } else {
         // Si no estamos en modo de edición, agrega el nuevo usuario al backend
@@ -112,6 +118,9 @@ export function Users() {
           icon: "success",
           title: "Usuario Agregado",
           text: "El usuario ha sido agregado exitosamente.",
+          customClass: {
+            title: 'swal-title',
+          }
         });
       }
 
@@ -128,10 +137,12 @@ export function Users() {
         icon: "error",
         title: "Error",
         text: "Hubo un error al agregar/editar el usuario.",
+        customClass: {
+          title: 'swal-title',
+        }
       });
     }
   };
-
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const openAddModal = () => {
@@ -148,6 +159,9 @@ export function Users() {
         icon: "error",
         title: "Error",
         text: "Todos los campos son obligatorios",
+        customClass: {
+          title: 'swal-title',
+        }
       });
       return;
     }
@@ -174,6 +188,9 @@ export function Users() {
           icon: "success",
           title: "Usuario Editado",
           text: "El usuario ha sido editado exitosamente.",
+          customClass: {
+            title: 'swal-title',
+          }
         });
       } else {
         // Si no estamos en modo de edición, agrega el nuevo usuario
@@ -183,6 +200,9 @@ export function Users() {
           icon: "success",
           title: "Usuario Agregado",
           text: "El usuario ha sido agregado exitosamente.",
+          customClass: {
+            title: 'swal-title',
+          }
         });
       }
 
@@ -201,6 +221,9 @@ export function Users() {
         icon: "error",
         title: "Error",
         text: "Hubo un error al agregar el usuario.",
+        customClass: {
+          title: 'swal-title',
+        }
       });
     }
   };
@@ -214,34 +237,54 @@ export function Users() {
     }
   };
 
-
   // Función para eliminar un usuario de la lista
   const deleteUser = async (userId) => {
-    try {
-      // Eliminar el usuario en el backend
-      await deleteUserFromBackend(userId);
-
-      // Actualizar la lista de usuarios localmente
-      const updatedUsers = users.filter(user => user._id !== userId);
-      setUsers(updatedUsers);
-
-      Swal.fire({
-        icon: "success",
-        title: "Usuario Eliminado",
-        text: "El usuario ha sido eliminado exitosamente.",
-      });
-    } catch (error) {
-      console.error("Error al eliminar usuario", error);
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Hubo un error al eliminar el usuario.",
-      });
-    }
-  };
-
-
-
+    Swal.fire({
+      title: "¿Confirmas eliminar un usuario?",
+      text: "Esta acción no se puede deshacer",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#E02181",
+      cancelButtonColor: "#442140",
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "Eliminar",
+      reverseButtons: true,
+      customClass: {
+        title: 'swal-title',
+      }
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          // Eliminar el usuario en el backend
+          await deleteUserFromBackend(userId);
+  
+          // Actualizar la lista de usuarios localmente
+          const updatedUsers = users.filter((user) => user._id !== userId);
+          setUsers(updatedUsers);
+  
+          Swal.fire({
+            icon: "success",
+            title: "Usuario Eliminado",
+            text: "El usuario ha sido eliminado exitosamente.",
+            customClass: {
+              title: 'swal-title',
+            }
+          });
+        } catch (error) {
+          console.error("Error al eliminar usuario", error);
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Hubo un error al eliminar el usuario.",
+            customClass: {
+              title: 'swal-title',
+            }
+          });
+        }
+      }
+    });
+  }
+  
   // Realiza la redirección a la ruta de login cuando se hace clic en "Salir"
   const navigate = useNavigate();
   const handleLogoutClick = () => {
@@ -279,21 +322,18 @@ export function Users() {
       <div >
 
         <h1 className="h1Users">Gestión de Usuarios</h1>
-
-
-
         {/* Modal para agregar usuario */}
-          <Modal
-        isOpen={isAddModalOpen}
-        onRequestClose={closeAddModal}
-        contentLabel="Agregar Usuario"
-        className="custom-modal-adduser"
-        ariaHideApp={true}
-      >
-        {/* Botón "x" para cerrar el modal */}
-        <button className="close-modal-button" onClick={closeAddModal}>
-          &times;
-        </button>
+        <Modal
+          isOpen={isAddModalOpen}
+          onRequestClose={closeAddModal}
+          contentLabel="Agregar Usuario"
+          className="custom-modal-adduser"
+          ariaHideApp={true}
+        >
+          {/* Botón "x" para cerrar el modal */}
+          <button className="close-modal-button" onClick={closeAddModal}>
+            &times;
+          </button>
           <h1 className="h1Users">Agregar Usuario</h1>
           <div className="form-group">
             <label className="label-style">Nombre:</label>
@@ -325,7 +365,6 @@ export function Users() {
               {getRoles().map((item, index) => <option key={index} value={item.key}>{item.role}</option>)}
             </select>
           </div>
-
           <div className="form-group">
             <label className="label-style">Contraseña:</label>
             <input
@@ -346,11 +385,10 @@ export function Users() {
             />
           </div>
           <button className="btn-saveChanges" onClick={saveNewUser}>
-            Guardar 
+            Guardar
           </button>
-          
-        </Modal>
 
+        </Modal>
       </div>
       <div>
         <table className="users-table">
@@ -398,7 +436,6 @@ export function Users() {
         >
           Ir a Productos
         </Link>
-
 
       </div>
       {/* Modal para editar usuario */}
@@ -465,5 +502,5 @@ export function Users() {
         <button className="btn-saveChanges" onClick={saveChanges}>Guardar</button>
       </Modal>
     </div>
-  );
-}
+  )
+};

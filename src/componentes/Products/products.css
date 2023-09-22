@@ -163,12 +163,12 @@ nav {
 }
 
 .even-row {
-  background: rgba(200, 173, 196, 0.88);
+  background: #C4A5C0;
   height: 40px;
 }
 
 .odd-row {
-  background: rgba(181, 127, 173, 0.30);
+  background: #F7D0F1;
   height: 40px;
 }
 

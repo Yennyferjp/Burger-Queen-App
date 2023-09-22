@@ -77,8 +77,7 @@ export function Users() {
         text: "Todos los campos son obligatorios",
         customClass: {
           title: 'swal-title',
-        },
-        textClass: 'swal-content',
+        }
       });
       return;
     }
@@ -106,8 +105,7 @@ export function Users() {
           text: "El usuario ha sido editado exitosamente.",
           customClass: {
             title: 'swal-title',
-          },
-          textClass: 'swal-content',
+          }
         });
       } else {
         // Si no estamos en modo de edición, agrega el nuevo usuario al backend
@@ -122,8 +120,7 @@ export function Users() {
           text: "El usuario ha sido agregado exitosamente.",
           customClass: {
             title: 'swal-title',
-          },
-          textClass: 'swal-content',
+          }
         });
       }
 
@@ -142,8 +139,7 @@ export function Users() {
         text: "Hubo un error al agregar/editar el usuario.",
         customClass: {
           title: 'swal-title',
-        },
-        textClass: 'swal-content',
+        }
       });
     }
   };
@@ -165,8 +161,7 @@ export function Users() {
         text: "Todos los campos son obligatorios",
         customClass: {
           title: 'swal-title',
-        },
-        textClass: 'swal-content',
+        }
       });
       return;
     }
@@ -195,8 +190,7 @@ export function Users() {
           text: "El usuario ha sido editado exitosamente.",
           customClass: {
             title: 'swal-title',
-          },
-          textClass: 'swal-content',
+          }
         });
       } else {
         // Si no estamos en modo de edición, agrega el nuevo usuario
@@ -208,8 +202,7 @@ export function Users() {
           text: "El usuario ha sido agregado exitosamente.",
           customClass: {
             title: 'swal-title',
-          },
-          textClass: 'swal-content',
+          }
         });
       }
 
@@ -230,8 +223,7 @@ export function Users() {
         text: "Hubo un error al agregar el usuario.",
         customClass: {
           title: 'swal-title',
-        },
-        textClass: 'swal-content',
+        }
       });
     }
   };
@@ -259,8 +251,7 @@ export function Users() {
       reverseButtons: true,
       customClass: {
         title: 'swal-title',
-      },
-      textClass: 'swal-content', // Aplicar el estilo de fuente al mensaje
+      }
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -277,8 +268,7 @@ export function Users() {
             text: "El usuario ha sido eliminado exitosamente.",
             customClass: {
               title: 'swal-title',
-            },
-            textClass: 'swal-content', // Aplicar el estilo de fuente al mensaje
+            }
           });
         } catch (error) {
           console.error("Error al eliminar usuario", error);
@@ -288,8 +278,7 @@ export function Users() {
             text: "Hubo un error al eliminar el usuario.",
             customClass: {
               title: 'swal-title',
-            },
-            textClass: 'swal-content', // Aplicar el estilo de fuente al mensaje
+            }
           });
         }
       }

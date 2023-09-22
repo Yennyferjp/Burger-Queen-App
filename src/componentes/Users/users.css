@@ -68,7 +68,7 @@ nav {
     color: #E6E6E6;
     text-align: center;
     font-family: Quicksand;
-    font-size: 36px;
+    font-size: 46px;
     font-style: normal;
     line-height: normal;
 }
@@ -143,14 +143,11 @@ nav {
 
 .users-table {
     font-family: Quicksand;
-    font-size: 17px;
-    color: black;
+
     min-width: 700px;
     border: hidden;
     margin: 0 auto;
-    border-collapse: collapse;
-    font-weight: 900;
-    line-height: 42px;
+    font-weight: 800;
     border-radius: 15px;
     overflow: hidden;
     margin-top: 35px;
@@ -159,18 +156,18 @@ nav {
 .users-table thead tr {
     font-family: Quicksand;
     font-size: 20px;
-    background-color: rgba(181, 127, 173, 0.30);
+    background-color: #CB1E75;
     color: white;
     height: 50px;
 }
 
 .even-row {
-    background: rgba(200, 173, 196, 0.88);
+    background: #C4A5C0;
     height: 40px;
 }
 
 .odd-row {
-    background: #B57FAD;
+    background: #F7D0F1;
     height: 40px;
 }
 
@@ -335,10 +332,4 @@ input[type="checkbox"]:checked {
     font-family: Quicksand;
     font-size: 30px ;
 }
-
-.swal-content{
-    font-family: Quicksand;
-    font-size: 15px;
-}
-
 /* Fin Swal Fire*/

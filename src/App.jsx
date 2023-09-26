@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { Login } from './componentes/Login/login';
-import { Orden } from './componentes/Orden/orden';
+import { Order } from './componentes/Order/order';
 import { Users } from './componentes/Users/users';
 import { Products } from './componentes/Products/products';
 
@@ -18,10 +18,8 @@ function App() {
           {/* Ruta para la página de inicio de sesión */}
           <Route path="/login" element={<Login setUser={setUser} />} />
 
-          {/* Ruta para la página de órdenes */}
-          <Route
-            path="/orden"
-            element={user.length > 0 ? <Orden user={user} setUser={setUser} /> : <Navigate to="/login" />}
+          {/* Ruta para la página de pedidos */}
+          <Route path="/order" element={<Order />} 
           />
 
           {/* Ruta para la página de usuarios */}

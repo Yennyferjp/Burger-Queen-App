@@ -2,9 +2,9 @@ import { getAuthorizationHeader } from './auth-services';
 const BASE_URL = import.meta.env.VITE_APP_API_URL;
 
 const productTypes = {
-  lunch: 'Almuerzo',
-  breakfast: 'Desayuno',
-  accompaniments: 'Acompañamientos',
+  Almuerzo: 'Almuerzo',
+  Desayuno: 'Desayuno',
+  Acompañamientos: 'Acompañamientos',
 }
 
 export function getTypeName(productType){

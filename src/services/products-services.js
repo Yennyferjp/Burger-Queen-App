@@ -42,8 +42,12 @@ export async function addProductToBackend(newProductData) {
     }
 }
 
-export async function getProductsFromBackend() {
-  const response = await fetch(`${BASE_URL}/products`, {
+export async function getProductsFromBackend(type) {
+  var url = `${BASE_URL}/products`;
+  if(type){
+    url+= `?type=${type}`;
+  }
+  const response = await fetch(url, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

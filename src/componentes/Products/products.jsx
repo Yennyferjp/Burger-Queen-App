@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Swal from "sweetalert2";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
@@ -17,65 +17,114 @@ import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
 import iconAdd from "./images/add.png";
 
+const BASE_URL = import.meta.env.VITE_APP_API_URL;
+
 Modal.setAppElement('#root');
 
 export function Products() {
   // Estado para almacenar los productos creados
   const [products, setProducts] = useState([]);
 
+  const [productId, setProductId] = useState("");
   const [productName, setProductName] = useState("");
   const [productType, setProductType] = useState("");
-  const [productId, setProductId] = useState("");
   const [productPrice, setProductPrice] = useState("");
-
-  const [productModalIsOpen, setProductModalIsOpen] = useState(false);
-
-  const [editingProduct, setEditingProduct] = useState(null);
+  const [productImage, setProductImage] = useState("");
+  const productImageRef = useRef(null);
 
   useEffect(() => {  // se utiliza para manejar el ciclo de vida de la aplicación
     refreshProductsList();
   },
     []);
 
-  const openProductModal = (index) => {
-    setEditingProduct(index);
-    setProductModalIsOpen(true);
+  const [editProductModalIsOpen, setEditProductModalIsOpen] = useState(false);
+  const openEditProductModal = (index) => {
+    setEditProductModalIsOpen(true);
 
     const product = products[index];
+    setProductImage(product.productImage);
     setProductName(product.productName);
     setProductType(product.productType);
     setProductId(product.productId);
     setProductPrice(product.productPrice);
   };
-
-  const closeProductModal = () => {
-    setEditingProduct(null);
-    setProductModalIsOpen(false);
+  const closeEditProductModal = () => {
+    setEditProductModalIsOpen(false);
   };
 
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const openAddModal = () => {
-    setIsAddModalOpen(true);
+  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
+  const openAddProductModal = () => {
+    setIsAddProductModalOpen(true);
   };
-
-  const closeAddModal = () => {
-    setIsAddModalOpen(false);
+  const closeAddProductModal = () => {
+    setIsAddProductModalOpen(false);
   };
 
   const saveProductsChanges = async () => {
-    if (productName === "" || productType === "" || productId === "" || productPrice === "") {
+    if (productName === "") {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "Todos los campos son obligatorios",
+        text: "El nombre del producto es obligatorio",
+        customClass: {
+          title: 'swal-title',
+        },
+        textClass: 'swal-content',
+      });
+      return;
+    }
+    if (productType === "") {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "El tipo de producto es obligatorio",
+        customClass: {
+          title: 'swal-title',
+        },
+        textClass: 'swal-content',
+      });
+      return;
+    }
+    if (productPrice === "") {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "El precio del producto es obligatorio",
+        customClass: {
+          title: 'swal-title',
+        },
+        textClass: 'swal-content',
       });
       return;
     }
 
+    let _productImage = null;
+    let productImagePromise = null;
+    if (!productImageRef?.current) {
+      console.error("Error al cargar imagen!");
+      return;
+    }
+    if (!productImageRef?.current.files[0]) {
+      console.log("El usuario no seleccionó una imagen");
+    } else {
+      productImagePromise = new Promise((resolve, reject) => {
+        let reader = new FileReader()
+        reader.readAsDataURL(productImageRef.current.files[0]);
+        reader.onloadend = () => {
+          resolve(reader.result);
+        }
+        reader.onerror = (error) => {
+          reject(error);
+        };
+      })
+    }
+    _productImage = await productImagePromise;
+
     const editedProduct = {
       name: productName,
       type: productType,
-      price: productPrice
+      price: productPrice,
+      image: _productImage
     };
 
     try {
@@ -86,19 +135,28 @@ export function Products() {
         icon: "success",
         title: "Producto Editado",
         text: "El producto ha sido editado exitosamente.",
+        customClass: {
+          title: 'swal-title',
+        },
+        textClass: 'swal-content',
       });
 
+      setProductId("");
       setProductName("");
       setProductType("");
-      setProductId("");
       setProductPrice("");
-      closeProductModal();
+      setProductImage("");
+      closeEditProductModal();
     } catch (error) {
       console.log(error);
       Swal.fire({
         icon: "error",
         title: "Error",
         text: "Ha habido un error al editar el producto.",
+        customClass: {
+          title: 'swal-title',
+        },
+        textClass: 'swal-content',
       });
     }
   };
@@ -106,6 +164,7 @@ export function Products() {
   const refreshProductsList = async () => {
     let productsList = await getProductsFromBackend();
     productsList = productsList.map(product => ({
+      productImage: product.image,
       productName: product.name,
       productPrice: product.price,
       productId: product._id,
@@ -115,20 +174,25 @@ export function Products() {
   }
 
   const addNewProduct = async () => {
-    if (productName === "" || productType === "" || productId === "" || productPrice === "") {
+    if (productName === "" || productType === "" || productPrice === "") {
 
       Swal.fire({
         icon: "error",
         title: "Error",
         text: "Todos los campos son obligatorios.",
+        customClass: {
+          title: 'swal-title',
+        },
+        textClass: 'swal-content',
       });
       return;
     }
 
     const newProduct = {
+      image: productImage, // image: URL.createObjectURL(productImage), // Crea una URL temporal para la imagen seleccionada
       name: productName,
       type: productType,
-      price: productPrice
+      price: productPrice,
     };
 
     try {
@@ -139,13 +203,18 @@ export function Products() {
         icon: "success",
         title: "Producto Agregado",
         text: "El producto ha sido agregado exitosamente.",
+        customClass: {
+          title: 'swal-title',
+        },
+        textClass: 'swal-content',
       });
 
+      setProductImage("");
       setProductName("");
       setProductType("");
       setProductId("");
       setProductPrice("");
-      closeProductModal();
+      closeEditProductModal();
 
     } catch (error) {
       console.log(error);
@@ -153,30 +222,59 @@ export function Products() {
         icon: "error",
         title: "Error",
         text: "Ha habido un error al agregar el producto.",
+        customClass: {
+          title: 'swal-title',
+        },
+        textClass: 'swal-content',
       });
     }
   };
 
   const deleteProduct = async (productId) => {
+    Swal.fire({
+      title: "¿Confirmas eliminar este producto?",
+      text: "Esta acción no se puede deshacer",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#E02181",
+      cancelButtonColor: "#442140",
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "Eliminar",
+      reverseButtons: true,
+      customClass: {
+        title: 'swal-title',
+      },
+      textClass: 'swal-content', // Aplicar el estilo de fuente al mensaje
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await deleteProductFromBackend(productId);
+          refreshProductsList();
 
-    try {
-      await deleteProductFromBackend(productId);
-      refreshProductsList();
+          Swal.fire({
+            icon: "success",
+            title: "Producto Eliminado",
+            text: "El producto ha sido eliminado exitosamente.",
+            customClass: {
+              title: 'swal-title',
+            },
+            textClass: 'swal-content',
+          });
 
-      Swal.fire({
-        icon: "success",
-        title: "Producto Eliminado",
-        text: "El producto ha sido eliminado exitosamente.",
-      });
-
-    } catch (error) {
-      console.log(error);
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Ha habido un error al eliminar el producto.",
-      });
-    }
+        } catch (error) {
+          console.log(error);
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Ha habido un error al eliminar el producto.",
+            customClass: {
+              title: 'swal-title',
+            },
+            textClass: 'swal-content',
+          });
+        }
+      }
+    });
   }
 
   const navigate = useNavigate();
@@ -190,7 +288,7 @@ export function Products() {
     <div>
       <div className="navbar-products">
         <nav>
-          <div className="navbar-products-left">
+          <div className="navbar-left">
             <img
               src={logout}
               alt="logout"
@@ -200,7 +298,7 @@ export function Products() {
               Salir
             </p>
           </div>
-          <div className="navbar-products-right">
+          <div className="navbar-right">
             <img
               src={logo}
               alt="Imagen 2"
@@ -215,14 +313,14 @@ export function Products() {
 
         {/* Modal para agregar producto */}
         <Modal
-          isOpen={isAddModalOpen}
-          onRequestClose={closeAddModal}
+          isOpen={isAddProductModalOpen}
+          onRequestClose={closeAddProductModal}
           contentLabel="Agregar Producto"
           className="custom-modal-addProduct"
           ariaHideApp={true}
         >
           {/* Botón "x" para cerrar el modal */}
-          <button className="close-modal-button" onClick={closeAddModal}>
+          <button className="close-modal-button" onClick={closeAddProductModal}>
             &times;
           </button>
           <h1 className="h1Products">Agregar Producto</h1>
@@ -256,8 +354,22 @@ export function Products() {
               {getTypes().map((item, index) => <option key={index} value={item.key}>{item.type}</option>)}
             </select>
           </div>
+          <div className="form-group">
+            <label className="label-style">Imagen:</label>
+            <input
+              type="file"
+              accept="image/*"
+              id="file-input"
+              value={productImage}
+              style={{ display: "none" }}
+              //ref={fileInputRef}
+              onChange={(e) => setProductImage(e.target.files[0])}
+              className="input-field"
+            />
+            {/* <span class="file-name">Ningún archivo seleccionado</span> */}
+          </div>
           <button className="btn-saveChanges" onClick={addNewProduct}>
-            Guardar 
+            Guardar
           </button>
 
         </Modal>
@@ -267,6 +379,7 @@ export function Products() {
         <table className="products-table">
           <thead>
             <tr>
+              <th>Imagen</th>
               <th>Nombre</th>
               <th>Tipo</th>
               <th>Precio</th>
@@ -276,13 +389,14 @@ export function Products() {
           <tbody>
             {products.map((product, index) => (
               <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
+                <td><img src={`${BASE_URL}${product.productImage}`}/></td>
                 <td>{product.productName}</td>
                 <td>{product.productType}</td>
                 <td>{product.productPrice}</td>
                 <td>
                   <div className="products-actions">
                     <button onClick={() => deleteProduct(product.productId)} className="delete-btn"></button>
-                    <button onClick={() => openProductModal(index)} className="edit-btn"></button>
+                    <button onClick={() => openEditProductModal(index)} className="edit-btn"></button>
                   </div>
                 </td>
               </tr>
@@ -291,7 +405,7 @@ export function Products() {
         </table>
       </div>
       <div className="btn-routes">
-        <button onClick={openAddModal} className="btn-add-product">
+        <button onClick={openAddProductModal} className="btn-add-product">
           <img
             src={iconAdd}
             alt="Icon add Product"
@@ -309,12 +423,12 @@ export function Products() {
       {/* Modal para editar producto */}
 
       <Modal
-        isOpen={productModalIsOpen}
-        onRequestClose={closeProductModal}
+        isOpen={editProductModalIsOpen}
+        onRequestClose={closeEditProductModal}
         contentLabel="Editar producto"
         className="custom-modal-editProduct"
       >
-        <button className="close-modal-button" onClick={closeProductModal}>
+        <button className="close-modal-button" onClick={closeEditProductModal}>
           &times;
         </button>
 
@@ -353,6 +467,16 @@ export function Products() {
             value={productPrice}
             onChange={(e) => setProductPrice(e.target.value)}
             className="input-field"
+          />
+        </div>
+        <div className="form-group">
+          <label className="label-style">Imagen:</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setProductImage(e.target.files[0])}
+            className="input-field"
+            ref={productImageRef}
           />
         </div>
         <button className="btn-saveChanges" onClick={saveProductsChanges}>Guardar</button>

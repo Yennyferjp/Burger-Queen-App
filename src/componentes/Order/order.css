@@ -10,67 +10,11 @@
   line-height: normal;
 }
 
-.cliente-mesa {}
-
-.input-customerName {
-  width: 250px;
-  height: 47px;
-  border-radius: 16.136px;
-  border: 3px solid #AD59A1;
-  background: #FFF;
-  margin-right: 20px;
-  padding-left: 10px;
-  color: black;
-  font-family: Quicksand;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-
-
-
-.input-tableNumber {
-  width: 150px;
-  height: 47px;
-  border-radius: 16.136px;
-  border: 3px solid #AD59A1;
-  background: #FFF;
-  margin-right: 20px;
-  padding-left: 10px;
-  color: black;
-  font-family: Quicksand;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-
-.content {
+.productandorder{
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  max-width: 100%;
   justify-content: space-around;
 }
 
-.menu {
-  margin-top: 50px;
-}
-
-.btn-breakfast, .btn-lunch  {
-  width: 147.826px;
-  height: 44px;
-  border-radius: 16.136px;
-  border: 3px solid #FF6584;
-  background: #AD59A1;
-  color: #FFF;
-  text-align: center;
-  font-family: Quicksand;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 20px;
-  margin-right: 15px;
-
-}
 

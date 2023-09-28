@@ -1,0 +1,32 @@
+
+.inputCustomerName {
+  width: 250px;
+  height: 47px;
+  border-radius: 16.136px;
+  border: 3px solid #AD59A1;
+  background: #FFF;
+  margin-right: 20px;
+  padding-left: 10px;
+  color: black;
+  font-family: Quicksand;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.inputTableNumber {
+  width: 150px;
+  height: 47px;
+  border-radius: 16.136px;
+  border: 3px solid #AD59A1;
+  background: #FFF;
+  margin-right: 20px;
+  padding-left: 10px;
+  color: black;
+  font-family: Quicksand;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}

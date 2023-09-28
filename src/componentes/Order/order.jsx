@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import CustomerInfo from './CustomerInfo';
+import ProductMenu from './ProductMenu';
+import OrderSummary from './OrderSummary';
 import Swal from 'sweetalert2';
 import "./order.css";
 import logout from "./images/flecha-logout.png";
@@ -8,11 +11,9 @@ import { useNavigate } from "react-router-dom";
 export function Order({ user }) {
   const [customer, setCustomer] = useState('');
   const [table, setTable] = useState('');
-  const [breakfastProducts, setBreakfastProducts] = useState([]);
-  const [lunchProducts, setLunchProducts] = useState([]);
+
   const [order, setOrder] = useState([]);
   const [totalOrder, setTotalOrder] = useState(0);
-  const [activeCategory, setActiveCategory] = useState('breakfast'); 
 
   const addProductToOrder = (product) => {
     // Verifica si el producto ya está en el pedido
@@ -39,14 +40,32 @@ export function Order({ user }) {
   };
 
   const clearOrder = () => {
-    setOrder([]);
-    setTotalOrder(0);
-    Swal.fire('Order cleared', 'The order has been cleared successfully', 'success');
+    if (order.length === 0) {
+      Swal.fire('Advertencia', 'La orden ya está vacía.', 'warning');
+    } else {
+      Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'Esto eliminará todos los productos de la orden. ¿Estás seguro de que deseas continuar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, limpiar orden',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setOrder([]);
+          setTotalOrder(0);
+          Swal.fire('Orden eliminada', 'La orden se ha eliminado correctamente', 'success');
+        }
+      });
+    }
   };
 
   const sendOrder = () => {
-    
-    Swal.fire('Pedido limpiado', 'El pedido se ha limpiado correctamente', 'success');
+    if (order.length === 0) {
+      Swal.fire('Error', 'La orden está vacía. Agregue productos antes de enviar el pedido.', 'error');
+    } else {
+      Swal.fire('Enviando Pedido', 'El pedido se ha enviado correctamente a cocina', 'success');
+    }
   };
 
   const navigate = useNavigate();
@@ -79,74 +98,10 @@ export function Order({ user }) {
       </div>
       <div className="order-container">
         <h1 className='order-title'>Es hora de hacer el pedido</h1>
-        <div className="customer-table">
-          <input
-            type="text"
-            placeholder="Nombre del cliente"
-            value={customer}
-            onChange={(e) => setCustomer(e.target.value)}
-            className='input-customerName'
-          />
-          <input
-            type="text"
-            placeholder="Número de mesa"
-            value={table}
-            onChange={(e) => setTable(e.target.value)}
-            className='input-tableNumber'
-          />
-        </div>
-        <div className="content">
-          <div className="menu">
-            <div className="categories">
-              <button
-                className={`btn-breakfast ${activeCategory === 'breakfast' ? 'active' : ''}`}
-                onClick={() => {
-                  setBreakfastProducts(breakfastData);
-                  setActiveCategory('breakfast');
-                }}
-              >
-                DESAYUNO
-              </button>
-              <button
-                className={`btn-lunch ${activeCategory === 'lunch' ? 'active' : ''}`}
-                onClick={() => {
-                  setLunchProducts(lunchData);
-                  setActiveCategory('lunch');
-                }}
-              >
-                ALMUERZO
-              </button>
-            </div>
-          </div>
-          <div className="products">
-            <div className="product-list">
-              {breakfastProducts.map((product) => (
-                <div key={product.id} className="product">
-                  <img src={product.image} alt={product.name} />
-                  <p>{product.name}</p>
-                  <p>${product.price}</p>
-                  <button onClick={() => addProductToOrder(product)}>Add</button>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="order">
-          <h2>Order</h2>
-          <div className="order-list">
-            {order.map((product) => (
-              <div key={product.id} className="order-item">
-                <p>{product.name}</p>
-                <p>Quantity: {product.quantity}</p>
-                <p>Price: ${product.price}</p>
-                <button onClick={() => removeProductFromOrder(product)}>-</button>
-                <button onClick={() => addProductToOrder(product)}>+</button>
-              </div>
-            ))}
-          </div>
-          <p>Total: ${totalOrder}</p>
-          <button onClick={clearOrder}>Clear</button>
-          <button onClick={sendOrder}>Order</button>
+        <CustomerInfo customer={customer} table={table} setCustomer={setCustomer} setTable={setTable} />
+        <div className='productandorder'>
+        <ProductMenu addProductToOrder={addProductToOrder} />
+        <OrderSummary order={order} totalOrder={totalOrder} removeProductFromOrder={removeProductFromOrder} clearOrder={clearOrder} sendOrder={sendOrder} />
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Swal from "sweetalert2";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
@@ -17,23 +17,26 @@ import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
 import iconAdd from "./images/add.png";
 
+const BASE_URL = import.meta.env.VITE_APP_API_URL;
+
 Modal.setAppElement('#root');
 
 export function Products() {
   // Estado para almacenar los productos creados
   const [products, setProducts] = useState([]);
 
-  const [productImage, setProductImage] = useState("");
+  const [productId, setProductId] = useState("");
   const [productName, setProductName] = useState("");
   const [productType, setProductType] = useState("");
-  const [productId, setProductId] = useState("");
   const [productPrice, setProductPrice] = useState("");
-  
+  const [productImage, setProductImage] = useState("");
+  const productImageRef = useRef(null);
+
   useEffect(() => {  // se utiliza para manejar el ciclo de vida de la aplicación
     refreshProductsList();
   },
-  []);
-  
+    []);
+
   const [editProductModalIsOpen, setEditProductModalIsOpen] = useState(false);
   const openEditProductModal = (index) => {
     setEditProductModalIsOpen(true);
@@ -58,11 +61,35 @@ export function Products() {
   };
 
   const saveProductsChanges = async () => {
-    if (productName === "" || productType === "" || productPrice === "") {
+    if (productName === "") {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "Todos los campos son obligatorios",
+        text: "El nombre del producto es obligatorio",
+        customClass: {
+          title: 'swal-title',
+        },
+        textClass: 'swal-content',
+      });
+      return;
+    }
+    if (productType === "") {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "El tipo de producto es obligatorio",
+        customClass: {
+          title: 'swal-title',
+        },
+        textClass: 'swal-content',
+      });
+      return;
+    }
+    if (productPrice === "") {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "El precio del producto es obligatorio",
         customClass: {
           title: 'swal-title',
         },
@@ -71,10 +98,33 @@ export function Products() {
       return;
     }
 
+    let _productImage = null;
+    let productImagePromise = null;
+    if (!productImageRef?.current) {
+      console.error("Error al cargar imagen!");
+      return;
+    }
+    if (!productImageRef?.current.files[0]) {
+      console.log("El usuario no seleccionó una imagen");
+    } else {
+      productImagePromise = new Promise((resolve, reject) => {
+        let reader = new FileReader()
+        reader.readAsDataURL(productImageRef.current.files[0]);
+        reader.onloadend = () => {
+          resolve(reader.result);
+        }
+        reader.onerror = (error) => {
+          reject(error);
+        };
+      })
+    }
+    _productImage = await productImagePromise;
+
     const editedProduct = {
       name: productName,
       type: productType,
-      price: productPrice
+      price: productPrice,
+      image: _productImage
     };
 
     try {
@@ -91,11 +141,11 @@ export function Products() {
         textClass: 'swal-content',
       });
 
-      setProductImage("");
+      setProductId("");
       setProductName("");
       setProductType("");
-      setProductId("");
       setProductPrice("");
+      setProductImage("");
       closeEditProductModal();
     } catch (error) {
       console.log(error);
@@ -339,7 +389,7 @@ export function Products() {
           <tbody>
             {products.map((product, index) => (
               <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
-                <td>{product.productImage}</td>
+                <td><img src={`${BASE_URL}${product.productImage}`}/></td>
                 <td>{product.productName}</td>
                 <td>{product.productType}</td>
                 <td>{product.productPrice}</td>
@@ -424,9 +474,9 @@ export function Products() {
           <input
             type="file"
             accept="image/*"
-            value={productImage}
             onChange={(e) => setProductImage(e.target.files[0])}
             className="input-field"
+            ref={productImageRef}
           />
         </div>
         <button className="btn-saveChanges" onClick={saveProductsChanges}>Guardar</button>

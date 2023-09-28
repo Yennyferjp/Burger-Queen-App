@@ -28,20 +28,15 @@ export function Products() {
   const [productType, setProductType] = useState("");
   const [productId, setProductId] = useState("");
   const [productPrice, setProductPrice] = useState("");
-
-
-  const [productModalIsOpen, setProductModalIsOpen] = useState(false);
-
-  const [editingProduct, setEditingProduct] = useState(null);
-
+  
   useEffect(() => {  // se utiliza para manejar el ciclo de vida de la aplicación
     refreshProductsList();
   },
-    []);
-
-  const openProductModal = (index) => {
-    setEditingProduct(index);
-    setProductModalIsOpen(true);
+  []);
+  
+  const [editProductModalIsOpen, setEditProductModalIsOpen] = useState(false);
+  const openEditProductModal = (index) => {
+    setEditProductModalIsOpen(true);
 
     const product = products[index];
     setProductImage(product.productImage);
@@ -50,19 +45,16 @@ export function Products() {
     setProductId(product.productId);
     setProductPrice(product.productPrice);
   };
-
-  const closeProductModal = () => {
-    setEditingProduct(null);
-    setProductModalIsOpen(false);
+  const closeEditProductModal = () => {
+    setEditProductModalIsOpen(false);
   };
 
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const openAddModal = () => {
-    setIsAddModalOpen(true);
+  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
+  const openAddProductModal = () => {
+    setIsAddProductModalOpen(true);
   };
-
-  const closeAddModal = () => {
-    setIsAddModalOpen(false);
+  const closeAddProductModal = () => {
+    setIsAddProductModalOpen(false);
   };
 
   const saveProductsChanges = async () => {
@@ -104,7 +96,7 @@ export function Products() {
       setProductType("");
       setProductId("");
       setProductPrice("");
-      closeProductModal();
+      closeEditProductModal();
     } catch (error) {
       console.log(error);
       Swal.fire({
@@ -172,7 +164,7 @@ export function Products() {
       setProductType("");
       setProductId("");
       setProductPrice("");
-      closeProductModal();
+      closeEditProductModal();
 
     } catch (error) {
       console.log(error);
@@ -271,14 +263,14 @@ export function Products() {
 
         {/* Modal para agregar producto */}
         <Modal
-          isOpen={isAddModalOpen}
-          onRequestClose={closeAddModal}
+          isOpen={isAddProductModalOpen}
+          onRequestClose={closeAddProductModal}
           contentLabel="Agregar Producto"
           className="custom-modal-addProduct"
           ariaHideApp={true}
         >
           {/* Botón "x" para cerrar el modal */}
-          <button className="close-modal-button" onClick={closeAddModal}>
+          <button className="close-modal-button" onClick={closeAddProductModal}>
             &times;
           </button>
           <h1 className="h1Products">Agregar Producto</h1>
@@ -354,7 +346,7 @@ export function Products() {
                 <td>
                   <div className="products-actions">
                     <button onClick={() => deleteProduct(product.productId)} className="delete-btn"></button>
-                    <button onClick={() => openProductModal(index)} className="edit-btn"></button>
+                    <button onClick={() => openEditProductModal(index)} className="edit-btn"></button>
                   </div>
                 </td>
               </tr>
@@ -363,7 +355,7 @@ export function Products() {
         </table>
       </div>
       <div className="btn-routes">
-        <button onClick={openAddModal} className="btn-add-product">
+        <button onClick={openAddProductModal} className="btn-add-product">
           <img
             src={iconAdd}
             alt="Icon add Product"
@@ -381,12 +373,12 @@ export function Products() {
       {/* Modal para editar producto */}
 
       <Modal
-        isOpen={productModalIsOpen}
-        onRequestClose={closeProductModal}
+        isOpen={editProductModalIsOpen}
+        onRequestClose={closeEditProductModal}
         contentLabel="Editar producto"
         className="custom-modal-editProduct"
       >
-        <button className="close-modal-button" onClick={closeProductModal}>
+        <button className="close-modal-button" onClick={closeEditProductModal}>
           &times;
         </button>
 

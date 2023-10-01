@@ -109,7 +109,7 @@ export function Products() {
     let _productImage = null;
     let productImagePromise = null;
     if (!productImageRef?.current) {
-      console.error("Error al cargar imagen!");
+      console.error("Error al cargar la imagen");
       return;
     }
     if (!productImageRef?.current.files[0]) {
@@ -360,7 +360,11 @@ export function Products() {
               onChange={(e) => setProductType(e.target.value)}
               className="input-field"
             >
-              {getTypes().map((item, index) => <option key={index} value={item.key}>{item.type}</option>)}
+              <option value="">Selecciona una opción</option>
+              {getTypes().map((item, index) =>
+                <option key={index} value={item.key}>
+                  {item.type}
+                </option>)}
             </select>
           </div>
           <div className="form-group">
@@ -368,12 +372,9 @@ export function Products() {
             <input
               type="file"
               accept="image/*"
-              id="file-input"
-              value={productImage}
-              style={{ display: "none" }}
-              //ref={fileInputRef}
               onChange={(e) => setProductImage(e.target.files[0])}
               className="input-field"
+              ref={productImageRef}
             />
             {/* <span class="file-name">Ningún archivo seleccionado</span> */}
           </div>
@@ -457,12 +458,13 @@ export function Products() {
         </div>
         <div className="form-group">
           <label className="label-style">Tipo:</label>
-          <input type="text"
-            placeholder="Tipo"
+          <select
             value={productType}
             onChange={(e) => setProductType(e.target.value)}
             className="input-field"
-          />
+          >
+            {getTypes().map((item, index) => <option key={index} value={item.key}>{item.type}</option>)}
+          </select>
         </div>
         <div className="form-group">
           <label className="label-style">ID:</label>

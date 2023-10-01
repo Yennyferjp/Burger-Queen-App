@@ -23,9 +23,9 @@ function OrderSummary({ order, totalOrder, addProductToOrder, removeProductFromO
 
   return (
     <div className={style.order}>
-      {customer && <h2 className={style.nameCustomer}>{`👋 Hola  ${customer}`}</h2>}
+      {customer && <h2 className={style.nameCustomer}>{`Hola,  ${customer} 👋`}</h2>}
       {table && <p className={style.numberTable}>{`Mesa # ${table}`}</p>}
-      <h1 className={style.orden}>ORDEN</h1>
+      <h1 className={style.orden}>Orden</h1>
       <hr />
       <div className="order-list">
         <table className={style.orderTable}>
@@ -45,11 +45,11 @@ function OrderSummary({ order, totalOrder, addProductToOrder, removeProductFromO
           </tbody>
         </table>
       </div>
-      <p className={style.totalOrder}>TOTAL ${calculateTotal()}</p>
+      <p className={style.totalOrder}>Total ${calculateTotal()}</p>
       <hr />
       <div className={style.btns}>
-        <button className={style.btnClear} onClick={clearOrder}>LIMPIAR</button>
-        <button className={style.btnSend} onClick={handleSendOrder} >ORDENAR</button>
+        <button className={style.btnClear} onClick={clearOrder}>Limpiar</button>
+        <button className={style.btnSend} onClick={handleSendOrder} >Ordenar</button>
       </div>
     </div>
   );

@@ -27,13 +27,13 @@ function ProductMenu({ addProductToOrder }) {
             className={`${style['btn-breakfast']} ${activeCategory === 'Desayuno' ? 'active' : ''}`}
             onClick={() => changeActiveCategory('Desayuno')}
           >
-            DESAYUNO
+            Desayuno
           </button>
           <button
             className={`${style['btn-lunch']} ${activeCategory === 'Almuerzo' ? 'active' : ''}`}
             onClick={() => changeActiveCategory('Almuerzo')}
           >
-            ALMUERZO
+            Almuerzo
           </button>
         </div>
         <div className="product-menu">

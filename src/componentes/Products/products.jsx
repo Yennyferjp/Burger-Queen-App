@@ -60,6 +60,14 @@ export function Products() {
     setIsAddProductModalOpen(false);
   };
 
+  const [isDetailsProductModalOpen, setDetailsProductModalOpen] = useState(false);
+  const openDetailsProductModal = () => {
+    setDetailsProductModalOpen(true);
+  };
+  const closeDetailsProductModal = () => {
+    setDetailsProductModalOpen(false);
+  };
+
   const saveProductsChanges = async () => {
     if (productName === "") {
       Swal.fire({
@@ -189,7 +197,7 @@ export function Products() {
     }
 
     const newProduct = {
-      image: productImage, // image: URL.createObjectURL(productImage), // Crea una URL temporal para la imagen seleccionada
+      image: productImage,
       name: productName,
       type: productType,
       price: productPrice,
@@ -283,6 +291,7 @@ export function Products() {
   };
 
   const usuariosMatch = useMatch("/users");
+  const orderMatch = useMatch("/order");
 
   return (
     <div>
@@ -379,7 +388,6 @@ export function Products() {
         <table className="products-table">
           <thead>
             <tr>
-              <th>Imagen</th>
               <th>Nombre</th>
               <th>Tipo</th>
               <th>Precio</th>
@@ -389,7 +397,6 @@ export function Products() {
           <tbody>
             {products.map((product, index) => (
               <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
-                <td><img src={`${BASE_URL}${product.productImage}`}/></td>
                 <td>{product.productName}</td>
                 <td>{product.productType}</td>
                 <td>{product.productPrice}</td>
@@ -397,6 +404,7 @@ export function Products() {
                   <div className="products-actions">
                     <button onClick={() => deleteProduct(product.productId)} className="delete-btn"></button>
                     <button onClick={() => openEditProductModal(index)} className="edit-btn"></button>
+                    <button onClick={() => openDetailsProductModal(index)} className="details-btn"></button>
                   </div>
                 </td>
               </tr>
@@ -413,6 +421,11 @@ export function Products() {
           />
           Nuevo
         </button>
+        <Link
+          to="/order"
+          className={`nav-button ${orderMatch ? "active-button" : ""}`}
+        >Ir a Órdenes
+        </Link>
         <Link
           to="/users"
           className={`nav-button ${usuariosMatch ? "active-button" : ""}`}
@@ -481,6 +494,43 @@ export function Products() {
         </div>
         <button className="btn-saveChanges" onClick={saveProductsChanges}>Guardar</button>
       </Modal>
+
+      {/* Modal para ver detalles del producto */}
+      <Modal
+        isOpen={isDetailsProductModalOpen}
+        onRequestClose={closeDetailsProductModal}
+        contentLabel="Detalles del producto"
+        className="custom-modal-detailsProduct"
+        ariaHideApp={true}
+      >
+        <button className="close-modal-button" onClick={closeDetailsProductModal}>
+          &times;
+        </button>
+        <h1 className="h1Products">Detalles del producto</h1>
+        <img
+          src={logo}
+          className="product-image" // cambiar por la del producto
+        />
+        <div className="form-group">
+          <label className="label-style">Nombre:</label>
+          <span className="product-details">
+            {productName}
+          </span>
+        </div>
+        <div className="form-group">
+          <label className="label-style">Tipo:</label>
+          <span className="product-details">
+            {productType}
+          </span>
+        </div>
+        <div className="form-group">
+          <label className="label-style">Precio:</label>
+          <span className="product-details">
+            {productPrice}
+          </span>
+        </div>
+      </Modal>
     </div>
   );
 }
+// <img src={`${BASE_URL}${product.productImage}`}/>

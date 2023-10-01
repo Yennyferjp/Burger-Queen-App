@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Questrial&family=Quicksand&family=Rammetto+One&display=swap');
 
+/* body {
+  max-height: 1024px;
+  max-width: 768px;
+} */
+
 .navbar-products {
   padding: 10px 0;
 }
@@ -141,7 +146,7 @@ nav {
 
 .products-table {
   font-family: Quicksand;
-  min-width: 700px;
+  width: 650px;
   border: hidden;
   margin: 0 auto;
   font-weight: 800;
@@ -195,6 +200,17 @@ nav {
   border: none;
 }
 
+.details-btn {
+  background-color: transparent;
+  background-image: url('./images/details.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  height: 25px;
+  width: 25px;
+  border: none;
+}
+
 /*Modal*/
 .close-modal-button {
   position: relative;
@@ -225,6 +241,33 @@ nav {
   margin: 15% auto;
   border-radius: 20px;
   padding: 20px;
+}
+
+.custom-modal-detailsProduct {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.92) 0%, rgba(34, 3, 30, 0.92) 25%, rgba(95, 40, 87, 0.92) 48.44%, rgba(34, 3, 30, 0.92) 70.31%, rgba(0, 0, 0, 0.92) 100%);
+  border: 2px solid #333;
+  border-radius: 5px;
+  max-width: 400px;
+  margin: 15% auto;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-details {
+  color: #FFF;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: Quicksand;
+  margin-left: 20px;
+}
+
+.product-image {
+  width: 142px;
+  height: 143px;
+  margin-bottom: 25px;
 }
 
 .form-group {

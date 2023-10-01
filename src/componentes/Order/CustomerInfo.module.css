@@ -1,6 +1,5 @@
-
 .inputCustomerName {
-  width: 250px;
+  width: 186px;
   height: 47px;
   border-radius: 16.136px;
   border: 3px solid #AD59A1;
@@ -29,4 +28,20 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+}
+
+.btnInit{
+  width: 80px;
+  height: 50px;
+  border-radius: 16.136px;
+  border: 3px solid #E6E6E6;
+  background: #E02181;
+  color: #FFF;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  font-family: Quicksand;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  
 }

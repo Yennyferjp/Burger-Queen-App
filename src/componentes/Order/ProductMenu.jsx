@@ -4,7 +4,7 @@ import { getProductsFromBackend } from '../../services/products-services'
 function ProductMenu({ addProductToOrder }) {
 
   const [products, setProducts] = useState([]);
-  const [activeCategory, setActiveCategory] = useState('breakfast'); // Estado para la categoría activa
+  const [activeCategory, setActiveCategory] = useState('Desayuno'); // Estado para la categoría activa
 
   // Filtra los productos según la categoría activa
   const filterProducts = (type) => {
@@ -24,13 +24,13 @@ function ProductMenu({ addProductToOrder }) {
       <div className={style.menu}>
         <div className="categories">
           <button
-            className={`${style['btn-breakfast']} ${activeCategory === 'breakfast' ? 'active' : ''}`}
+            className={`${style['btn-breakfast']} ${activeCategory === 'Desayuno' ? 'active' : ''}`}
             onClick={() => changeActiveCategory('Desayuno')}
           >
             DESAYUNO
           </button>
           <button
-            className={`${style['btn-lunch']} ${activeCategory === 'lunch' ? 'active' : ''}`}
+            className={`${style['btn-lunch']} ${activeCategory === 'Almuerzo' ? 'active' : ''}`}
             onClick={() => changeActiveCategory('Almuerzo')}
           >
             ALMUERZO

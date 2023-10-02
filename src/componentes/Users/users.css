@@ -143,8 +143,7 @@ nav {
 
 .users-table {
     font-family: Quicksand;
-
-    min-width: 700px;
+    width: 650px;
     border: hidden;
     margin: 0 auto;
     font-weight: 800;

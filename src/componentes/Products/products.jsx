@@ -13,6 +13,7 @@ import {
   getTypes,
 } from "../../services/products-services";
 
+
 import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
 import iconAdd from "./images/add.png";
@@ -39,17 +40,18 @@ export function Products() {
 
   const [editProductModalIsOpen, setEditProductModalIsOpen] = useState(false);
   const openEditProductModal = (index) => {
-    setEditProductModalIsOpen(true);
-
     const product = products[index];
     setProductImage(product.productImage);
     setProductName(product.productName);
     setProductType(product.productType);
     setProductId(product.productId);
     setProductPrice(product.productPrice);
+
+    setEditProductModalIsOpen(true);
   };
   const closeEditProductModal = () => {
     setEditProductModalIsOpen(false);
+    clearProductModal();
   };
 
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
@@ -58,6 +60,30 @@ export function Products() {
   };
   const closeAddProductModal = () => {
     setIsAddProductModalOpen(false);
+    clearProductModal();
+  };
+
+  const [isDetailsProductModalOpen, setDetailsProductModalOpen] = useState(false);
+  const openDetailsProductModal = (index) => {
+    const product = products[index];
+    setProductName(product.productName);
+    setProductType(product.productType);
+    setProductId(product.productId);
+    setProductPrice(product.productPrice);
+    setProductImage(product.productImage);
+
+    setDetailsProductModalOpen(true);
+  };
+  const closeDetailsProductModal = () => {
+    setDetailsProductModalOpen(false);
+  };
+
+  const clearProductModal = () => {
+    setProductName("");
+    setProductType("");
+    setProductId("");
+    setProductPrice("");
+    setProductImage("");
   };
 
   const saveProductsChanges = async () => {
@@ -101,7 +127,7 @@ export function Products() {
     let _productImage = null;
     let productImagePromise = null;
     if (!productImageRef?.current) {
-      console.error("Error al cargar imagen!");
+      console.error("Error al cargar la imagen");
       return;
     }
     if (!productImageRef?.current.files[0]) {
@@ -141,11 +167,6 @@ export function Products() {
         textClass: 'swal-content',
       });
 
-      setProductId("");
-      setProductName("");
-      setProductType("");
-      setProductPrice("");
-      setProductImage("");
       closeEditProductModal();
     } catch (error) {
       console.log(error);
@@ -174,12 +195,35 @@ export function Products() {
   }
 
   const addNewProduct = async () => {
-    if (productName === "" || productType === "" || productPrice === "") {
-
+    if (productName === "") {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "Todos los campos son obligatorios.",
+        text: "El nombre del producto es obligatorio",
+        customClass: {
+          title: 'swal-title',
+        },
+        textClass: 'swal-content',
+      });
+      return;
+    }
+    if (productType === "") {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "El tipo de producto es obligatorio",
+        customClass: {
+          title: 'swal-title',
+        },
+        textClass: 'swal-content',
+      });
+      return;
+    }
+    if (productPrice === "") {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "El precio del producto es obligatorio",
         customClass: {
           title: 'swal-title',
         },
@@ -188,11 +232,33 @@ export function Products() {
       return;
     }
 
+    let _productImage = null;
+    let productImagePromise = null;
+    if (!productImageRef?.current) {
+      console.error("Error al cargar la imagen");
+      return;
+    }
+    if (!productImageRef?.current.files[0]) {
+      console.log("El usuario no seleccionó una imagen");
+    } else {
+      productImagePromise = new Promise((resolve, reject) => {
+        let reader = new FileReader()
+        reader.readAsDataURL(productImageRef.current.files[0]);
+        reader.onloadend = () => {
+          resolve(reader.result);
+        }
+        reader.onerror = (error) => {
+          reject(error);
+        };
+      })
+    }
+    _productImage = await productImagePromise;
+
     const newProduct = {
-      image: productImage, // image: URL.createObjectURL(productImage), // Crea una URL temporal para la imagen seleccionada
       name: productName,
       type: productType,
       price: productPrice,
+      image: _productImage,
     };
 
     try {
@@ -209,12 +275,7 @@ export function Products() {
         textClass: 'swal-content',
       });
 
-      setProductImage("");
-      setProductName("");
-      setProductType("");
-      setProductId("");
-      setProductPrice("");
-      closeEditProductModal();
+      closeAddProductModal();
 
     } catch (error) {
       console.log(error);
@@ -283,6 +344,7 @@ export function Products() {
   };
 
   const usuariosMatch = useMatch("/users");
+  const orderMatch = useMatch("/order");
 
   return (
     <div>
@@ -351,7 +413,11 @@ export function Products() {
               onChange={(e) => setProductType(e.target.value)}
               className="input-field"
             >
-              {getTypes().map((item, index) => <option key={index} value={item.key}>{item.type}</option>)}
+              <option value="">Selecciona una opción</option>
+              {getTypes().map((item, index) =>
+                <option key={index} value={item.key}>
+                  {item.type}
+                </option>)}
             </select>
           </div>
           <div className="form-group">
@@ -359,12 +425,9 @@ export function Products() {
             <input
               type="file"
               accept="image/*"
-              id="file-input"
-              value={productImage}
-              style={{ display: "none" }}
-              //ref={fileInputRef}
               onChange={(e) => setProductImage(e.target.files[0])}
               className="input-field"
+              ref={productImageRef}
             />
             {/* <span class="file-name">Ningún archivo seleccionado</span> */}
           </div>
@@ -379,7 +442,6 @@ export function Products() {
         <table className="products-table">
           <thead>
             <tr>
-              <th>Imagen</th>
               <th>Nombre</th>
               <th>Tipo</th>
               <th>Precio</th>
@@ -389,7 +451,6 @@ export function Products() {
           <tbody>
             {products.map((product, index) => (
               <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
-                <td><img src={`${BASE_URL}${product.productImage}`}/></td>
                 <td>{product.productName}</td>
                 <td>{product.productType}</td>
                 <td>{product.productPrice}</td>
@@ -397,6 +458,7 @@ export function Products() {
                   <div className="products-actions">
                     <button onClick={() => deleteProduct(product.productId)} className="delete-btn"></button>
                     <button onClick={() => openEditProductModal(index)} className="edit-btn"></button>
+                    <button onClick={() => openDetailsProductModal(index)} className="details-btn"></button>
                   </div>
                 </td>
               </tr>
@@ -413,6 +475,11 @@ export function Products() {
           />
           Nuevo
         </button>
+        <Link
+          to="/order"
+          className={`nav-button ${orderMatch ? "active-button" : ""}`}
+        >Ir a Órdenes
+        </Link>
         <Link
           to="/users"
           className={`nav-button ${usuariosMatch ? "active-button" : ""}`}
@@ -444,12 +511,13 @@ export function Products() {
         </div>
         <div className="form-group">
           <label className="label-style">Tipo:</label>
-          <input type="text"
-            placeholder="Tipo"
+          <select
             value={productType}
             onChange={(e) => setProductType(e.target.value)}
             className="input-field"
-          />
+          >
+            {getTypes().map((item, index) => <option key={index} value={item.key}>{item.type}</option>)}
+          </select>
         </div>
         <div className="form-group">
           <label className="label-style">ID:</label>
@@ -480,6 +548,42 @@ export function Products() {
           />
         </div>
         <button className="btn-saveChanges" onClick={saveProductsChanges}>Guardar</button>
+      </Modal>
+
+      {/* Modal para ver detalles del producto */}
+      <Modal
+        isOpen={isDetailsProductModalOpen}
+        onRequestClose={closeDetailsProductModal}
+        contentLabel="Detalles del producto"
+        className="custom-modal-detailsProduct"
+        ariaHideApp={true}
+      >
+        <button className="close-modal-button" onClick={closeDetailsProductModal}>
+          &times;
+        </button>
+        <h1 className="h1Products">Detalles del producto</h1>
+        <img
+          src={`${BASE_URL}${productImage}`}
+          className="product-image" // cambiar por la del producto
+        />
+        <div className="form-group">
+          <label className="label-style">Nombre:</label>
+          <span className="product-details">
+            {productName}
+          </span>
+        </div>
+        <div className="form-group">
+          <label className="label-style">Tipo:</label>
+          <span className="product-details">
+            {productType}
+          </span>
+        </div>
+        <div className="form-group">
+          <label className="label-style">Precio:</label>
+          <span className="product-details">
+            {productPrice}
+          </span>
+        </div>
       </Modal>
     </div>
   );

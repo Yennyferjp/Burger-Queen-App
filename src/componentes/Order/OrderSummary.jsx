@@ -46,8 +46,8 @@ function OrderSummary({ order, totalOrder, addProductToOrder, removeProductFromO
           </tbody>
         </table>
       </div>
-      <p className={style.totalOrder}>Total ${calculateTotal()}</p>
       <hr />
+      <p className={style.totalOrder}>Total ${calculateTotal()}</p>
       <div className={style.btns}>
         <button className={style.btnClear} onClick={clearOrder}>Limpiar</button>
         <button className={style.btnSend} onClick={handleSendOrder} >Ordenar</button>

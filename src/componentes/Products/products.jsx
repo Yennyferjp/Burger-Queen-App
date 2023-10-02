@@ -40,14 +40,14 @@ export function Products() {
 
   const [editProductModalIsOpen, setEditProductModalIsOpen] = useState(false);
   const openEditProductModal = (index) => {
-    setEditProductModalIsOpen(true);
-
     const product = products[index];
     setProductImage(product.productImage);
     setProductName(product.productName);
     setProductType(product.productType);
     setProductId(product.productId);
     setProductPrice(product.productPrice);
+
+    setEditProductModalIsOpen(true);
   };
   const closeEditProductModal = () => {
     setEditProductModalIsOpen(false);
@@ -64,7 +64,14 @@ export function Products() {
   };
 
   const [isDetailsProductModalOpen, setDetailsProductModalOpen] = useState(false);
-  const openDetailsProductModal = () => {
+  const openDetailsProductModal = (index) => {
+    const product = products[index];
+    setProductName(product.productName);
+    setProductType(product.productType);
+    setProductId(product.productId);
+    setProductPrice(product.productPrice);
+    setProductImage(product.productImage);
+
     setDetailsProductModalOpen(true);
   };
   const closeDetailsProductModal = () => {
@@ -556,7 +563,7 @@ export function Products() {
         </button>
         <h1 className="h1Products">Detalles del producto</h1>
         <img
-          src={logo}
+          src={`${BASE_URL}${productImage}`}
           className="product-image" // cambiar por la del producto
         />
         <div className="form-group">
@@ -581,4 +588,3 @@ export function Products() {
     </div>
   );
 }
-// <img src={`${BASE_URL}${product.productImage}`}/>

@@ -25,11 +25,20 @@
   cursor: pointer;
 }
 
+.productMenu {
+
+}
+
+.productList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .productCard {
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.70);
   padding: 16px;
-  margin: 8px;
+  margin: 10px 8px 8px 0px;
   width: 109px;
   text-align: center;
   height: 109px;
@@ -44,4 +53,9 @@
   font-style: normal;
   font-weight: 700;
   line-height: 13px;
+}
+
+.productCardImg {
+  width: 70px;
+  margin-bottom: 5px;
 }

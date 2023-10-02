@@ -3,7 +3,7 @@
 .order {
   max-height: 400px; 
   overflow-y: auto; 
-  margin-top: 25px;
+  margin-top: 51px;
   background-color: rgba(217, 217, 217, 0.31);
   width: 290px;
   height: auto;
@@ -42,13 +42,13 @@
   font-weight: bolder;
   line-height: 20px;
   text-align: initial;
-  margin-left: 10px;
+  margin-left: 20px;
   margin-bottom: 1px;
   letter-spacing: 1.1px
 }
 
 hr {
-  width: 268px;
+  width: 250px;
   border: 1px solid #fff;
   border-radius: 20px;
 
@@ -99,7 +99,7 @@ hr {
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
+  margin-left: 15px;
 }
 
 .orderTable th, .orderTable td {

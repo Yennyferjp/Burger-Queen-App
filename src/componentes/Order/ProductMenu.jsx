@@ -39,19 +39,20 @@ function ProductMenu({ addProductToOrder }) {
             Almuerzo
           </button>
         </div>
-        <div className="product-menu">
-        <div className="product-list">
-          {products.map((product, index) => (
-            <div key={index} className={style.productCard} onClick={() => addProductToOrder(product)}>
-              <img src={`${BASE_URL}${product.image}`} alt={product.name} />
-              <p>{product.name}</p>
-              <p>Precio: ${product.price}</p>
-            </div>
-          ))}
+        <div className={style.productMenu}>
+          <div className={style.productList}>
+            {products.map((product, index) => (
+              <div key={index} className={style.productCard} onClick={() => addProductToOrder(product)}>
+                <img src={`${BASE_URL}${product.image}`} alt={product.name} className={style.productCardImg} />
+
+                <p>{product.name}</p>
+                <p>Precio: ${product.price}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-      </div>
-      
+
     </div>
   );
 }

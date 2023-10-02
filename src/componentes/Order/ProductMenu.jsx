@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import style from './ProductMenu.module.css';
 import { getProductsFromBackend } from '../../services/products-services'
+
+const BASE_URL = import.meta.env.VITE_APP_API_URL;
+
 function ProductMenu({ addProductToOrder }) {
 
   const [products, setProducts] = useState([]);
@@ -27,20 +30,20 @@ function ProductMenu({ addProductToOrder }) {
             className={`${style['btn-breakfast']} ${activeCategory === 'Desayuno' ? 'active' : ''}`}
             onClick={() => changeActiveCategory('Desayuno')}
           >
-            DESAYUNO
+            Desayuno
           </button>
           <button
             className={`${style['btn-lunch']} ${activeCategory === 'Almuerzo' ? 'active' : ''}`}
             onClick={() => changeActiveCategory('Almuerzo')}
           >
-            ALMUERZO
+            Almuerzo
           </button>
         </div>
         <div className="product-menu">
         <div className="product-list">
           {products.map((product, index) => (
             <div key={index} className={style.productCard} onClick={() => addProductToOrder(product)}>
-              <img src={product.image} alt={product.name} />
+              <img src={`${BASE_URL}${product.image}`} alt={product.name} />
               <p>{product.name}</p>
               <p>Precio: ${product.price}</p>
             </div>

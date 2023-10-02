@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Importa useNavigate en lugar de useHistory
 import "./login.css";
 import logo from "./images/logo_bq.png";
+import vector from "./images/employees.png";
 import { authorize } from "../../services/auth-services";
 
 export function Login({ setUser }) {
@@ -35,26 +36,30 @@ export function Login({ setUser }) {
   return (
     <section>
       <img src={logo} alt="Logo Burger Queen" className="logo-login" />
-      <h1 className="titulo">Inicia Sesión</h1>
-      <form className="login" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Correo electrónico"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="input-field-login"
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="input-field-login"
-
-        />
-        <button className="btn-continue">CONTINUAR</button>
-      </form>
+      <h1 className="title">Inicia Sesión</h1>
+      <div className="form-login">
+        <form className="login" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Correo electrónico"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="input-field-login"
+          />
+          <input
+            type="password"
+            placeholder="Contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="input-field-login"
+          />
+        </form>
+      </div>
+      <div className="btn-and-image">
+      <button className="btn-continue">Continuar</button>
+      {/* <img src={vector} alt="Burger Queen Ilustración" className="image-login" /> */}
       {error && <p className="p-error">Credenciales incorrectas. Inténtalo de nuevo.</p>}
+      </div>
     </section>
   );
 }

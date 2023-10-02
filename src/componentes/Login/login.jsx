@@ -57,7 +57,7 @@ export function Login({ setUser }) {
       </div>
       <div className="btn-and-image">
       <button className="btn-continue">Continuar</button>
-      <img src={vector} alt="Burger Queen Ilustración" className="image-login" />
+      {/* <img src={vector} alt="Burger Queen Ilustración" className="image-login" /> */}
       {error && <p className="p-error">Credenciales incorrectas. Inténtalo de nuevo.</p>}
       </div>
     </section>

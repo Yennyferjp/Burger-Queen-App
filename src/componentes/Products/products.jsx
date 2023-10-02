@@ -13,6 +13,7 @@ import {
   getTypes,
 } from "../../services/products-services";
 
+
 import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
 import iconAdd from "./images/add.png";
@@ -66,6 +67,14 @@ export function Products() {
   };
   const closeDetailsProductModal = () => {
     setDetailsProductModalOpen(false);
+  };
+
+  const clearProductModal = () => {
+    setProductName("");
+    setProductType("");
+    setProductId("");
+    setProductPrice("");
+    setProductImage("");
   };
 
   const saveProductsChanges = async () => {
@@ -149,11 +158,7 @@ export function Products() {
         textClass: 'swal-content',
       });
 
-      setProductId("");
-      setProductName("");
-      setProductType("");
-      setProductPrice("");
-      setProductImage("");
+      clearProductModal();
       closeEditProductModal();
     } catch (error) {
       console.log(error);
@@ -182,12 +187,35 @@ export function Products() {
   }
 
   const addNewProduct = async () => {
-    if (productName === "" || productType === "" || productPrice === "") {
-
+    if (productName === "") {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "Todos los campos son obligatorios.",
+        text: "El nombre del producto es obligatorio",
+        customClass: {
+          title: 'swal-title',
+        },
+        textClass: 'swal-content',
+      });
+      return;
+    }
+    if (productType === "") {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "El tipo de producto es obligatorio",
+        customClass: {
+          title: 'swal-title',
+        },
+        textClass: 'swal-content',
+      });
+      return;
+    }
+    if (productPrice === "") {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "El precio del producto es obligatorio",
         customClass: {
           title: 'swal-title',
         },
@@ -196,11 +224,33 @@ export function Products() {
       return;
     }
 
+    let _productImage = null;
+    let productImagePromise = null;
+    if (!productImageRef?.current) {
+      console.error("Error al cargar la imagen");
+      return;
+    }
+    if (!productImageRef?.current.files[0]) {
+      console.log("El usuario no seleccionó una imagen");
+    } else {
+      productImagePromise = new Promise((resolve, reject) => {
+        let reader = new FileReader()
+        reader.readAsDataURL(productImageRef.current.files[0]);
+        reader.onloadend = () => {
+          resolve(reader.result);
+        }
+        reader.onerror = (error) => {
+          reject(error);
+        };
+      })
+    }
+    _productImage = await productImagePromise;
+
     const newProduct = {
-      image: productImage,
       name: productName,
       type: productType,
       price: productPrice,
+      image: _productImage,
     };
 
     try {
@@ -217,11 +267,7 @@ export function Products() {
         textClass: 'swal-content',
       });
 
-      setProductImage("");
-      setProductName("");
-      setProductType("");
-      setProductId("");
-      setProductPrice("");
+      clearProductModal();
       closeEditProductModal();
 
     } catch (error) {

@@ -51,6 +51,7 @@ export function Products() {
   };
   const closeEditProductModal = () => {
     setEditProductModalIsOpen(false);
+    clearProductModal();
   };
 
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
@@ -59,6 +60,7 @@ export function Products() {
   };
   const closeAddProductModal = () => {
     setIsAddProductModalOpen(false);
+    clearProductModal();
   };
 
   const [isDetailsProductModalOpen, setDetailsProductModalOpen] = useState(false);
@@ -158,7 +160,6 @@ export function Products() {
         textClass: 'swal-content',
       });
 
-      clearProductModal();
       closeEditProductModal();
     } catch (error) {
       console.log(error);
@@ -267,8 +268,7 @@ export function Products() {
         textClass: 'swal-content',
       });
 
-      clearProductModal();
-      closeEditProductModal();
+      closeAddProductModal();
 
     } catch (error) {
       console.log(error);

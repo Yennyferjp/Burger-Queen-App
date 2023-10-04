@@ -34,19 +34,20 @@ function OrderSummary({ order, totalOrder, addProductToOrder, removeProductFromO
               <tr key={index}>
                 <td>{product.name}</td>
                 <td>${product.price}</td>
-                  <td><img src={lessIcon} alt="Restar" className={style.iconLess} onClick={() => removeProductFromOrder(product)} />
+                  <td>
+                    <img src={lessIcon} alt="Restar" className={style.iconLess} onClick={() => removeProductFromOrder(product)} />
                   </td>
                   <td>{product.quantity}</td>
                   <td>
                     <img src={plusIcon} alt="Sumar" className={style.iconPlus} onClick={() => addProductToOrder(product)} />
-                </td>
+                  </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <p className={style.totalOrder}>Total ${calculateTotal()}</p>
       <hr />
+      <p className={style.totalOrder}>Total ${calculateTotal()}</p>
       <div className={style.btns}>
         <button className={style.btnClear} onClick={clearOrder}>Limpiar</button>
         <button className={style.btnSend} onClick={handleSendOrder} >Ordenar</button>

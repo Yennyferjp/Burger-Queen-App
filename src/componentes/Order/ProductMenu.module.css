@@ -1,6 +1,5 @@
 .content {
   display: flex;
-
 }
 
 .menu {
@@ -13,7 +12,7 @@
   height: 44px;
   border-radius: 16.136px;
   border: 3px solid #FF6584;
-  background: #AD59A1;
+  background: rgba(173, 89, 161, 0.00);
   color: #FFF;
   text-align: center;
   font-family: Quicksand;
@@ -25,11 +24,23 @@
   cursor: pointer;
 }
 
+.btn-breakfast.active,
+.btn-lunch.active {
+  background-color: #AD59A1;
+  color: #fff;
+}
+
+.productList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 10px;
+}
+
 .productCard {
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.70);
   padding: 16px;
-  margin: 8px;
+  margin: 10px 8px 8px 5px;
   width: 109px;
   text-align: center;
   height: 109px;
@@ -44,4 +55,10 @@
   font-style: normal;
   font-weight: 700;
   line-height: 13px;
+  margin-bottom: 5px;
+}
+
+.productCardImg {
+  width: 70px;
+  margin: -5px 0px 5px 0px;
 }

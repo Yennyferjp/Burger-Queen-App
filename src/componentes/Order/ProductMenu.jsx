@@ -7,34 +7,42 @@ const BASE_URL = import.meta.env.VITE_APP_API_URL;
 function ProductMenu({ addProductToOrder }) {
 
   const [products, setProducts] = useState([]);
-  const [activeCategory, setActiveCategory] = useState('Desayuno'); // Estado para la categoría activa
 
   // Filtra los productos según la categoría activa
   const filterProducts = (type) => {
     getProductsFromBackend(type).then((result) => setProducts(result));
   }
+
+  const [activeButton, setActiveButton] = useState('Desayuno');
+
   const changeActiveCategory = (category) => {
-    setActiveCategory(category);
+    setActiveButton(category);
     filterProducts(category);
   }
   useEffect(() => {  // se utiliza para manejar el ciclo de vida de la aplicación
-    filterProducts(activeCategory);
+    filterProducts(activeButton);
   },
     []);
 
-  return (
+    console.log(activeButton);
+
+    return (
     <div className={style.content}>
       <div className={style.menu}>
-        <div className="categories">
+        <div className="categories" id="category-buttons">
           <button
-            className={`${style['btn-breakfast']} ${activeCategory === 'Desayuno' ? 'active' : ''}`}
-            onClick={() => changeActiveCategory('Desayuno')}
+            className={`${style['btn-breakfast']} ${activeButton === 'Desayuno' ? style['active'] : ''}`}
+            onClick={() => {
+              changeActiveCategory('Desayuno');
+            }}
           >
             Desayuno
           </button>
           <button
-            className={`${style['btn-lunch']} ${activeCategory === 'Almuerzo' ? 'active' : ''}`}
-            onClick={() => changeActiveCategory('Almuerzo')}
+            className={`${style['btn-lunch']} ${activeButton === 'Almuerzo' ? style['active'] : ''}`}
+            onClick={() => {
+              changeActiveCategory('Almuerzo');
+            }}
           >
             Almuerzo
           </button>
@@ -53,7 +61,7 @@ function ProductMenu({ addProductToOrder }) {
         </div>
       </div>
 
-    </div>
+    </div >
   );
 }
 

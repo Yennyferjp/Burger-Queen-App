@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Questrial&family=Quicksand&family=Rammetto+One&display=swap');
+
+.order-title {
+  margin-top: 0;
+  color: #E6E6E6;
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 46px;
+  font-style: normal;
+  line-height: normal;
+  margin-top: 140px;
+}

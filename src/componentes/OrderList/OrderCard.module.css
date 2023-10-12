@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Questrial&family=Quicksand&family=Rammetto+One&display=swap');
+
+.orderCard {
+  max-height: 400px; 
+  overflow-y: auto; 
+  margin-top: 51px;
+  background-color: rgba(217, 217, 217, 0.31);
+  width: 290px;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid #fff;
+  padding-right: 15px;
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import style from "./OrderList.module.css";
 import OrderCard from './OrderCard'; 
 
 export function OrderList() {
@@ -61,7 +62,7 @@ export function OrderList() {
   []
   return (
     <div className="order-list">
-      <div className='order-title'>Listado de órdenes</div>
+      <div className={style.orderListTitle}>Lista de órdenes</div>
       {!orderList && "Cargando órdenes"}
       {(orderList && orderList.length === 0) && "No hay órdenes"}
       {(orderList && orderList.length !== 0) && orderList.map((order) => (

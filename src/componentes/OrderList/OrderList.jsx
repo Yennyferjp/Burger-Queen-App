@@ -39,7 +39,7 @@ export function OrderList() {
         'productos': [
           {
             '_id': 'poiuytrewq',
-            'nombre': 'Frappuccino Pumpkin Spice, leche regular, shot de café extra',
+            'nombre': 'Jugo de naranja',
             'tipo': 'Desayuno',
             'precio': '15',
             'cantidad': '2'

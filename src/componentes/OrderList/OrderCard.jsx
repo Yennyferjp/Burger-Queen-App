@@ -1,5 +1,6 @@
 import React from 'react';
 import style from "./OrderCard.module.css";
+import check from "./images/check.png";
 
 function OrderCard({ order }) {
 
@@ -7,8 +8,9 @@ function OrderCard({ order }) {
     <div className={style.orderCard}>
       <div className={style.cardHeader}>
         <h4>{order.mesa}</h4>
-        <hr></hr>
+        <img src={check} alt="check" className={style.checkIcon}/>
       </div>
+      <hr></hr>
       {/* <h3>Juan Pérez</h3>
       <h3>{order.customerName}</h3> */}
       <div className={style.orderSection}>

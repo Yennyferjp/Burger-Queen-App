@@ -1,23 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Questrial&family=Quicksand&family=Rammetto+One&display=swap');
 
 .orderCard {
-  max-height: 400px;
   overflow-y: auto;
   margin-top: 51px;
   background-color: rgba(217, 217, 217, 0.31);
   width: 290px;
-  height: auto;
+  height: fit-content;
   border-radius: 16px;
   border: 1px solid #fff;
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
   padding-bottom: 20px;
 }
 
 .cardHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
+  width: 250px;
 }
 
 .orderSection {
@@ -50,30 +52,28 @@ h4 {
   font-size: 24px;
   font-weight: 600;
   line-height: normal;
-  margin-bottom: 15px;
+  margin: 20px 0px 15px 0px;
 }
 
 .orderStatus {
-  /* ¿va a ser botón? */
   border-radius: 12px;
   border: 2px solid #FFF;
-  background: #E02181;
+  background: #C6C6C5;
   color: #FFF;
   font-family: Quicksand;
   font-size: 17px;
   font-weight: 700;
   width: 164px;
-  height: 55px;
+  min-height: 55px;
 }
-
-/* .orderSection {
-  display: flex;
-  flex-direction: row;
-} */
 
 .productQuantity {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 230px;
+  width: 210px;
+}
+
+.checkIcon {
+  width: 50px;
 }

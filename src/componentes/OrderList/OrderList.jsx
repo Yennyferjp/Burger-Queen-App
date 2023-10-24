@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import style from "./OrderList.module.css";
 import OrderCard from './OrderCard';
 import { Link } from "react-router-dom";
+import update from "./images/update.png";
 
 export function OrderList() {
   const [orderList, setOrderList] = useState(null);
@@ -129,6 +130,7 @@ export function OrderList() {
       </div>
       <div className={style.orderListTitle}>Órdenes</div>
       <h1>Hola, Mesero Juan</h1>
+      <img src={update} alt="updateOrders" className={style.updateIcon}/>
       <div className={style.orderCardsSection}>
         {!orderList && "Cargando órdenes"}
         {(orderList && orderList.length === 0) && "No hay órdenes"}

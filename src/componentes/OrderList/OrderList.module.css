@@ -64,3 +64,9 @@ h1 {
   font-weight: 700;
   line-height: 60px;
 }
+
+.updateIcon {
+  width: 50px;
+  margin: -85px 70px 20px 0px;
+  align-self: flex-end;
+}

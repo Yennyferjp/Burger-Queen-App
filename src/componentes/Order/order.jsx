@@ -3,9 +3,10 @@ import CustomerInfo from './CustomerInfo';
 import ProductMenu from './ProductMenu';
 import OrderSummary from './OrderSummary';
 import Swal from 'sweetalert2';
-import "./order.css";
-import logout from "./images/flecha-logout.png";
-import logo from "./images/logo_bq.png";
+import style from "./order.module.css";
+import { Link } from "react-router-dom";
+// import logout from "./images/flecha-logout.png";
+// import logo from "./images/logo_bq.png";
 import { useNavigate } from "react-router-dom";
 
 export function Order({ user }) {
@@ -14,6 +15,7 @@ export function Order({ user }) {
   const [order, setOrder] = useState([]);
   const [totalOrder, setTotalOrder] = useState(0);
   const [isOrderStarted, setIsOrderStarted] = useState(false);
+  const [activeTab, setActiveTab] = useState(1);
 
   const addProductToOrder = (product) => {
     console.log(product);
@@ -45,7 +47,7 @@ export function Order({ user }) {
     }
     // Actualiza el total del pedido
     setTotalOrder(totalOrder - product.price);
-  };  
+  };
 
   const clearOrder = () => {
     if (order.length === 0) {
@@ -85,28 +87,29 @@ export function Order({ user }) {
     setIsOrderStarted(true);
   };
 
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
+
   return (
     <div>
-      <div className="navbar-user">
-        <nav>
-          <div className="navbar-left">
-            <img
-              src={logout}
-              alt="logout"
-              className="navbar-logout" onClick={handleLogoutClick}
-            />
-            <p className="navbar-logout" onClick={handleLogoutClick} >
-              Salir
-            </p>
-          </div>
-          <div className="navbar-right">
-            <img
-              src={logo}
-              alt="Logo Image"
-              className="navbar-image-logo"
-            />
-          </div>
-        </nav>
+      <div className={style.orderList}>
+        <div className={style.tabs}>
+          <Link
+            to="/order"
+            className={activeTab === 1 ? `${style.tabOrder} active` : style.tabOrder}
+            onClick={() => handleTabClick(1)}
+          >
+            Ordenar
+          </Link>
+          <Link
+            to="/order-list"
+            className={activeTab === 2 ? `${style.tabOrderList} active` : style.tabOrderList}
+            onClick={() => handleTabClick(2)}
+          >
+            Lista de Órdenes
+          </Link>
+        </div>
       </div>
       <div className="order-container">
         <h1 className='order-title'>
@@ -137,3 +140,5 @@ export function Order({ user }) {
     </div>
   );
 }
+
+export default Order;

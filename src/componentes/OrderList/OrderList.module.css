@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Questrial&family=Quicksand&family=Rammetto+One&display=swap');
+
+.orderList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  color: #E6E6E6;
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 24px;
+  font-style: normal;
+  line-height: normal;
+}
+
+.orderListTitle {
+  margin-top: 0;
+  color: #E6E6E6;
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 40px;
+  font-style: normal;
+  line-height: normal;
+  margin-top: 70px;
+  font-weight: 600;
+}
+
+.orderCardsSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 45px;
+}
+
+.tabs {
+  display: flex;
+  text-align: center;
+}
+
+.tabOrder {
+  width: 375px;
+  height: 65px;
+  border: 1px solid #E6E6E6;
+  background: #270022;
+  font-family: Quicksand;
+  font-size: 24px;
+  color: #FFF;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 60px;
+}
+
+.tabOrderList {
+  width: 392px;
+  height: 65px;
+  border: 1px solid #E6E6E6;
+  background: #5F2857;
+  color: #FFF;
+  font-family: Quicksand;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 60px;
+}
+
+.updateIcon {
+  width: 50px;
+  margin: -85px 70px 20px 0px;
+  align-self: flex-end;
+}

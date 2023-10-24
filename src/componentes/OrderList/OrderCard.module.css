@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Questrial&family=Quicksand&family=Rammetto+One&display=swap');
+
+.orderCard {
+  overflow-y: auto;
+  margin-top: 51px;
+  background-color: rgba(217, 217, 217, 0.31);
+  width: 290px;
+  height: fit-content;
+  border-radius: 16px;
+  border: 1px solid #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 250px;
+}
+
+.orderSection {
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+h2 {
+  color: #E6E6E6;
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+h3 {
+  color: #E6E6E6;
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+h4 {
+  color: #E6E6E6;
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 20px 0px 15px 0px;
+}
+
+.orderStatus {
+  border-radius: 12px;
+  border: 2px solid #FFF;
+  background: #C6C6C5;
+  color: #FFF;
+  font-family: Quicksand;
+  font-size: 17px;
+  font-weight: 700;
+  width: 164px;
+  min-height: 55px;
+}
+
+.productQuantity {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 210px;
+}
+
+.checkIcon {
+  width: 50px;
+}

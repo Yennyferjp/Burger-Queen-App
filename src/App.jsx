@@ -4,6 +4,7 @@ import { Login } from './componentes/Login/login';
 import { Order } from './componentes/Order/order';
 import { Users } from './componentes/Users/users';
 import { Products } from './componentes/Products/products';
+import { OrderList } from './componentes/OrderList/OrderList';
 
 import { useState } from 'react'
 import './App.css'
@@ -19,15 +20,19 @@ function App() {
           <Route path="/login" element={<Login setUser={setUser} />} />
 
           {/* Ruta para la página de pedidos */}
-          <Route path="/order" element={<Order />} 
+          <Route path="/order" element={<Order />}
           />
 
           {/* Ruta para la página de usuarios */}
-          <Route path="/users" element={<Users />} 
+          <Route path="/users" element={<Users />}
           />
 
           {/* Ruta para la página de productos */}
           <Route path="/products" element={<Products />}
+          />
+
+          {/* Ruta para la página de listado de órdenes */}
+          <Route path="/order-list" element={<OrderList />}
           /> 
 
           {/* Redirección predeterminada a la página de inicio de sesión */}

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import CustomerInfo from './CustomerInfo';
 import ProductMenu from './ProductMenu';
 import OrderSummary from './OrderSummary';
-import OrderList from './OrderList';
 import Swal from 'sweetalert2';
 import "./order.css";
 import logout from "./images/flecha-logout.png";

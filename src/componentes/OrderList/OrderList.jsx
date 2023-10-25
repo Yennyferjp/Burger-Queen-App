@@ -114,14 +114,14 @@ export function OrderList() {
     <div className={style.orderList}>
       <div className={style.tabs}>
         <Link
-        to="/order"
+          to="/order"
           className={activeTab === 1 ? `${style.tabOrder} active` : style.tabOrder}
           onClick={() => handleTabClick(1)}
         >
           Ordenar
         </Link>
         <Link
-        to="/order-list"
+          to="/order-list"
           className={activeTab === 2 ? `${style.tabOrderList} active` : style.tabOrderList}
           onClick={() => handleTabClick(2)}
         >
@@ -129,17 +129,20 @@ export function OrderList() {
         </Link>
       </div>
       <div className={style.orderListTitle}>Órdenes</div>
-      <h1>Hola, Mesero Juan</h1>
-      <img src={update} alt="updateOrders" className={style.updateIcon}/>
+      <h2>Hola, Mesero Juan</h2>
+      <img src={update} alt="updateOrders" className={style.updateIcon} />
       <div className={style.orderCardsSection}>
-        {!orderList && "Cargando órdenes"}
-        {(orderList && orderList.length === 0) && "No hay órdenes"}
-        {(orderList && orderList.length !== 0) && orderList.map((order) => (
-          <OrderCard key={order.orderId} order={order} />
-        ))}
+        {!orderList ? (
+          <div className={style.loadingSpinner}></div>
+        ) : orderList.length === 0 ? (
+          "No hay órdenes"
+        ) : (
+          orderList.map((order) => (
+            <OrderCard key={order.orderId} order={order} />
+          ))
+        )}
       </div>
     </div>
   );
 }
-
 export default OrderList;

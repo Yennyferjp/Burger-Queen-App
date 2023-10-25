@@ -110,7 +110,7 @@ export function Order({ user }) {
       </div>
       <div className="order-container">
         <h1 className='order-title'>
-          ¡Es hora de ordenar!
+          ¡Hora de tomar la orden!
         </h1>
         <CustomerInfo
           customer={customer}

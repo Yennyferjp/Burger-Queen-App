@@ -122,7 +122,7 @@ export function Order({ user }) {
           setTable={setTable}
 
         />
-        <div className='productandorder'>
+        <div className={style.productAndOrder}>
           <ProductMenu addProductToOrder={addProductToOrder} />
           <OrderSummary
             order={order}

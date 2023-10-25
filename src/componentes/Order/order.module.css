@@ -6,7 +6,9 @@ h1 {
   font-family: Quicksand;
   font-size: 40px;
   font-style: normal;
-  margin-top: 80px;
+  line-height: normal;
+  margin-top: 70px;
+  font-weight: 600;
 }
 
 .productandorder{

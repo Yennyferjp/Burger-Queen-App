@@ -5,8 +5,6 @@ import OrderSummary from './OrderSummary';
 import Swal from 'sweetalert2';
 import style from "./order.module.css";
 import { Link } from "react-router-dom";
-// import logout from "./images/flecha-logout.png";
-// import logo from "./images/logo_bq.png";
 import { useNavigate } from "react-router-dom";
 
 export function Order({ user }) {
@@ -88,7 +86,11 @@ export function Order({ user }) {
   };
 
   const handleTabClick = (tab) => {
-    setActiveTab(tab);
+    if (tab === 1) {
+      setActiveTab('Ordenar');
+    } else if (tab === 2) {
+      setActiveTab('Lista de Órdenes');
+    }
   };
 
   return (
@@ -97,14 +99,14 @@ export function Order({ user }) {
         <div className={style.tabs}>
           <Link
             to="/order"
-            className={activeTab === 1 ? `${style.tabOrder} active` : style.tabOrder}
+            className={`${style.tabOrder} ${activeTab === 'Ordenar' ? style.active : ''}`}
             onClick={() => handleTabClick(1)}
           >
             Ordenar
           </Link>
           <Link
             to="/order-list"
-            className={activeTab === 2 ? `${style.tabOrderList} active` : style.tabOrderList}
+            className={`${style.tabOrderList} ${activeTab === 'Lista de Órdenes' ? style.active : ''}`}
             onClick={() => handleTabClick(2)}
           >
             Lista de Órdenes

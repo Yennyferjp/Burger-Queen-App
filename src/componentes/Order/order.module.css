@@ -47,11 +47,17 @@ h1 {
   width: 392px;
   height: 65px;
   border: 1px solid #E6E6E6;
-  background: #5F2857;
+  background: #270022;
   color: #FFF;
   font-family: Quicksand;
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
   line-height: 60px;
+}
+
+.tabOrderList.active,
+.tabOrder.active {
+  background-color: #AD59A1;
+  color: #fff;
 }

@@ -437,7 +437,7 @@ export function Products() {
 
         </Modal>
       </div>
-      <div>
+      <div className="list-products">
 
         <table className="products-table">
           <thead>

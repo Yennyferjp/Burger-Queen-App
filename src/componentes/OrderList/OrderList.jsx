@@ -3,113 +3,29 @@ import style from "./OrderList.module.css";
 import OrderCard from './OrderCard';
 import { Link } from "react-router-dom";
 import update from "./images/update.png";
+import { getOrdersFromBackend } from "../../services/orders-services";
 
 export function OrderList() {
-  const [orderList, setOrderList] = useState(null);
+  const [orderList, setOrderList] = useState([]);
   const [activeTab, setActiveTab] = useState(1);
 
-  useEffect(() => {  // se utiliza para manejar el ciclo de vida de la aplicación
+  useEffect(() => {
     refreshOrderList();
   }, []);
 
   const refreshOrderList = async () => {
-    setTimeout(() => {
-      // Nombres de chocolate, mapear con los de Yenny
-      setOrderList([
-        {
-          'mesa': 'Mesa 1',
-          'productos': [
-            {
-              '_id': 'qwertyuiop',
-              'nombre': 'Café americano',
-              'tipo': 'Desayuno',
-              'precio': '15',
-              'cantidad': '2'
-            },
-            {
-              '_id': 'asdfghjkl',
-              'nombre': 'Latte',
-              'tipo': 'Almuerzo',
-              'precio': '25',
-              'cantidad': '1'
-            }
-          ],
-          'total': '55',
-          'estado': 'Pendiente'
-        },
-        {
-          'mesa': 'Mesa 8',
-          'productos': [
-            {
-              '_id': 'vdsvsfddp',
-              'nombre': 'Chilaquiles',
-              'tipo': 'Desayuno',
-              'precio': '50',
-              'cantidad': '2'
-            },
-            {
-              '_id': 'fdesfewe',
-              'nombre': 'Limonada',
-              'tipo': 'Almuerzo',
-              'precio': '25',
-              'cantidad': '1'
-            },
-            {
-              '_id': 'gwegwsd',
-              'nombre': 'Agua embotellada',
-              'tipo': 'Almuerzo',
-              'precio': '25',
-              'cantidad': '1'
-            },
-            {
-              '_id': 'wqfewd',
-              'nombre': 'Sándwich',
-              'tipo': 'Almuerzo',
-              'precio': '25',
-              'cantidad': '1'
-            },
-            {
-              '_id': 'vewvew',
-              'nombre': 'Ensalada',
-              'tipo': 'Almuerzo',
-              'precio': '25',
-              'cantidad': '1'
-            }
-          ],
-          'total': '55',
-          'estado': 'Pendiente'
-        },
-        {
-          'mesa': 'Mesa 7',
-          'productos': [
-            {
-              '_id': 'poiuytrewq',
-              'nombre': 'Jugo de naranja',
-              'tipo': 'Desayuno',
-              'precio': '15',
-              'cantidad': '2'
-            },
-            {
-              '_id': 'ñlkjhgfdsa',
-              'nombre': 'Chai Latte',
-              'tipo': 'Almuerzo',
-              'precio': '40',
-              'cantidad': '1'
-            }
-          ],
-          'total': '70',
-          'estado': 'Preparada'
-        }
-      ]);
-    },
-      1000);
+    try {
+      const orders = await getOrdersFromBackend();
+      setOrderList(orders);
+    } catch (error) {
+      console.error('Error al obtener las órdenes: ', error);
+    }
   };
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
 
-  []
   return (
     <div className={style.orderList}>
       <div className={style.tabs}>
@@ -138,11 +54,12 @@ export function OrderList() {
           "No hay órdenes"
         ) : (
           orderList.map((order) => (
-            <OrderCard key={order.orderId} order={order} />
+            <OrderCard key={order._id} order={order} />
           ))
         )}
       </div>
     </div>
   );
 }
+
 export default OrderList;

@@ -163,6 +163,12 @@ nav {
   height: 50px;
 }
 
+.list-products{
+  width: 702px;
+    height: 679px;
+    overflow: auto;
+}
+
 .even-row {
   background: #C4A5C0;
   height: 40px;

@@ -5,6 +5,7 @@ import { Order } from './componentes/Order/order';
 import { Users } from './componentes/Users/users';
 import { Products } from './componentes/Products/products';
 import { OrderList } from './componentes/OrderList/OrderList';
+import { Kitchen } from './componentes/Kitchen/kitchen';
 
 import { useState } from 'react'
 import './App.css'
@@ -33,7 +34,11 @@ function App() {
 
           {/* Ruta para la página de listado de órdenes */}
           <Route path="/order-list" element={<OrderList />}
-          /> 
+          />
+
+          {/* Ruta para la página de órdenes en cocina*/}
+          <Route path="/kitchen-orders" element={<Kitchen />}
+          />
 
           {/* Redirección predeterminada a la página de inicio de sesión */}
           <Route path="*" element={<Navigate to="/login" />} />

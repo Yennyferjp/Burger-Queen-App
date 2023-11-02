@@ -20,6 +20,7 @@ export function Kitchen() {
   };
 
   const refreshOrderList = async () => {
+    setKitchenOrders(null);
     setTimeout(() => {
       // Nombres de chocolate, mapear con los de Yenny
       setKitchenOrders([
@@ -139,7 +140,7 @@ export function Kitchen() {
       <div className={style.ordersContainer}>
         <h1 className={style.kitchenTitle}>Órdenes por preparar</h1>
         <h2>Hola, Chef Juanita</h2>
-        <img src={update} alt="updateOrders" className={style.updateIcon} />
+        <img src={update} alt="updateOrders" className={style.updateIcon} onClick={() => refreshOrderList()} />
         <div className={style.orderCardsKitchen}>
           {!kitchenOrders ? (
             <div className={style.loadingSpinner}></div>

@@ -19,7 +19,7 @@ export function OrderCardKitchen({ order }) {
           </div>
         </>)}
       </div>
-      <button className={style.orderStatus}>PENDIENTE</button>
+      <button className={style.orderStatus}>PREPARAR</button>
     </div>
   );
 }

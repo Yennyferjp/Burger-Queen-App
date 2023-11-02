@@ -13,6 +13,7 @@ export function OrderList() {
   }, []);
 
   const refreshOrderList = async () => {
+    setOrderList(null);
     setTimeout(() => {
       // Nombres de chocolate, mapear con los de Yenny
       setOrderList([
@@ -130,7 +131,7 @@ export function OrderList() {
       </div>
       <div className={style.orderListTitle}>Órdenes</div>
       <h2>Hola, Mesero Juan</h2>
-      <img src={update} alt="updateOrders" className={style.updateIcon} />
+      <img src={update} alt="updateOrders" className={style.updateIcon} onClick={() => refreshOrderList()}/>
       <div className={style.orderCardsSection}>
         {!orderList ? (
           <div className={style.loadingSpinner}></div>

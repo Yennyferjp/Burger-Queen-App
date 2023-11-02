@@ -29,7 +29,7 @@ export function Products() {
   const [productId, setProductId] = useState("");
   const [productName, setProductName] = useState("");
   const [productType, setProductType] = useState("");
-  const [productPrice, setProductPrice] = useState("");
+  const [productPrice, setProductPrice] = useState(0);
   const [productImage, setProductImage] = useState("");
   const productImageRef = useRef(null);
 
@@ -82,7 +82,7 @@ export function Products() {
     setProductName("");
     setProductType("");
     setProductId("");
-    setProductPrice("");
+    setProductPrice(0);
     setProductImage("");
   };
 
@@ -399,10 +399,10 @@ export function Products() {
           <div className="form-group">
             <label className="label-style">Precio:</label>
             <input
-              type="text"
+              type="number"
               value={productPrice}
               placeholder="Precio"
-              onChange={(e) => setProductPrice(e.target.value)}
+              onChange={(e) => setProductPrice(new Number (e.target.value))}
               className="input-field"
             />
           </div>

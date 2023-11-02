@@ -73,7 +73,7 @@ function OrderSummary({
       {table && <p className={style.numberTable}>{`Mesa # ${table}`}</p>}
       <h1 className={style.orden}>Orden</h1>
       <hr />
-      <div className="order-list">
+      <div className={style.orderList}>
         <table className={style.orderTable}>
           <tbody>
             {products.map((product, index) => (

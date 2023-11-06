@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Questrial&family=Quicksand&family=Rammetto+One&display=swap');
 
+.navbarKitchen {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 770px;
+}
+
 .orderList {
   display: flex;
   justify-content: center;
@@ -34,37 +41,6 @@
   grid-column-gap: 45px;
 }
 
-.tabs {
-  display: flex;
-  text-align: center;
-}
-
-.tabOrder {
-  width: 375px;
-  height: 65px;
-  border: 1px solid #E6E6E6;
-  background: #270022;
-  font-family: Quicksand;
-  font-size: 24px;
-  color: #FFF;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 60px;
-}
-
-.tabOrderList {
-  width: 392px;
-  height: 65px;
-  border: 1px solid #E6E6E6;
-  background: #5F2857;
-  color: #FFF;
-  font-family: Quicksand;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 60px;
-}
-
 .updateIcon {
   width: 50px;
   margin: -85px 70px 20px 0px;
@@ -77,6 +53,49 @@
   padding-left: 80px;
   font-size: 22px;
   font-weight: 700;
+}
+
+.tabs {
+  display: flex;
+  text-align: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.tabOrder {
+  width: 240px;
+  height: 65px;
+  border: 1px solid #E6E6E6;
+  background: #270022;
+  font-family: Quicksand;
+  font-size: 22px;
+  color: #FFF;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  border-radius: 16.136px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.tabOrderList {
+  width: 240px;
+  height: 65px;
+  border: 1px solid #E6E6E6;
+  background: #5F2857;
+  color: #FFF;
+  font-family: Quicksand;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  border-radius: 16.136px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 @keyframes spin {

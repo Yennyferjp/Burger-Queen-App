@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 export function Order({ user }) {
   const [customer, setCustomer] = useState('');
   const [table, setTable] = useState('');
-  const [order, setOrder] = useState([]);
+  const [products, setProducts] = useState([]);
   const [totalOrder, setTotalOrder] = useState(0);
   const [isOrderStarted, setIsOrderStarted] = useState(false);
   const [activeTab, setActiveTab] = useState(1);
@@ -18,14 +18,14 @@ export function Order({ user }) {
   const addProductToOrder = (product) => {
     console.log(product);
     // Verifica si el producto ya está en el pedido
-    const existingProduct = order.find((item) => item._id === product._id);
+    const existingProduct = products.find((item) => item._id === product._id);
 
     if (existingProduct) {
       // Incrementa la cantidad del producto existente
       existingProduct.quantity++;
     } else {
       // Agrega el producto al pedido
-      setOrder([...order, { ...product, quantity: 1 }]);
+      setProducts([...products, { ...product, quantity: 1 }]);
     }
     // Actualiza el total del pedido
     setTotalOrder(totalOrder + product.price);
@@ -34,21 +34,21 @@ export function Order({ user }) {
   const removeProductFromOrder = (product) => {
     if (product.quantity > 1) {
       const updatedProduct = { ...product, quantity: product.quantity - 1 };
-      const updatedOrder = order.map((item) =>
+      const updateProducts = products.map((item) =>
         item._id === product._id ? updatedProduct : item
       );
 
-      setOrder(updatedOrder);
+      setProducts(updateProducts);
     } else {
-      const updatedOrder = order.filter((item) => item._id !== product._id);
-      setOrder(updatedOrder);
+      const updatedProducts = products.filter((item) => item._id !== product._id);
+      setProducts(updatedProducts);
     }
     // Actualiza el total del pedido
     setTotalOrder(totalOrder - product.price);
   };
 
   const clearOrder = () => {
-    if (order.length === 0) {
+    if (products.length === 0) {
       Swal.fire('Advertencia', 'La orden ya está vacía.', 'warning');
     } else {
       Swal.fire({
@@ -60,7 +60,7 @@ export function Order({ user }) {
         cancelButtonText: 'Cancelar',
       }).then((result) => {
         if (result.isConfirmed) {
-          setOrder([]);
+          setProducts([]);
           setTotalOrder(0);
           Swal.fire('Orden eliminada', 'La orden se ha eliminado correctamente', 'success');
         }
@@ -69,7 +69,7 @@ export function Order({ user }) {
   };
 
   const sendOrder = () => {
-    if (order.length === 0) {
+    if (products.length === 0) {
       Swal.fire('Error', 'La orden está vacía. Agregue productos antes de enviar el pedido.', 'error');
     } else {
       Swal.fire('Enviando Pedido', 'El pedido se ha enviado correctamente a cocina', 'success');
@@ -127,7 +127,7 @@ export function Order({ user }) {
         <div className={style.productAndOrder}>
           <ProductMenu addProductToOrder={addProductToOrder} />
           <OrderSummary
-            order={order}
+            products={products}
             totalOrder={totalOrder}
             addProductToOrder={addProductToOrder}
             removeProductFromOrder={removeProductFromOrder}

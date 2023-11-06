@@ -36,7 +36,7 @@ export function OrderList() {
 
   return (
     <div className={style.orderList}>
-      <div className={style.navbarKitchen}>
+      <div className={style.navbarList}>
         <nav>
           <div className="navbar-left">
             <img
@@ -57,23 +57,21 @@ export function OrderList() {
           </div>
         </nav>
       </div>
-      <div className={style.orderList}>
-        <div className={style.tabs}>
-          <Link
-            to="/order"
-            className={activeTab === 1 ? `${style.tabOrder} active` : style.tabOrder}
-            onClick={() => handleTabClick(1)}
-          >
-            Ordenar
-          </Link>
-          <Link
-            to="/order-list"
-            className={activeTab === 2 ? `${style.tabOrderList} active` : style.tabOrderList}
-            onClick={() => handleTabClick(2)}
-          >
-            Lista de Órdenes
-          </Link>
-        </div>
+      <div className={style.tabs}>
+        <Link
+          to="/order"
+          className={activeTab === 1 ? `${style.tabOrder} active` : style.tabOrder}
+          onClick={() => handleTabClick(1)}
+        >
+          Ordenar
+        </Link>
+        <Link
+          to="/order-list"
+          className={activeTab === 2 ? `${style.tabOrderList} active` : style.tabOrderList}
+          onClick={() => handleTabClick(2)}
+        >
+          Lista de Órdenes
+        </Link>
       </div>
       <div className={style.orderListTitle}>Órdenes</div>
       <h2>Hola, Mesero Juan</h2>

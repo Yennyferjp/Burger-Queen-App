@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Questrial&family=Quicksand&family=Rammetto+One&display=swap');
 
-.navbarKitchen {
+.navbarList {
   display: flex;
   justify-content: space-between;
   align-items: center;

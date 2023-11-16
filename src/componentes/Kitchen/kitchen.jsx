@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import style from "./kitchen.module.css";
+import { getOrdersFromBackend } from "../../services/orders-services";
 import { useNavigate } from "react-router-dom";
 import OrderCardKitchen from './orderCardKitchen';
-
 import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
 import update from "./images/update.png";
@@ -10,7 +10,7 @@ import update from "./images/update.png";
 export function Kitchen() {
   const [kitchenOrders, setKitchenOrders] = useState(null);
 
-  useEffect(() => {  // se utiliza para manejar el ciclo de vida de la aplicación
+  useEffect(() => {
     refreshOrderList();
   }, []);
 
@@ -21,98 +21,13 @@ export function Kitchen() {
 
   const refreshOrderList = async () => {
     setKitchenOrders(null);
-    setTimeout(() => {
-      // Nombres de chocolate, mapear con los de Yenny
-      setKitchenOrders([
-        {
-          'mesa': 'Mesa 1',
-          'productos': [
-            {
-              '_id': 'qwertyuiop',
-              'nombre': 'Café americano',
-              'tipo': 'Desayuno',
-              'precio': '15',
-              'cantidad': '2'
-            },
-            {
-              '_id': 'asdfghjkl',
-              'nombre': 'Latte',
-              'tipo': 'Almuerzo',
-              'precio': '25',
-              'cantidad': '1'
-            }
-          ],
-          'total': '55',
-          'estado': 'Pendiente'
-        },
-        {
-          'mesa': 'Mesa 8',
-          'productos': [
-            {
-              '_id': 'vdsvsfddp',
-              'nombre': 'Chilaquiles',
-              'tipo': 'Desayuno',
-              'precio': '50',
-              'cantidad': '2'
-            },
-            {
-              '_id': 'fdesfewe',
-              'nombre': 'Limonada',
-              'tipo': 'Almuerzo',
-              'precio': '25',
-              'cantidad': '1'
-            },
-            {
-              '_id': 'gwegwsd',
-              'nombre': 'Agua embotellada',
-              'tipo': 'Almuerzo',
-              'precio': '25',
-              'cantidad': '1'
-            },
-            {
-              '_id': 'wqfewd',
-              'nombre': 'Sándwich',
-              'tipo': 'Almuerzo',
-              'precio': '25',
-              'cantidad': '1'
-            },
-            {
-              '_id': 'vewvew',
-              'nombre': 'Ensalada',
-              'tipo': 'Almuerzo',
-              'precio': '25',
-              'cantidad': '1'
-            }
-          ],
-          'total': '55',
-          'estado': 'Pendiente'
-        },
-        {
-          'mesa': 'Mesa 7',
-          'productos': [
-            {
-              '_id': 'poiuytrewq',
-              'nombre': 'Jugo de naranja',
-              'tipo': 'Desayuno',
-              'precio': '15',
-              'cantidad': '2'
-            },
-            {
-              '_id': 'ñlkjhgfdsa',
-              'nombre': 'Chai Latte',
-              'tipo': 'Almuerzo',
-              'precio': '40',
-              'cantidad': '1'
-            }
-          ],
-          'total': '70',
-          'estado': 'Preparada'
-        }
-      ]);
-    },
-      1000);
+    try {
+      const orders = await getOrdersFromBackend(); 
+      setKitchenOrders(orders);
+    } catch (error) {
+      console.error('Error al obtener las órdenes de la cocina: ', error);
+    }
   };
-
 
   return (
     <div>
@@ -148,7 +63,7 @@ export function Kitchen() {
             "No hay órdenes"
           ) : (
             kitchenOrders.map((order) => (
-              <OrderCardKitchen key={order.orderId} order={order} />
+              <OrderCardKitchen key={order._id} order={order} />
             ))
           )}
         </div>
@@ -157,4 +72,4 @@ export function Kitchen() {
   );
 }
 
-
+export default Kitchen;

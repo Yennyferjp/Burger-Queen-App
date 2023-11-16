@@ -4,7 +4,7 @@ const BASE_URL = import.meta.env.VITE_APP_API_URL;
 // Función para agregar crear una orden
 export async function createOrderToBackend(order) {
   try {
-    const response = await fetch(`${BASE_URL}/order`, {
+    const response = await fetch(`${BASE_URL}/orders`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,28 +29,30 @@ export async function createOrderToBackend(order) {
 
 export async function getOrdersFromBackend() {
   try {
-    const response = await fetch(`${BASE_URL}/order`, {
+    const response = await fetch(`${BASE_URL}/orders`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': getAuthorizationHeader() 
+        'Authorization': getAuthorizationHeader()
       },
-    }); 
+    });
     if (response.ok) {
       const orders = await response.json();
-      console.log(orders);
+      return orders; 
     } else {
       const errorData = await response.json();
       console.error('Error al obtener órdenes:', errorData.message);
+      return []; 
     }
   } catch (error) {
     console.error('Error inesperado:', error);
+    return []; 
   }
 }
-4
+
 export async function updateOrderToBackend(orderId, updatedOrderData) {
   try {
-    const response = await fetch(`${BASE_URL}/order`, {
+    const response = await fetch(`${BASE_URL}/orders`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -73,7 +75,7 @@ export async function updateOrderToBackend(orderId, updatedOrderData) {
 
 export async function deleteOrderToBackend(orderId) {
   try {
-    const response = await fetch(`${BASE_URL}/order`, {
+    const response = await fetch(`${BASE_URL}/orders`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

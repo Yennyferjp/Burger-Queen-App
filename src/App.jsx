@@ -6,6 +6,7 @@ import { Order } from './componentes/Order/order';
 import { Users } from './componentes/Users/users';
 import { Products } from './componentes/Products/products';
 import { OrderList } from './componentes/OrderList/OrderList';
+import { Kitchen } from './componentes/Kitchen/kitchen';
 
 import { useState } from 'react'
 import './App.css'

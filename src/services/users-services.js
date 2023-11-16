@@ -5,8 +5,8 @@ const userRoles = {
   admin: 'Administrador',
   chef: 'Cocinero',
   waiter: 'Mesero',
+  chef: 'Chef',
 }
-
 
 export function getRoleName(roleName){
   return userRoles[roleName];

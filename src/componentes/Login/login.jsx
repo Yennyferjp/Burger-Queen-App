@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Importa useNavigate en lugar de useHistory
 import "./login.css";
 import logo from "./images/logo_bq.png";
-import { authorize } from "../../services/auth-services";
+import { authorize, parseJwt } from "../../services/auth-services";
 
 export function Login({ setUser }) {
   const [email, setEmail] = useState("");
@@ -21,12 +21,10 @@ export function Login({ setUser }) {
     try {
       // Hacer la llamada a authorize con las credenciales del usuario
       const token = await authorize(email, password);
-
+      const payload = parseJwt(token);
       // Si la autenticación fue exitosa, guardar el token en el estado o donde sea necesario
-      setUser([email]);
-
-      // Redirige al usuario a la página de órdenes después de iniciar sesión.
-      navigate("/users");
+      setUser(payload);
+     
     } catch (err) {
       setError(true);
     }

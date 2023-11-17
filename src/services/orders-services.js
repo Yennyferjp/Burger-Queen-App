@@ -49,16 +49,15 @@ export async function getOrdersFromBackend() {
     return []; 
   }
 }
-
-export async function updateOrderToBackend(orderId, updatedOrderData) {
+export async function updateOrderToBackend(orderId, newStatus) {
   try {
-    const response = await fetch(`${BASE_URL}/orders`, {
+    const response = await fetch(`${BASE_URL}/orders/${orderId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': getAuthorizationHeader() 
       },
-      body: JSON.stringify(updatedOrderData),
+      body: JSON.stringify({ status: newStatus }),
     });
 
     if (response.ok) {
@@ -66,7 +65,8 @@ export async function updateOrderToBackend(orderId, updatedOrderData) {
       return result; 
     } else {
       const errorData = await response.json();
-      throw new Error(errorData.message);
+      console.log('Error Data:', errorData);
+      throw new Error(errorData.message || 'Error desconocido en la solicitud');
     }
   } catch (error) {
     throw error;

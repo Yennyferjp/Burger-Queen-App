@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import style from "./kitchen.module.css";
-import { getOrdersFromBackend } from "../../services/orders-services";
+import { getOrdersFromBackend, updateOrderToBackend } from "../../services/orders-services";
 import { useNavigate } from "react-router-dom";
 import OrderCardKitchen from './orderCardKitchen';
+import Swal from 'sweetalert2';
 import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
 import update from "./images/update.png";
@@ -22,10 +23,29 @@ export function Kitchen() {
   const refreshOrderList = async () => {
     setKitchenOrders(null);
     try {
-      const orders = await getOrdersFromBackend(); 
+      const orders = await getOrdersFromBackend();
       setKitchenOrders(orders);
     } catch (error) {
       console.error('Error al obtener las órdenes de la cocina: ', error);
+    }
+  };
+
+  const updateOrderList = async (orderId, newStatus) => {
+    try {
+      await updateOrderToBackend(orderId, newStatus);
+
+
+      setKitchenOrders((prevOrders) =>
+        prevOrders.filter((order) => order._id !== orderId)
+      );
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Estado actualizado',
+        text: `La orden ${orderId} está ${newStatus}.`,
+      });
+    } catch (error) {
+      console.error('Error al actualizar la orden: ', error);
     }
   };
 
@@ -63,7 +83,7 @@ export function Kitchen() {
             "No hay órdenes"
           ) : (
             kitchenOrders.map((order) => (
-              <OrderCardKitchen key={order._id} order={order} />
+              <OrderCardKitchen key={order._id} order={order} updateOrderList={updateOrderList} />
             ))
           )}
         </div>

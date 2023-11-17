@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types'; 
 import style from "./orderCardKitchen.module.css";
 import check from "./images/check.png";
 import Swal from 'sweetalert2';
+import { updateOrderToBackend } from '../../services/orders-services';
 
-export function OrderCardKitchen({ order }) {
+function OrderCardKitchen({ order, updateOrderList }) {
   const [status, setStatus] = useState("PENDIENTE");
   const [timer, setTimer] = useState(null);
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -18,20 +20,29 @@ export function OrderCardKitchen({ order }) {
     setTimer(preparationTimer);
   };
 
-  const stopPreparation = () => {
+  const stopPreparation = async () => {
     Swal.fire({
       icon: 'question',
       title: 'Confirmar Entrega',
       text: '¿Estás seguro de que la orden está lista para ser entregada?',
       showCancelButton: true,
+      confirmButtonColor: '#D889CC93',
+      cancelButtonColor: '#d33',
       confirmButtonText: 'Sí, lista para entregar',
       cancelButtonText: 'Cancelar',
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         clearInterval(timer);
         setTimer(null);
         setElapsedTime(0);
         setStatus('LISTO PARA ENTREGAR');
+  
+        // Llama a la función para actualizar la orden en la base de datos
+        await updateOrderToBackend(order._id, 'LISTO PARA ENTREGAR');
+  
+        // Llama a la función para actualizar la lista de órdenes en el componente padre
+        updateOrderList(order._id, 'LISTO PARA ENTREGAR');
+  
         Swal.fire({
           icon: 'success',
           title: 'Preparación Completada',
@@ -39,8 +50,8 @@ export function OrderCardKitchen({ order }) {
         });
       }
     });
-  };  
-  
+  };
+
   const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = timeInSeconds % 60;
@@ -48,13 +59,12 @@ export function OrderCardKitchen({ order }) {
     const formattedSeconds = String(seconds).padStart(2, '0');
     return `${formattedMinutes}:${formattedSeconds}`;
   };
-  
 
   useEffect(() => {
     return () => {
       clearInterval(timer);
     };
-  }, [timer]);  
+  }, [timer]);
 
   return (
     <div className={style.orderCardKitchen}>
@@ -87,5 +97,10 @@ export function OrderCardKitchen({ order }) {
     </div>
   );
 }
+
+OrderCardKitchen.propTypes = {
+  order: PropTypes.object.isRequired,
+  updateOrderList: PropTypes.func.isRequired,
+};
 
 export default OrderCardKitchen;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types';
 import style from "./orderCardKitchen.module.css";
 import check from "./images/check.png";
 import Swal from 'sweetalert2';
@@ -36,18 +36,20 @@ function OrderCardKitchen({ order, updateOrderList }) {
         setTimer(null);
         setElapsedTime(0);
         setStatus('LISTO PARA ENTREGAR');
-  
+
         // Llama a la función para actualizar la orden en la base de datos
         await updateOrderToBackend(order._id, 'LISTO PARA ENTREGAR');
-  
+
         // Llama a la función para actualizar la lista de órdenes en el componente padre
         updateOrderList(order._id, 'LISTO PARA ENTREGAR');
-  
+
         Swal.fire({
           icon: 'success',
           title: 'Preparación Completada',
           text: 'La orden está lista para ser entregada.',
         });
+      } else if (status === 'LISTO PARA ENTREGAR') {
+        updateOrderList(order._id, 'LISTO PARA ENTREGAR');
       }
     });
   };

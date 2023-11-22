@@ -5,10 +5,10 @@ import lessIcon from './images/less.png';
 import plusIcon from './images/plus.png';
 import { createOrderToBackend } from "../../services/orders-services";
 
-export const OrderStatus = {
-  ENVIADA: 0,
-  PENDIENTE: 1,
-  COMPLETADA: 2,
+const OrderStatus = {
+  PENDIENTE: 'PENDIENTE',
+  EN_PREPARACION: 'EN PREPARACIÓN',
+  LISTO_PARA_ENTREGAR: 'LISTO PARA ENTREGAR',
 };
 function OrderSummary({
   products,

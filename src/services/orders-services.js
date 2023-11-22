@@ -51,6 +51,7 @@ export async function getOrdersFromBackend() {
 }
 export async function updateOrderToBackend(orderId, newStatus) {
   try {
+    console.log('Actualizando el estado del pedido...');
     const response = await fetch(`${BASE_URL}/orders/${orderId}`, {
       method: 'PUT',
       headers: {
@@ -62,6 +63,7 @@ export async function updateOrderToBackend(orderId, newStatus) {
 
     if (response.ok) {
       const result = await response.json();
+      console.log('Estado del pedido actualizado correctamente:', result);
       return result; 
     } else {
       const errorData = await response.json();
@@ -69,9 +71,11 @@ export async function updateOrderToBackend(orderId, newStatus) {
       throw new Error(errorData.message || 'Error desconocido en la solicitud');
     }
   } catch (error) {
+    console.error('Error al actualizar el estado del pedido:', error);
     throw error;
   }
 }
+
 
 export async function deleteOrderToBackend(orderId) {
   try {

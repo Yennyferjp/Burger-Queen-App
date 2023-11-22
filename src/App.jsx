@@ -34,8 +34,8 @@ function App() {
           <Route path="/order" element={<Order />} />
           <Route path="/users" element={<Users />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/order-list" element={<OrderList />} />
-          <Route path="/kitchen-orders" element={<Kitchen />} />
+          <Route path="/order-list" element={<OrderList  user={user} />} />
+          <Route path="/kitchen-orders" element={<Kitchen user={user} />} />
           <Route path="/" element={<Navigate to="/login" />} />
         </Routes>
       </div>

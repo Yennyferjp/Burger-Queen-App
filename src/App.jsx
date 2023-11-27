@@ -22,6 +22,8 @@ function App() {
       navigate("/order");
     }else if (loggedInUser.rol == "admin"){
        navigate("/users");
+    } else if(loggedInUser.rol == "chef"){
+      navigate("/kitchen-orders");
     }
   }
 

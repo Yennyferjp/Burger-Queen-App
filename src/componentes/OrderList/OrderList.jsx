@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import update from "./images/update.png";
 import { getOrdersFromBackend, updateOrderToBackend } from "../../services/orders-services";
 import OrderCard from './OrderCard';
+import logout from "./images/flecha-logout.png";
+import logo from "./images/logo_bq.png";
+import { useNavigate } from "react-router-dom";
 
 export function OrderList({ user }) {
   const [orderList, setOrderList] = useState([]);
@@ -22,9 +25,16 @@ export function OrderList({ user }) {
     }
   };
 
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
+  const navigate = useNavigate();
+  const handleLogoutClick = () => {
+    navigate("/login");
   };
+
+  const [activeButton, setActiveButton] = useState('Tomar orden');
+
+  const changeActiveCategory = (category) => {
+    setActiveButton(category);
+  }
 
   const handleOrderDelivered = async (orderId) => {
     try {
@@ -42,20 +52,44 @@ export function OrderList({ user }) {
 
   return (
     <div className={style.orderList}>
-      <div className={style.tabs}>
+      <div className={style.navbar}>
+        <nav>
+          <div className="navbar-left">
+            <img
+              src={logout}
+              alt="logout"
+              className="navbar-image-logout"
+            />
+            <p className="navbar-logout" onClick={handleLogoutClick}>
+              Salir
+            </p>
+          </div>
+          <div className={style.navbarLogoOrder}>
+            <img
+              src={logo}
+              alt="Imagen 2"
+              className="navbar-image-logo"
+            />
+          </div>
+        </nav>
+      </div>
+      <div className={style.interfaceCategories} id="interface-buttons">
         <Link
           to="/order"
-          className={activeTab === 1 ? `${style.tabOrder} active` : style.tabOrder}
-          onClick={() => handleTabClick(1)}
-        >
-          Ordenar
+          className={`${style['btn-take-order']} 
+          ${activeButton === 'Tomar orden' ? style['active'] : ''}`}
+          onClick={() => {
+            changeActiveCategory('Tomar orden');
+          }}> Tomar orden
         </Link>
         <Link
           to="/order-list"
-          className={activeTab === 2 ? `${style.tabOrderList} active` : style.tabOrderList}
-          onClick={() => handleTabClick(2)}
-        >
-          Lista de Órdenes
+          className={`${style['btn-order-list']} 
+          ${activeButton === 'Lista de Órdenes' ? style['active'] : ''}`}
+          onClick={() => {
+            changeActiveCategory('Lista de Órdenes');
+          }}
+        > Lista de Órdenes
         </Link>
       </div>
       <div className={style.orderListTitle}>Órdenes</div>

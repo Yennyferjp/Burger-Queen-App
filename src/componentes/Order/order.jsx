@@ -4,6 +4,8 @@ import ProductMenu from './ProductMenu';
 import OrderSummary from './OrderSummary';
 import Swal from 'sweetalert2';
 import style from "./order.module.css";
+import logout from "./images/flecha-logout.png";
+import logo from "./images/logo_bq.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -12,8 +14,8 @@ export function Order({ user }) {
   const [table, setTable] = useState('');
   const [products, setProducts] = useState([]);
   const [totalOrder, setTotalOrder] = useState(0);
-  const [isOrderStarted, setIsOrderStarted] = useState(false);
-  const [activeTab, setActiveTab] = useState(1);
+  // const [isOrderStarted, setIsOrderStarted] = useState(false);
+  // const [activeTab, setActiveTab] = useState(1);
 
   const addProductToOrder = (product) => {
     console.log(product);
@@ -85,33 +87,61 @@ export function Order({ user }) {
     setIsOrderStarted(true);
   };
 
-  const handleTabClick = (tab) => {
-    if (tab === 1) {
-      setActiveTab('Ordenar');
-    } else if (tab === 2) {
-      setActiveTab('Lista de Órdenes');
-    }
-  };
+  const [activeButton, setActiveButton] = useState('Tomar orden');
+
+  const changeActiveCategory = (category) => {
+    setActiveButton(category);
+  }
+
+  // const handleTabClick = (tab) => {
+  //   if (tab === 1) {
+  //     setActiveTab('Ordenar');
+  //   } else if (tab === 2) {
+  //     setActiveTab('Lista de Órdenes');
+  //   }
+  // };
 
   return (
     <div>
-      <div className={style.orderList}>
-        <div className={style.tabs}>
-          <Link
-            to="/order"
-            className={`${style.tabOrder} ${activeTab === 'Ordenar' ? style.active : ''}`}
-            onClick={() => handleTabClick(1)}
-          >
-            Ordenar
-          </Link>
-          <Link
-            to="/order-list"
-            className={`${style.tabOrderList} ${activeTab === 'Lista de Órdenes' ? style.active : ''}`}
-            onClick={() => handleTabClick(2)}
-          >
-            Lista de Órdenes
-          </Link>
-        </div>
+      <div className="navbar-products">
+        <nav>
+          <div className="navbar-left">
+            <img
+              src={logout}
+              alt="logout"
+              className="navbar-image-logout"
+            />
+            <p className="navbar-logout" onClick={handleLogoutClick}>
+              Salir
+            </p>
+          </div>
+          <div className="navbar-right">
+            <img
+              src={logo}
+              alt="Imagen 2"
+              className="navbar-image-logo"
+            />
+          </div>
+        </nav>
+      </div>
+      <div className={style.interfaceCategories} id="interface-buttons">
+        <Link
+          to="/order"
+          className={`${style['btn-take-order']} 
+          ${activeButton === 'Tomar orden' ? style['active'] : ''}`}
+          onClick={() => {
+            changeActiveCategory('Tomar orden');
+          }}> Tomar orden
+        </Link>
+        <Link
+          to="/order-list"
+          className={`${style['btn-order-list']} 
+          ${activeButton === 'Lista de Órdenes' ? style['active'] : ''}`}
+          onClick={() => {
+            changeActiveCategory('Lista de Órdenes');
+          }}
+        > Lista de Órdenes
+        </Link>
       </div>
       <div className="order-container">
         <h1 className='order-title'>

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import style from "./OrderList.module.css";
-import OrderCard from './OrderCard';
 import { Link } from "react-router-dom";
 import update from "./images/update.png";
-import { getOrdersFromBackend } from "../../services/orders-services";
+import { getOrdersFromBackend, updateOrderToBackend } from "../../services/orders-services";
+import OrderCard from './OrderCard';
 
-export function OrderList() {
+export function OrderList({ user }) {
   const [orderList, setOrderList] = useState([]);
   const [activeTab, setActiveTab] = useState(1);
 
@@ -24,6 +24,20 @@ export function OrderList() {
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
+  };
+
+  const handleOrderDelivered = async (orderId) => {
+    try {
+      // Actualiza la orden en el backend como "Entregado"
+      await updateOrderToBackend(orderId, 'Entregado');
+
+      // Actualiza la lista de órdenes eliminando la orden entregada
+      setOrderList((prevOrders) =>
+        prevOrders.filter((order) => order._id !== orderId)
+      );
+    } catch (error) {
+      console.error('Error al actualizar la orden: ', error);
+    }
   };
 
   return (
@@ -45,8 +59,8 @@ export function OrderList() {
         </Link>
       </div>
       <div className={style.orderListTitle}>Órdenes</div>
-      <h2>Hola, Mesero Juan</h2>
-      <img src={update} alt="updateOrders" className={style.updateIcon} onClick={() => refreshOrderList()}/>
+      <h2>{user ? `Hola Mesero ${user.userName}` : 'Hola Mesero'}</h2>
+      <img src={update} alt="updateOrders" className={style.updateIcon} onClick={() => refreshOrderList()} />
       <div className={style.orderCardsSection}>
         {!orderList ? (
           <div className={style.loadingSpinner}></div>
@@ -54,7 +68,11 @@ export function OrderList() {
           "No hay órdenes"
         ) : (
           orderList.map((order) => (
-            <OrderCard key={order._id} order={order} />
+            <OrderCard
+              key={order._id}
+              order={order}
+              onOrderDelivered={handleOrderDelivered}
+            />
           ))
         )}
       </div>

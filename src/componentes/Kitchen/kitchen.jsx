@@ -8,7 +8,7 @@ import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
 import update from "./images/update.png";
 
-export function Kitchen() {
+export function Kitchen({user}) {
   const [kitchenOrders, setKitchenOrders] = useState(null);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export function Kitchen() {
       </div>
       <div className={style.ordersContainer}>
         <h1 className={style.kitchenTitle}>Órdenes por preparar</h1>
-        <h2>Hola, Chef Juanita</h2>
+        <h2>{user ? `Hola Chef ${user.userName}` : 'Hola Chef'}</h2>
         <img src={update} alt="updateOrders" className={style.updateIcon} onClick={() => refreshOrderList()} />
         <div className={style.orderCardsKitchen}>
           {!kitchenOrders ? (

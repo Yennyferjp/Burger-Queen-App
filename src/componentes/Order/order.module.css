@@ -7,8 +7,9 @@ h1 {
   font-size: 40px;
   font-style: normal;
   line-height: normal;
-  margin-top: 70px;
+  margin-top: 50px;
   font-weight: 600;
+  margin-bottom: 40px;
 }
 
 .productAndOrder{
@@ -25,39 +26,35 @@ h1 {
   flex-direction: column;
 }
 
-.tabs {
+.interfaceCategories {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.btn-take-order,
+.btn-order-list {
+  border-radius: 16.136px;
+  border: 1px solid #FFFFFF;
+  background: rgba(173, 89, 161, 0.00);
+  color: #FFF;
   text-align: center;
-}
-
-.tabOrder {
-  width: 375px;
-  height: 65px;
-  border: 1px solid #E6E6E6;
-  background: #270022;
   font-family: Quicksand;
-  font-size: 24px;
-  color: #FFF;
-  font-style: normal;
+  font-size: 20px;
   font-weight: 700;
-  line-height: 60px;
+  margin-right: 15px;
+  cursor: pointer;
+  display: flex;
+  width: 190px;
+  height: 50px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
 }
 
-.tabOrderList {
-  width: 392px;
-  height: 65px;
-  border: 1px solid #E6E6E6;
-  background: #270022;
-  color: #FFF;
-  font-family: Quicksand;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 60px;
-}
-
-.tabOrderList.active,
-.tabOrder.active {
-  background-color: #AD59A1;
+.btn-take-order.active,
+.btn-order-list.active {
+  background-color: #5F2857;
   color: #fff;
 }

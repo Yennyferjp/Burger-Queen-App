@@ -7,6 +7,13 @@
   flex-direction: column;
 }
 
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
 .order-title {
   color: #E6E6E6;
   text-align: center;
@@ -24,7 +31,8 @@
   font-size: 40px;
   font-style: normal;
   line-height: normal;
-  margin-top: 70px;
+  font-weight: 600;
+  margin-top: 50px;
   font-weight: 600;
 }
 
@@ -32,37 +40,6 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 45px;
-}
-
-.tabs {
-  display: flex;
-  text-align: center;
-}
-
-.tabOrder {
-  width: 375px;
-  height: 65px;
-  border: 1px solid #E6E6E6;
-  background: #270022;
-  font-family: Quicksand;
-  font-size: 24px;
-  color: #FFF;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 60px;
-}
-
-.tabOrderList {
-  width: 392px;
-  height: 65px;
-  border: 1px solid #E6E6E6;
-  background: #5F2857;
-  color: #FFF;
-  font-family: Quicksand;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 60px;
 }
 
 .updateIcon {
@@ -80,8 +57,13 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .loadingSpinner {
@@ -95,4 +77,43 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.interfaceCategories {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.btn-take-order,
+.btn-order-list {
+  border-radius: 16.136px;
+  border: 1px solid #FFFFFF;
+  background: rgba(173, 89, 161, 0.00);
+  color: #FFF;
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 20px;
+  font-weight: 700;
+  margin-right: 15px;
+  cursor: pointer;
+  display: flex;
+  width: 190px;
+  height: 50px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+}
+
+.btn-take-order.active,
+.btn-order-list.active {
+  background-color: #5F2857;
+  color: #fff;
+}
+
+.navbarLogoOrder {
+  display: flex;
+  align-items: center;
+  margin-left: 410px;
 }

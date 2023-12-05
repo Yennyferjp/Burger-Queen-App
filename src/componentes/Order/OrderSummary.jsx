@@ -9,6 +9,7 @@ const OrderStatus = {
   PENDIENTE: 'PENDIENTE',
   EN_PREPARACION: 'EN PREPARACIÓN',
   LISTO_PARA_ENTREGAR: 'LISTO PARA ENTREGAR',
+  ENTREGADO: 'ENTREGADO'
 };
 function OrderSummary({
   products,

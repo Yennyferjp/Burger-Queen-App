@@ -39,7 +39,15 @@ export function OrderList({ user }) {
 
   const handleCheckClicked = async (orderId, orderStatus) => {
     try {
-      if (orderStatus === 'LISTO PARA ENTREGAR') {
+      if(orderStatus === 'PENDIENTE'){
+        Swal.fire({
+          icon: 'info',
+          title: 'Orden en Preparación',
+          text: 'La orden aún está en preparación y no puede ser entregada. Por favcor, espere!',
+        });
+        return;
+      }
+      if (orderStatus === 'LISTO PARA ENTREGAR' ) {
         const isConfirmed = await Swal.fire({
           title: '¿La orden ya fue entregada?',
           icon: 'question',

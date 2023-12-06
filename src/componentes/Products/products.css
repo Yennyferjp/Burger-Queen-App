@@ -5,15 +5,14 @@
   max-width: 768px;
 } */
 
-.navbar-products {
-  padding: 10px 0;
+.navbar {
+  padding: 10px 0 0 0;
 }
 
-nav {
+.nav-products {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
 }
 
 .navbar-left {
@@ -47,34 +46,49 @@ nav {
   margin-left: 10px;
 }
 
+.navCategories {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 /* Estilo para el botón cuando está activo */
 
 .nav-button {
   border-radius: 16.136px;
-  border: 3px solid #FF6584;
+  border: 1px solid #FFFFFF;
+  background: rgba(173, 89, 161, 0.00);
   color: #FFF;
   text-align: center;
   font-family: Quicksand;
-  font-size: 16px;
-  font-style: normal;
+  font-size: 20px;
   font-weight: 700;
-  line-height: 20px;
-  margin: 0 2rem;
-  width: 145px;
-  height: 46px;
-  align-items: center;
+  margin-right: 15px;
+  cursor: pointer;
   display: flex;
+  width: 190px;
+  height: 50px;
+  text-align: center;
   justify-content: center;
+  align-items: center;
+  padding: 3px;
+}
+
+.nav-button.active {
+  background-color: #5F2857;
+  color: #fff;
 }
 
 .h1Products {
-  margin-top: 0;
   color: #E6E6E6;
   text-align: center;
   font-family: Quicksand;
-  font-size: 46px;
+  font-size: 40px;
   font-style: normal;
   line-height: normal;
+  margin-top: 50px;
+  font-weight: 600;
+  margin-bottom: 40px;
 }
 
 .div-formulario-products {

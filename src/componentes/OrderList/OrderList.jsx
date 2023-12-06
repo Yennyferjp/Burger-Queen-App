@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 export function OrderList({ user }) {
   const [orderList, setOrderList] = useState([]);
-  const [activeTab, setActiveTab] = useState(1);
+  // const [activeTab, setActiveTab] = useState(1);
 
   useEffect(() => {
     refreshOrderList();

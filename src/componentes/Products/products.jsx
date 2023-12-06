@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Swal from "sweetalert2";
 import Modal from "react-modal";
+import style from "./products.css";
 import { useNavigate } from "react-router-dom";
 import "./products.css";
 import { Link, useMatch } from "react-router-dom";
@@ -343,13 +344,13 @@ export function Products() {
     navigate("/login");
   };
 
-  const usuariosMatch = useMatch("/users");
-  const orderMatch = useMatch("/order");
+  const usersMatch = useMatch("/users");
+  const productsMatch = useMatch("/products");
 
   return (
     <div>
-      <div className="navbar-products">
-        <nav>
+      <div className="navbar">
+        <div className="nav-products">
           <div className="navbar-left">
             <img
               src={logout}
@@ -367,10 +368,21 @@ export function Products() {
               className="navbar-image-logo"
             />
           </div>
-        </nav>
+        </div>
+      </div>
+      <div className={`navCategories`}>
+      <Link
+          to="/users"
+          className={`nav-button ${usersMatch === 'Usuarios' ? style['active-button'] : ''}`}
+        >Usuarios
+        </Link>
+        <Link
+          to="/products"
+          className={`nav-button ${productsMatch === 'Productos' ? style['active-button'] : ''}`}
+        >Productos
+        </Link>
       </div>
       <div>
-
         <h1 className="h1Products">Gestión de Productos</h1>
 
         {/* Modal para agregar producto */}
@@ -402,7 +414,7 @@ export function Products() {
               type="number"
               value={productPrice}
               placeholder="Precio"
-              onChange={(e) => setProductPrice(new Number (e.target.value))}
+              onChange={(e) => setProductPrice(new Number(e.target.value))}
               className="input-field"
             />
           </div>
@@ -475,16 +487,6 @@ export function Products() {
           />
           Nuevo
         </button>
-        <Link
-          to="/order"
-          className={`nav-button ${orderMatch ? "active-button" : ""}`}
-        >Ir a Órdenes
-        </Link>
-        <Link
-          to="/users"
-          className={`nav-button ${usuariosMatch ? "active-button" : ""}`}
-        >Ir a Usuarios
-        </Link>
       </div>
 
       {/* Modal para editar producto */}

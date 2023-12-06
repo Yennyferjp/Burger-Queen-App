@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import style from "./OrderList.module.css";
+import Swal from 'sweetalert2';
 import { Link } from "react-router-dom";
 import update from "./images/update.png";
 import { getOrdersFromBackend, updateOrderToBackend } from "../../services/orders-services";
@@ -10,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 export function OrderList({ user }) {
   const [orderList, setOrderList] = useState([]);
-  const [activeTab, setActiveTab] = useState(1);
+  // const [activeTab, setActiveTab] = useState(1);
 
   useEffect(() => {
     refreshOrderList();
@@ -36,20 +37,46 @@ export function OrderList({ user }) {
     setActiveButton(category);
   }
 
-  const handleOrderDelivered = async (orderId) => {
+  const handleCheckClicked = async (orderId, orderStatus) => {
     try {
-      // Actualiza la orden en el backend como "Entregado"
-      await updateOrderToBackend(orderId, 'Entregado');
-
-      // Actualiza la lista de órdenes eliminando la orden entregada
+      if(orderStatus === 'PENDIENTE'){
+        Swal.fire({
+          icon: 'info',
+          title: 'Orden en Preparación',
+          text: 'La orden aún está en preparación y no puede ser entregada. Por favcor, espere!',
+        });
+        return;
+      }
+      if (orderStatus === 'LISTO PARA ENTREGAR' ) {
+        const isConfirmed = await Swal.fire({
+          title: '¿La orden ya fue entregada?',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Sí',
+          cancelButtonText: 'No',
+        });
+  
+        if (!isConfirmed.isConfirmed) {
+          return;
+        }
+      }
+  
+      // Elimina la orden entregada de la lista local
       setOrderList((prevOrders) =>
         prevOrders.filter((order) => order._id !== orderId)
       );
+  
+      if (orderStatus === 'COMPLETADO') {
+        return;
+      }
+  
+      // Actualiza la orden en el backend como "Entregado"
+      await updateOrderToBackend(orderId, 'ENTREGADO');
     } catch (error) {
-      console.error('Error al actualizar la orden: ', error);
+      console.error('Error al actualizar la orden:', error);
     }
   };
-
+  
   return (
     <div className={style.orderList}>
       <div className={style.navbar}>
@@ -105,7 +132,7 @@ export function OrderList({ user }) {
             <OrderCard
               key={order._id}
               order={order}
-              onOrderDelivered={handleOrderDelivered}
+              onCheckClicked={handleCheckClicked}
             />
           ))
         )}

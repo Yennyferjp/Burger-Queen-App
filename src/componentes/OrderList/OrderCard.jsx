@@ -1,14 +1,25 @@
-import React from 'react';
+import Swal from 'sweetalert2';
 import style from "./OrderCard.module.css";
 import check from "./images/check.png";
+import pendingIcon from "./images/pendingIcon.png"; 
 
-function OrderCard({ order }) {
+function OrderCard({ order, onCheckClicked }) {
+  const handleCheckClick = async () => {
+    onCheckClicked(order._id, order.status);
+  };
+
+  const checkIcon = order.status === 'PENDIENTE' ? pendingIcon : check;
 
   return (
     <div className={style.orderCard}>
       <div className={style.cardHeader}>
         <h4>{`Mesa # ${order.table}`}</h4>
-        <img src={check} alt="check" className={style.checkIcon} />
+        <img
+          src={checkIcon}
+          alt="check"
+          className={style.checkIcon}
+          onClick={handleCheckClick}
+        />
       </div>
       <hr></hr>
       <div className={style.orderSection}>

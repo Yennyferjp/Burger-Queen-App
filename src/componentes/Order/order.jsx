@@ -62,8 +62,14 @@ export function Order({ user }) {
         cancelButtonText: 'Cancelar',
       }).then((result) => {
         if (result.isConfirmed) {
+          // Limpiar la orden local
           setProducts([]);
           setTotalOrder(0);
+  
+          // Restablecer campos customer y table
+          setCustomer('');
+          setTable('');
+  
           Swal.fire('Orden eliminada', 'La orden se ha eliminado correctamente', 'success');
         }
       });
@@ -74,6 +80,13 @@ export function Order({ user }) {
     if (products.length === 0) {
       Swal.fire('Error', 'La orden está vacía. Agregue productos antes de enviar el pedido.', 'error');
     } else {
+      clearOrder();
+      // Actualizar estados para que queden vacíos o en su estado inicial
+      setCustomer('');
+      setTable('');
+      setProducts([]);
+      setTotalOrder(0);
+  
       Swal.fire('Enviando Pedido', 'El pedido se ha enviado correctamente a cocina', 'success');
     }
   };

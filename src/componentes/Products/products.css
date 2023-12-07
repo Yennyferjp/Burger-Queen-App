@@ -319,13 +319,6 @@
   outline: none;
 }
 
-/* .input-img {
-  flex: 2;
-  height: 27px;
-  background: #FFF;
-  outline: none;
-} */
-
 .custom-file-container {
   display: flex;
   flex-direction: column;
@@ -347,11 +340,10 @@
   border-radius: 11.135999999999996px;
   margin: 0 23px 0 0;
   width: 204px;
-  height: 12px;
+  height: 9px;
   align-items: center;
   justify-content: center;
 }
-
 
 .custom-file-upload:hover {
   background: #FFF;
@@ -385,10 +377,6 @@
   font-family: Quicksand;
   margin-left: 20px;
 }
-
-/* .input[type="file"] {
-  display: none;
-} */
 
 .label-style {
   flex: 1;

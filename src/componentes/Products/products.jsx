@@ -451,7 +451,7 @@ export function Products() {
               // ref={productImageRef}
               />
               <label htmlFor="fileInput" className="custom-file-upload">
-                Seleccionar archivo
+              {productImage ? 'Archivo seleccionado' : 'Seleccionar archivo'}
               </label>
               {productImage && (
                 <div className="img-name">{productImage.name}</div>

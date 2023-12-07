@@ -31,7 +31,7 @@ export function Products() {
   const [productName, setProductName] = useState("");
   const [productType, setProductType] = useState("");
   const [productPrice, setProductPrice] = useState(0);
-  const [productImage, setProductImage] = useState("");
+  const [productImage, setProductImage] = useState(null);
   const productImageRef = useRef(null);
 
   useEffect(() => {  // se utiliza para manejar el ciclo de vida de la aplicación
@@ -344,6 +344,11 @@ export function Products() {
     navigate("/login");
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setProductImage(file);
+  };
+
   const usersMatch = useMatch("/users");
   const productsMatch = useMatch("/products");
 
@@ -371,7 +376,7 @@ export function Products() {
         </div>
       </div>
       <div className={`navCategories`}>
-      <Link
+        <Link
           to="/users"
           className={`nav-button ${usersMatch === 'Usuarios' ? style['active-button'] : ''}`}
         >Usuarios
@@ -397,7 +402,7 @@ export function Products() {
           <button className="close-modal-button" onClick={closeAddProductModal}>
             &times;
           </button>
-          <h1 className="h1Products">Agregar Producto</h1>
+          <h1 className="h1ProductsModal">Agregar Producto</h1>
           <div className="form-group">
             <label className="label-style">Nombre:</label>
             <input
@@ -433,16 +438,27 @@ export function Products() {
             </select>
           </div>
           <div className="form-group">
-            <label className="label-style">Imagen:</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => setProductImage(e.target.files[0])}
-              className="input-field"
-              ref={productImageRef}
-            />
-            {/* <span class="file-name">Ningún archivo seleccionado</span> */}
+            <label className="label-style" htmlFor="fileInput">
+              Imagen:
+            </label>
+            <div className="custom-file-container">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                id="fileInput"
+                style={{ display: 'none' }}
+              // ref={productImageRef}
+              />
+              <label htmlFor="fileInput" className="custom-file-upload">
+                Seleccionar archivo
+              </label>
+              {productImage && (
+                <div className="img-name">{productImage.name}</div>
+              )}
+            </div>
           </div>
+
           <button className="btn-saveChanges" onClick={addNewProduct}>
             Guardar
           </button>

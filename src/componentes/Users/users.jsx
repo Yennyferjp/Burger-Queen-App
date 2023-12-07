@@ -457,7 +457,7 @@ export function Users() {
         <button className="close-modal-button" onClick={closeModal}>
           &times;
         </button>
-        <h1 className="h1Users">Editar Usuario</h1>
+        <h1 className="h1UsersModal">Editar Usuario</h1>
         <div className="form-group">
           <label className="label-style">Nombre:</label>
           <input

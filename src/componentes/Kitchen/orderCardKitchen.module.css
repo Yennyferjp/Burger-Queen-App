@@ -2,21 +2,27 @@
 
 .orderCardKitchen {
   overflow-y: auto;
-  margin-top: 51px;
+  margin-top: 25px;
   background-color: rgba(217, 217, 217, 0.31);
   width: 290px;
-  height: fit-content;
+  height: 220px;
+  max-height: 400px;
   border-radius: 16px;
   border: 1px solid #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+  transition: box-shadow 0.3s ease;
+}
+
+.orderCardKitchen:hover {
+  box-shadow: 0px 8px 16px rgb(235, 21, 137);
 }
 
 .cardHeader {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
   width: 250px;
@@ -24,38 +30,58 @@
 
 .orderSection {
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
-h2 {
+.productName,
+.productqty {
   color: #E6E6E6;
   text-align: center;
   font-family: Quicksand;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: normal;
+  margin-top: 4px;
+  margin-bottom: 2px;
 }
 
-h4 {
+.h4Mesa {
   color: #E6E6E6;
   text-align: center;
   font-family: Quicksand;
   font-size: 24px;
   font-weight: 600;
   line-height: normal;
-  margin: 20px 0px 15px 0px;
+  margin-top: 10px;
+  margin-bottom: 1px;
 }
 
-.orderStatus {
+.preparationButton {
   border-radius: 12px;
-  border: 2px solid #FFF;
-  background: #C6C6C5;
+  border: 1.5px solid #FFF;
+  background: #EC2569;
   color: #FFF;
   font-family: Quicksand;
   font-size: 17px;
-  font-weight: 700;
-  width: 164px;
-  min-height: 55px;
+  font-weight: 600;
+  width: auto;
+  min-height: 40px;
+  margin-top: auto;
+  margin-bottom: 3px;
+}
+
+.deliveryButton {
+  border-radius: 12px;
+  border: 1.5px solid #1c141b;
+  background: #f7dc34;
+  color: #1c141b;
+  font-family: Quicksand;
+  font-size: 17px;
+  font-weight: 600;
+  width: auto;
+  min-height: 40px;
+  margin-top: auto;
+  margin-bottom: 3px;
 }
 
 .productQuantity {
@@ -64,7 +90,10 @@ h4 {
   justify-content: space-between;
   width: 210px;
 }
-
-.checkIcon {
-  width: 50px;
+.elapsedTime {
+  color: #E6E6E6;
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 12px;
+  margin: auto;
 }

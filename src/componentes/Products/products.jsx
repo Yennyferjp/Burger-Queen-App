@@ -448,7 +448,6 @@ export function Products() {
                 onChange={handleFileChange}
                 id="fileInput"
                 style={{ display: 'none' }}
-              // ref={productImageRef}
               />
               <label htmlFor="fileInput" className="custom-file-upload">
               {productImage ? 'Archivo seleccionado' : 'Seleccionar archivo'}
@@ -517,7 +516,7 @@ export function Products() {
           &times;
         </button>
 
-        <h1 className="h1Products">Editar producto</h1>
+        <h1 className="h1ProductsModal">Editar producto</h1>
         <div className="form-group">
           <label className="label-style">Nombre:</label>
           <input type="text"
@@ -556,15 +555,25 @@ export function Products() {
           />
         </div>
         <div className="form-group">
-          <label className="label-style">Imagen:</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setProductImage(e.target.files[0])}
-            className="input-field"
-            ref={productImageRef}
-          />
-        </div>
+            <label className="label-style" htmlFor="fileInput">
+              Imagen:
+            </label>
+            <div className="custom-file-container">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                id="fileInput"
+                style={{ display: 'none' }}
+              />
+              <label htmlFor="fileInput" className="custom-file-upload">
+              {productImage ? 'Archivo seleccionado' : 'Seleccionar archivo'}
+              </label>
+              {productImage && (
+                <div className="img-name">{productImage.name}</div>
+              )}
+            </div>
+          </div>
         <button className="btn-saveChanges" onClick={saveProductsChanges}>Guardar</button>
       </Modal>
 
@@ -579,7 +588,7 @@ export function Products() {
         <button className="close-modal-button" onClick={closeDetailsProductModal}>
           &times;
         </button>
-        <h1 className="h1Products">Detalles del producto</h1>
+        <h1 className="h1ProductsModal">Detalles del producto</h1>
         <img
           src={`${BASE_URL}${productImage}`}
           className="product-image" // cambiar por la del producto

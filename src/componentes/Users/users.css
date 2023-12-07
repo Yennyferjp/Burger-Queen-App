@@ -1,14 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Questrial&family=Quicksand&family=Rammetto+One&display=swap');
 
 .navbar-user {
-    padding: 10px 0;
+    padding: 10px 0 0 0;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
 }
 
 .navbar-left {
@@ -63,13 +62,15 @@ nav {
 }
 
 .h1Users {
-    margin-top: 0;
     color: #E6E6E6;
     text-align: center;
     font-family: Quicksand;
-    font-size: 46px;
+    font-size: 40px;
     font-style: normal;
     line-height: normal;
+    margin-top: 50px;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
 .div-formulario-users {
@@ -121,7 +122,7 @@ nav {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin: 10px;
+    margin: 10px 25px;
     display: flex;
     flex-direction: column-reverse;
     justify-content: center;
@@ -138,6 +139,14 @@ nav {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+}
+
+.h1UsersModal { 
+    color: #E6E6E6;
+    text-align: center;
+    font-family: Quicksand;
+    font-size: 35px;
+    margin: 0px 0px 30px 0px;
 }
 
 .users-table {

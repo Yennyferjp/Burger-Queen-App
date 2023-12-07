@@ -257,11 +257,11 @@ export function Users() {
         try {
           // Eliminar el usuario en el backend
           await deleteUserFromBackend(userId);
-  
+
           // Actualizar la lista de usuarios localmente
           const updatedUsers = users.filter((user) => user._id !== userId);
           setUsers(updatedUsers);
-  
+
           Swal.fire({
             icon: "success",
             title: "Usuario Eliminado",
@@ -284,15 +284,15 @@ export function Users() {
       }
     });
   }
-  
+
   // Realiza la redirección a la ruta de login cuando se hace clic en "Salir"
   const navigate = useNavigate();
   const handleLogoutClick = () => {
     navigate("/login");
   };
 
-  const usuariosMatch = useMatch("/users");
-  const productosMatch = useMatch("/products");
+  const usersMatch = useMatch("/users");
+  const productsMatch = useMatch("/products");
 
   // Renderizar la interfaz de usuario
   return (
@@ -319,7 +319,19 @@ export function Users() {
           </div>
         </nav>
       </div>
-      <div >
+      <div>
+        <div className={`navCategories`}>
+          <Link
+            to="/users"
+            className={`nav-button ${usersMatch === 'Usuarios' ? style['active-button'] : ''}`}
+          >Usuarios
+          </Link>
+          <Link
+            to="/products"
+            className={`nav-button ${productsMatch === 'Productos' ? style['active-button'] : ''}`}
+          >Productos
+          </Link>
+        </div>
 
         <h1 className="h1Users">Gestión de Usuarios</h1>
         {/* Modal para agregar usuario */}
@@ -334,7 +346,7 @@ export function Users() {
           <button className="close-modal-button" onClick={closeAddModal}>
             &times;
           </button>
-          <h1 className="h1Users">Agregar Usuario</h1>
+          <h1 className="h1UsersModal">Agregar Usuario</h1>
           <div className="form-group">
             <label className="label-style">Nombre:</label>
             <input
@@ -361,8 +373,11 @@ export function Users() {
               value={role}
               onChange={(e) => setRol(e.target.value)}
               className="input-field"
-            >
-              {getRoles().map((item, index) => <option key={index} value={item.key}>{item.role}</option>)}
+            > <option value="">Selecciona una opción</option>
+              {getRoles().map((item, index) =>
+                <option key={index} value={item.key}>
+                  {item.role}
+                </option>)}
             </select>
           </div>
           <div className="form-group">
@@ -430,13 +445,6 @@ export function Users() {
           />
           Nuevo
         </button>
-        <Link
-          to="/products"
-          className={`nav-button ${productosMatch ? "active-button" : ""}`}
-        >
-          Ir a Productos
-        </Link>
-
       </div>
       {/* Modal para editar usuario */}
       <Modal

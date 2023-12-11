@@ -69,6 +69,9 @@ h3 {
   width: 50px;
 }
 
+.cancelIcon{
+  width: 25px;
+}
 .orderStatusMessage {
   color: #E6E6E6;
   text-align: center;
@@ -76,11 +79,17 @@ h3 {
   font-size: 16px;
   font-weight: 600;
   line-height: normal;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   width: 250px;
   margin-top: auto;
 
 }
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+}
+

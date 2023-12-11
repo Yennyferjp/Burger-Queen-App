@@ -79,7 +79,7 @@ export async function updateOrderToBackend(orderId, newStatus) {
 
 export async function deleteOrderToBackend(orderId) {
   try {
-    const response = await fetch(`${BASE_URL}/orders`, {
+    const response = await fetch(`${BASE_URL}/orders/${orderId}`, { 
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

@@ -44,41 +44,37 @@ export function OrderList({ user }) {
 
   const handleCheckClicked = async (orderId, orderStatus) => {
     try {
-      if(orderStatus === 'PENDIENTE'){
-        Swal.fire({
-          icon: 'info',
-          title: 'Orden en Preparación',
-          text: 'La orden aún está en preparación y no puede ser entregada. Por favor, espere!',
-        });
+      let confirmationTitle, backendStatus;
+  
+      if (orderStatus === 'PENDIENTE') {
+        confirmationTitle = '¿Desea cancelar la orden?';
+        backendStatus = 'CANCELADO';
+      } else if (orderStatus === 'LISTO PARA ENTREGAR') {
+        confirmationTitle = '¿La orden ya fue entregada?';
+        backendStatus = 'COMPLETADO';
+      }
+  
+      const isConfirmed = await Swal.fire({
+        title: confirmationTitle,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No',
+      });
+  
+      if (!isConfirmed.isConfirmed) {
         return;
       }
-      if (orderStatus === 'LISTO PARA ENTREGAR') {
-        const isConfirmed = await Swal.fire({
-          title: '¿La orden ya fue entregada?',
-          icon: 'question',
-          showCancelButton: true,
-          confirmButtonText: 'Sí',
-          cancelButtonText: 'No',
-        });
-
-        if (!isConfirmed.isConfirmed) {
-          return;
-        }
-      }
-
-      // Elimina la orden entregada de la lista local
+  
+      // Elimina la orden de la lista local
       setOrderList((prevOrders) =>
         prevOrders.filter((order) => order._id !== orderId)
       );
-
-      if (orderStatus === 'COMPLETADO') {
-        return;
-      }
-
-      // Actualiza la orden en el backend como "Entregado"
-      await updateOrderToBackend(orderId, 'ENTREGADO');
+  
+      // Actualiza la orden en el backend
+      await updateOrderToBackend(orderId, backendStatus);
     } catch (error) {
-      console.error('Error al actualizar la orden:', error);
+      console.error('Error al manejar la acción de la orden:', error);
     }
   };
 

@@ -66,23 +66,25 @@ h3 {
 }
 
 .checkIcon {
-  width: 50px;
+  margin-top: 10px;
+  width: 40px;
 }
 
 .cancelIcon{
   width: 25px;
 }
 .orderStatusMessage {
-  color: #E6E6E6;
+  color: #fff;
   text-align: center;
   font-family: Quicksand;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: bolder;
   line-height: normal;
   align-items: center;
   width: 250px;
   margin-top: auto;
-
+  margin-bottom: 0;
+  text-shadow: 2px 2px 3px rgb(230, 34, 118)
 }
 
 .cardHeader {

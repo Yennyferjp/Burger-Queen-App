@@ -568,7 +568,7 @@ export function Products() {
               {productImage ? 'Archivo seleccionado' : 'Seleccionar archivo'}
               </label>
               {productImage && (
-                <div className={style.imgName}>{productImage.name}</div>
+                <div className={style.imgName}>{productImage}</div>
               )}
             </div>
           </div>

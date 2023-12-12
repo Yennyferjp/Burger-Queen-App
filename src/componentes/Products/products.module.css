@@ -321,7 +321,7 @@
   justify-content: center;
 }
 
-.customFileUpload {
+.customFileUploadAdd {
   cursor: pointer;
   display: flex;
   padding: 10px 15px;
@@ -340,7 +340,31 @@
   justify-content: center;
 }
 
-.customFileUpload:hover {
+.customFileUploadEdit {
+  cursor: pointer;
+  display: flex;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-family: Quicksand;
+  font-weight: 700;
+  text-align: center;
+  color: #FFF;
+  background: #AD59A1;
+  border: 2px solid #AD59A1;
+  border-radius: 11.135999999999996px;
+  margin: 0 2px 0 0;
+  width: 204px;
+  height: 9px;
+  align-items: center;
+  justify-content: center;
+}
+
+.customFileUploadAdd:hover {
+  background: #FFF;
+  color: #AD59A1;
+}
+
+.customFileUploadEdit:hover {
   background: #FFF;
   color: #AD59A1;
 }

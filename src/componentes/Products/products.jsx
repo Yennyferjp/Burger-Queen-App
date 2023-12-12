@@ -447,7 +447,7 @@ export function Products() {
                 id="fileInput"
                 style={{ display: 'none' }}
               />
-              <label htmlFor="fileInput" className={style.customFileUpload}>
+              <label htmlFor="fileInput" className={style.customFileUploadAdd}>
               {productImage ? 'Archivo seleccionado' : 'Seleccionar archivo'}
               </label>
               {productImage && (
@@ -564,7 +564,7 @@ export function Products() {
                 id="fileInput"
                 style={{ display: 'none' }}
               />
-              <label htmlFor="fileInput" className={style.customFileUpload}>
+              <label htmlFor="fileInput" className={style.customFileUploadEdit}>
               {productImage ? 'Archivo seleccionado' : 'Seleccionar archivo'}
               </label>
               {productImage && (

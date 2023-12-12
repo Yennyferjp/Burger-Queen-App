@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Kavoon&family=Questrial&family=Quicksand&family=Rammetto+One&display=swap');
 
-.navbar-user {
+.navbarUser {
     padding: 10px 0 0 0;
 }
 
@@ -10,17 +10,17 @@ nav {
     align-items: center;
 }
 
-.navbar-left {
+.navbarLeft {
     display: flex;
     align-items: center;
 }
 
-.navbar-image-logout {
+.navbarImageLogout {
     width: 61px;
     height: 56px;
 }
 
-.navbar-logout {
+.navbarLogout {
     color: #FFF;
     font-family: Quicksand;
     font-size: 22px;
@@ -30,35 +30,49 @@ nav {
     font-weight: bold;
 }
 
-.navbar-right {
+.navbarRight {
     display: flex;
     align-items: center;
 }
 
-.navbar-image-logo {
+.navbarImageLogo {
     width: 142px;
     height: 143.909px;
     margin-left: 10px;
 }
 
+.navCategories {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+}
+
 /* Estilo para el botón cuando está activo */
 
-.nav-button {
+.navButton {
     border-radius: 16.136px;
-    border: 3px solid #FF6584;
+    border: 1px solid #FFFFFF;
+    background: rgba(173, 89, 161, 0.00);
     color: #FFF;
     text-align: center;
     font-family: Quicksand;
-    font-size: 16px;
-    font-style: normal;
+    font-size: 20px;
     font-weight: 700;
-    line-height: 20px;
-    margin: 0 2rem;
-    width: 145px;
-    height: 46px;
-    align-items: center;
+    margin-right: 15px;
+    cursor: pointer;
     display: flex;
+    width: 190px;
+    height: 50px;
+    text-align: center;
     justify-content: center;
+    align-items: center;
+    padding: 3px;
+}
+
+.activeButton {
+    background-color: #5F2857;
+    color: #fff;
 }
 
 .h1Users {
@@ -73,13 +87,13 @@ nav {
     margin-bottom: 10px;
 }
 
-.div-formulario-users {
+.divFormularioUsers {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.input-users {
+.inputUsers {
     width: 181px;
     height: 47px;
     border-radius: 16.136px;
@@ -97,19 +111,19 @@ nav {
 
 }
 
-.div-pass-btn {
+.divPassBtn {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.user-management {
+.userManagement {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
-.btn-add-user {
+.btnAddUser {
     width: 145px;
     height: 47px;
     border-radius: 16.136px;
@@ -131,7 +145,7 @@ nav {
 
 }
 
-.h2-users {
+.h2Users {
     color: #E6E6E6;
     text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
     font-family: Quicksand;
@@ -141,7 +155,7 @@ nav {
     line-height: normal;
 }
 
-.h1UsersModal { 
+.h1UsersModal {
     color: #E6E6E6;
     text-align: center;
     font-family: Quicksand;
@@ -149,7 +163,7 @@ nav {
     margin: 0px 0px 40px 0px;
 }
 
-.users-table {
+.usersTable {
     font-family: Quicksand;
     width: 650px;
     border: hidden;
@@ -160,7 +174,7 @@ nav {
     margin-top: 35px;
 }
 
-.users-table thead tr {
+.usersTable thead tr {
     font-family: Quicksand;
     font-size: 20px;
     background-color: #CB1E75;
@@ -168,22 +182,22 @@ nav {
     height: 50px;
 }
 
-.even-row {
+.evenRow {
     background: #C4A5C0;
     height: 40px;
 }
 
-.odd-row {
+.oddRow {
     background: #F7D0F1;
     height: 40px;
 }
 
-.users-actions {
+.usersActions {
     display: flex;
     justify-content: space-evenly;
 }
 
-.delete-btn {
+.deleteBtn {
     background-color: transparent;
     background-image: url('./images/delete.png');
     background-repeat: no-repeat;
@@ -194,7 +208,7 @@ nav {
     border: none;
 }
 
-.edit-btn {
+.editBtn {
     background-color: transparent;
     background-image: url('./images/edit.png');
     background-repeat: no-repeat;
@@ -207,7 +221,7 @@ nav {
 
 /*Modal*/
 
-.close-modal-button {
+.closeModalButton {
     position: relative;
     background: none;
     border: none;
@@ -218,7 +232,7 @@ nav {
     margin-left: 375px;
 }
 
-.custom-modal-edituser {
+.customModalEditUser {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.92) 0%, rgba(34, 3, 30, 0.92) 25%, rgba(95, 40, 87, 0.92) 48.44%, rgba(34, 3, 30, 0.92) 70.31%, rgba(0, 0, 0, 0.92) 100%);
     border: 2px solid #333;
     border-radius: 5px;
@@ -228,7 +242,7 @@ nav {
     padding: 20px;
 }
 
-.custom-modal-adduser {
+.customModalAddUser {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.92) 0%, rgba(34, 3, 30, 0.92) 25%, rgba(95, 40, 87, 0.92) 48.44%, rgba(34, 3, 30, 0.92) 70.31%, rgba(0, 0, 0, 0.92) 100%);
     border: 2px solid #333;
     border-radius: 5px;
@@ -238,7 +252,7 @@ nav {
     padding: 20px;
 }
 
-.form-group {
+.formGroup {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -246,7 +260,7 @@ nav {
     justify-content: space-around;
 }
 
-.input-field {
+.inputField {
     flex: 2;
     width: 200px;
     height: 27px;
@@ -261,7 +275,7 @@ nav {
 
 }
 
-.label-style {
+.labelStyle {
     flex: 1;
     margin-right: 10px;
     color: #FFF;
@@ -292,7 +306,7 @@ input[type="checkbox"]:checked {
     border: 1px solid #E02181;
 }
 
-.btn-saveChanges {
+.btnSaveChanges {
     height: 47px;
     width: 100px;
     border-radius: 16.136px;
@@ -308,7 +322,7 @@ input[type="checkbox"]:checked {
     margin: 25px 0px 10px 150px;
 }
 
-.btn-closeModal {
+.btnCloseModal {
     height: 47px;
     border-radius: 16.136px;
     border: 1px solid #E6E6E6;
@@ -326,7 +340,7 @@ input[type="checkbox"]:checked {
 
 /*Termina Modal*/
 
-.btn-routes {
+.btnRoutes {
     display: flex;
     margin-top: 30px;
     justify-content: space-around;
@@ -335,8 +349,9 @@ input[type="checkbox"]:checked {
 }
 
 /*Swal Fire*/
-.swal-title {
+.swalTitle {
     font-family: Quicksand;
-    font-size: 30px ;
+    font-size: 30px;
 }
+
 /* Fin Swal Fire*/

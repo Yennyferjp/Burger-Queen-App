@@ -55,48 +55,138 @@
 
 - **SweetAlert2**: Para crear pop-ups y alertas atractivas, utilizamos la librería SweetAlert2.
 
-## Capturas de Pantalla
+## Historias de Usuario
 
-**Inicio de Sesión:**
-- Muestra la página de inicio de la aplicación, que incluye el formulario de inicio de sesión para los usuarios autorizados.
+### [Historia de Usuario 1] Mesero/a debe poder ingresar al sistema, si el admin ya le ha asignado credenciales
 
+#### Descripción
+
+Como mesero/a, quiero poder ingresar al sistema de pedidos.
+
+**Criterios de Aceptación:**
+- Acceder a una pantalla de inicio de sesión.
+- Ingresar email y contraseña.
+- Recibir mensajes de error comprensibles según la información ingresada.
+- Ingresar al sistema de pedidos si las credenciales son correctas.
+
+**Captura de Pantalla:**
 ![Inicio de Sesión](./src/images/bq2.png)
 
-**Proceso de Toma de Pedido:**
-- Ilustra cómo los empleados toman pedidos de manera eficiente y seleccionan elementos del menú.
+---
 
+### [Historia de Usuario 2] Mesero/a debe poder tomar pedido de cliente/a
+
+#### Descripción
+
+Como mesero/a, quiero tomar el pedido de un/a cliente/a para no depender de mi mala memoria, saber cuánto cobrar y enviarlo a la cocina para evitar errores y preparar en orden.
+
+**Criterios de Aceptación:**
+- Anotar el nombre del/a cliente/a.
+- Agregar productos al pedido.
+- Eliminar productos.
+- Ver resumen y el total de la compra.
+- Enviar pedido.
+
+**Captura de Pantalla:**
 ![Proceso de Toma de Pedido](./src/images/bq.png)
 
-**Gestión de Trabajadores:**
-- Muestra la interfaz para administrar usuarios, lo que incluye crear, editar y eliminar productos.
+---
 
-**Menú de Productos:**
-- Muestra la variedad de productos disponibles en la aplicación, con opciones de personalización.
+### [Historia de Usuario 3] Jefe de cocina debe ver los pedidos
 
-![Gestión de Productos](./src/images/bq3.png)
+#### Descripción
+
+Como jefe de cocina, quiero ver los pedidos de los clientes en orden y marcar cuáles están listos para saber qué se debe cocinar y avisar a los meseros que un pedido está listo para servirlo a un cliente.
+
+**Criterios de Aceptación:**
+- Ver los pedidos ordenados según se van haciendo.
+- Marcar los pedidos que se han preparado y están listos para servirse.
+- **Tiempo de Preparación (En desarrollo):**
+   - Actualmente, estamos trabajando en la implementación del cálculo y visualización del tiempo que tomó preparar cada pedido desde que llegó hasta que se marcó como completado. Esta función se encuentra en proceso de desarrollo.
+
+**Capturas de Pantalla:**
+- Interfaz del Chef: ![Interfaz del Chef](./src/images/bqKitchen.png)
+
+---
+
+### [Historia de Usuario 4] Mesero/a debe ver pedidos listos para servir
+
+#### Descripción
+
+Como mesero/a, quiero ver los pedidos que están preparados para entregarlos rápidamente a los clientes que las hicieron.
+
+**Criterios de Aceptación:**
+- Ver listado de pedidos listos para servir.
+- Marcar pedidos que han sido entregados.
+
+**Captura de Pantallas:**
+- Estado de Órdenes: ![Estado de Órdenes](./src/images/bqOrdenes.png)
+![Estado de Órdenes](./src/images/bqStatus.png)
 
 
-**Pop-Up de Confirmación:**
-- Muestra el pop-up de confirmación que aparece después de realizar un pedido exitosamente.
+---
 
-![Pop-Up de Confirmación](./src/images/bq4.png)
-![Pop-Up de Error](./src/images/bq1.png)
+### [Historia de Usuario 5] Administrador(a) de tienda debe administrar a sus trabajadorxs
+
+#### Descripción
+
+Como administrador(a) de tienda, quiero gestionar a los usuarios de la plataforma para mantener actualizada la información de mis trabajadorxs.
+
+**Criterios de Aceptación:**
+- Ver un listado de trabajadorxs.
+- Agregar nuevos trabajadorxs.
+- Eliminar trabajadorxs existentes.
+- Actualizar datos de trabajadorxs.
+
+
+**Captura de Pantalla:**
+- Listado de Trabajadores: ![Listado de Trabajadores](./src/images/bqUser.png)
+
+---
+
+### [Historia de Usuario 6] Administrador(a) de tienda debe administrar a sus productos
+
+#### Descripción
+
+Como administrador(a) de tienda, quiero gestionar los productos para mantener actualizado el menú.
+
+**Criterios de Aceptación:**
+- Ver un listado de productos.
+- Agregar nuevos productos al menú.
+- Eliminar productos del menú.
+- Actualizar datos de productos existentes.
+
+
+**Captura de Pantalla:**
+- Listado de Productos: ![Gestión de Productos](./src/images/bq3.png)
+
+
+**Pop-Ups en la Aplicación:**
+
+1. **Pop-Up de Confirmación de Pedido:**
+   - Muestra el pop-up de confirmación que aparece después de realizar un pedido exitosamente.
+
+   ![Pop-Up de Confirmación](./src/images/bq4.png)
+
+2. **Pop-Up de Cancelación de Orden:**
+   - Se presenta cuando el cliente decide cancelar la orden, proporcionando una confirmación para garantizar la precisión de la acción.
+
+   ![Pop-Up de Cancelación](./src/images/bqCancel.png)
+
+3. **Pop-Up de Confirmación de Entrega:**
+   - Aparece para confirmar si la orden ha sido entregada satisfactoriamente al cliente, brindando un cierre claro al proceso de servicio.
+
+   ![Pop-Up de Confirmación de Entrega](./src/images/bqConfirm.png)
+
+
 
 ## Estado del Proyecto
 
-**En Desarrollo:** El proyecto está en proceso de desarrollo y actualmente se están trabajando en las siguientes historias de usuario:
+**En Desarrollo:**
+El proyecto está actualmente en fase de desarrollo y se están abordando las siguientes tareas:
 
-- [Historia de usuario 3] Jefe de cocina debe ver los pedidos:
-  - Yo como jefe de cocina quiero ver los pedidos de lxs clientxs en orden y marcar cuáles están listos para saber qué se debe cocinar y avisar a lxs meserxs que un pedido está listo para servirlo a un clientx.
+- Desarrollo de nuevas funcionalidades y mejoras.
+- Resolución de los issues creados en el repositorio de Git.
 
-  **Criterios de Aceptación:**
-  - Ver los pedidos ordenados según se van haciendo.
-  - Marcar los pedidos que se han preparado y están listos para servirse.
-  - Ver el tiempo que tomó preparar el pedido desde que llegó hasta que se marcó como completado.
+Puedes encontrar detalles específicos sobre cada tarea en nuestro [repositorio de Git](https://github.com/Yennyferjp/Burger-Queen-App/issues).
 
-- [Historia de usuario 4] Meserx debe ver pedidos listos para servir:
-  - Yo como meserx quiero ver los pedidos que están preparados para entregarlos rápidamente a lxs clientxs que las hicieron.
-
-  **Criterios de Aceptación:**
-  - Ver listado de pedido listos para servir.
-  - Marcar pedidos que han sido entregados.

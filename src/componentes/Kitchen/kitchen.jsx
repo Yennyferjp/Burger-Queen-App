@@ -8,8 +8,9 @@ import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
 import update from "./images/update.png";
 
-export function Kitchen({user}) {
+export function Kitchen({ user }) {
   const [kitchenOrders, setKitchenOrders] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     refreshOrderList();
@@ -23,12 +24,19 @@ export function Kitchen({user}) {
   const refreshOrderList = async () => {
     setKitchenOrders(null);
     try {
+      setLoading(true)
       const orders = await getOrdersFromBackend();
       setKitchenOrders(orders);
     } catch (error) {
       console.error('Error al obtener las órdenes de la cocina: ', error);
     }
+    finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000)
+    }
   };
+
 
   const updateOrderList = async (orderId, newStatus) => {
     try {
@@ -59,7 +67,8 @@ export function Kitchen({user}) {
               alt="logout"
               className="navbar-image-logout"
             />
-            <p className="navbar-logout" onClick={handleLogoutClick}>
+            <p className="navbar-logout"
+              onClick={handleLogoutClick}>
               Salir
             </p>
           </div>
@@ -73,21 +82,29 @@ export function Kitchen({user}) {
         </nav>
       </div>
       <div className={style.ordersContainer}>
+        <h2 style={{ margin: '5px' }}>{user ? `Hola Chef ${user.userName}` : 'Hola Chef'}</h2>
         <h1 className={style.kitchenTitle}>Órdenes por preparar</h1>
-        <h2>{user ? `Hola Chef ${user.userName}` : 'Hola Chef'}</h2>
-        <img src={update} alt="updateOrders" className={style.updateIcon} onClick={() => refreshOrderList()} />
+        <img
+          src={update}
+          alt="updateOrders"
+          className={style.updateIcon}
+          onClick={() => refreshOrderList()} />
         <div className={style.orderCardsKitchen}>
-          {!kitchenOrders ? (
-            <div className={style.loadingSpinner}></div>
-          ) : kitchenOrders.length === 0 ? (
-            "No hay órdenes"
-          ) : (
+          {kitchenOrders && !loading && kitchenOrders.length > 0 && (
             kitchenOrders.map((order) => (
-              <OrderCardKitchen key={order._id} order={order} updateOrderList={updateOrderList} />
+              <OrderCardKitchen
+                key={order._id}
+                order={order}
+                updateOrderList={updateOrderList}
+              />
             ))
           )}
         </div>
       </div>
+      {loading && <div className={style.loadingSpinner}></div>}
+      {!loading && kitchenOrders && kitchenOrders.length === 0 && (
+        <p className={style.noOrdersText}> No hay órdenes</p>
+      )}
     </div>
   );
 }

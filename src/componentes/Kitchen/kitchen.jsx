@@ -7,8 +7,10 @@ import Swal from 'sweetalert2';
 import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
 import update from "./images/update.png";
+import { getUserInfo } from '../../services/auth-services';
 
-export function Kitchen({ user }) {
+export function Kitchen() {
+  const user = getUserInfo();
   const [kitchenOrders, setKitchenOrders] = useState(null);
   const [loading, setLoading] = useState(false);
 

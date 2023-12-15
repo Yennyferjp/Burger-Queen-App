@@ -19,7 +19,7 @@ export async function authorize(email, password) {
     throw new Error(json.message);
   }
   setAccessToken(json.token);
-  return json.token;
+  return getUserInfo(json.token);
 }
 
 function setAccessToken(token) {
@@ -42,7 +42,7 @@ export function getAuthorizationHeader() {
   return `Bearer ${getAccessToken()}`;
 }
 
-export function parseJwt(token) {
+function parseJwt(token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
@@ -50,4 +50,13 @@ export function parseJwt(token) {
   }).join(''));
 
   return JSON.parse(jsonPayload);
+}
+
+export function getUserInfo(token){
+  token = token || getAccessToken();
+  if(!token){
+    throw new Error('No está autenticado');
+  }
+  const payload = parseJwt(token);
+  return{ ...payload, token}
 }

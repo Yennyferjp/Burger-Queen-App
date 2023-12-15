@@ -8,8 +8,10 @@ import OrderCard from './OrderCard';
 import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
 import { useNavigate } from "react-router-dom";
+import { getUserInfo } from '../../services/auth-services';
 
-export function OrderList({ user }) {
+export function OrderList() {
+  const user = getUserInfo();
   const [orderList, setOrderList] = useState([]);
   const [loading, setLoading] = useState(false);
 

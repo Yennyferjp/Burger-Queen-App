@@ -8,13 +8,28 @@
 }
 
 .navbar {
+  padding: 10px 0 0 0;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px;
 }
 
-.order-title {
+.navbarImageLogo {
+  width: 142px;
+  height: 143.909px;
+  margin-left: 10px;
+}
+
+.navbarLogout {
+  color: #FFF;
+  font-family: Quicksand;
+  font-size: 22px;
+  font-style: normal;
+  line-height: normal;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.orderTitle {
   color: #E6E6E6;
   text-align: center;
   font-family: Quicksand;
@@ -85,8 +100,8 @@
   justify-content: center;
 }
 
-.btn-take-order,
-.btn-order-list {
+.btnTakeOrder,
+.btnOrderList {
   border-radius: 16.136px;
   border: 1px solid #FFFFFF;
   background: rgba(173, 89, 161, 0.00);
@@ -106,8 +121,7 @@
   padding: 3px;
 }
 
-.btn-take-order.active,
-.btn-order-list.active {
+.activeButton {
   background-color: #5F2857;
   color: #fff;
 }

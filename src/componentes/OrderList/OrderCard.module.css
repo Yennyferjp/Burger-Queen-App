@@ -2,38 +2,41 @@
 
 .orderCard {
   overflow-y: auto;
-  margin-top: 51px;
+  margin-top: 25px;
   background-color: rgba(217, 217, 217, 0.31);
   width: 290px;
-  height: fit-content;
+  height: 220px;
+  max-height: 400px;
   border-radius: 16px;
   border: 1px solid #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+  transition: box-shadow 0.3s ease;
+  position: relative;
 }
 
-.cardHeader {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  width: 250px;
+.orderCard:hover {
+  box-shadow: 0px 8px 16px rgb(235, 21, 137);
 }
 
 .orderSection {
   align-items: center;
-  margin-bottom: 25px;
+  overflow-y: auto;
+  max-height: 400px;
 }
 
-h2 {
+.productName,
+.productqty {
   color: #E6E6E6;
   text-align: center;
   font-family: Quicksand;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: normal;
+  margin-top: 4px;
+  margin-bottom: 2px;
 }
 
 h3 {
@@ -45,26 +48,15 @@ h3 {
   line-height: normal;
 }
 
-h4 {
+.h4Mesa {
   color: #E6E6E6;
   text-align: center;
   font-family: Quicksand;
   font-size: 24px;
   font-weight: 600;
   line-height: normal;
-  margin: 20px 0px 15px 0px;
-}
-
-.orderStatus {
-  border-radius: 12px;
-  border: 2px solid #FFF;
-  background: #C6C6C5;
-  color: #FFF;
-  font-family: Quicksand;
-  font-size: 17px;
-  font-weight: 700;
-  width: 164px;
-  min-height: 55px;
+  margin-top: 10px;
+  margin-bottom: 1px;
 }
 
 .productQuantity {
@@ -75,5 +67,41 @@ h4 {
 }
 
 .checkIcon {
-  width: 50px;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
+
+.cancelIcon{
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.orderStatusMessage {
+  color: #fff;
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 16px;
+  font-weight: bolder;
+  line-height: normal;
+  align-items: center;
+  width: 250px;
+  margin-top: auto;
+  margin-bottom: 0;
+  text-shadow: 2px 2px 3px rgb(230, 34, 118)
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+}
+

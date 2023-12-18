@@ -39,22 +39,21 @@
 }
 
 .orderListTitle {
-  margin-top: 0;
   color: #E6E6E6;
   text-align: center;
   font-family: Quicksand;
   font-size: 40px;
   font-style: normal;
   line-height: normal;
+  margin-top: 70px;
   font-weight: 600;
-  margin-top: 50px;
-  font-weight: 600;
+  margin-top: 5px;
 }
 
 .orderCardsSection {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: 45px;
+  grid-column-gap: 20px;
 }
 
 .updateIcon {
@@ -85,13 +84,10 @@
   border: 4px solid rgba(0, 0, 0, 0.1);
   border-top: 4px solid #FFFFFF;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  margin-top: 50px;
-  animation: spin 2s linear infinite;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 50px;
+  height: 50px;
+  margin: 10% auto; 
+  animation: spin 8s linear infinite;
 }
 
 .interfaceCategories {
@@ -130,4 +126,13 @@
   display: flex;
   align-items: center;
   margin-left: 410px;
+}
+
+.noOrdersText {
+  font-family: Quicksand;
+  text-align: center;
+  font-weight: 400;
+  font-size: 30px;
+  color: #fff;
+  padding: 20px;
 }

@@ -7,10 +7,12 @@ import OrderCard from './OrderCard';
 import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
 import { useNavigate, Link, useMatch } from "react-router-dom";
+import { getUserInfo } from '../../services/auth-services';
 
-export function OrderList({ user }) {
+export function OrderList() {
+  const user = getUserInfo();
   const [orderList, setOrderList] = useState([]);
-  // const [activeTab, setActiveTab] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     refreshOrderList();
@@ -18,10 +20,15 @@ export function OrderList({ user }) {
 
   const refreshOrderList = async () => {
     try {
+      setLoading(true);
       const orders = await getOrdersFromBackend();
       setOrderList(orders);
     } catch (error) {
       console.error('Error al obtener las órdenes: ', error);
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     }
   };
 
@@ -34,51 +41,47 @@ export function OrderList({ user }) {
 
   const changeActiveCategory = (category) => {
     setActiveButton(category);
-  }
+  };
 
   const handleCheckClicked = async (orderId, orderStatus) => {
     try {
-      if(orderStatus === 'PENDIENTE'){
-        Swal.fire({
-          icon: 'info',
-          title: 'Orden en Preparación',
-          text: 'La orden aún está en preparación y no puede ser entregada. Por favcor, espere!',
-        });
+      let confirmationTitle, backendStatus;
+  
+      if (orderStatus === 'PENDIENTE') {
+        confirmationTitle = '¿Desea cancelar la orden?';
+        backendStatus = 'CANCELADO';
+      } else if (orderStatus === 'LISTO PARA ENTREGAR') {
+        confirmationTitle = '¿La orden ya fue entregada?';
+        backendStatus = 'COMPLETADO';
+      }
+  
+      const isConfirmed = await Swal.fire({
+        title: confirmationTitle,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No',
+      });
+  
+      if (!isConfirmed.isConfirmed) {
         return;
       }
-      if (orderStatus === 'LISTO PARA ENTREGAR' ) {
-        const isConfirmed = await Swal.fire({
-          title: '¿La orden ya fue entregada?',
-          icon: 'question',
-          showCancelButton: true,
-          confirmButtonText: 'Sí',
-          cancelButtonText: 'No',
-        });
   
-        if (!isConfirmed.isConfirmed) {
-          return;
-        }
-      }
-  
-      // Elimina la orden entregada de la lista local
+      // Elimina la orden de la lista local
       setOrderList((prevOrders) =>
         prevOrders.filter((order) => order._id !== orderId)
       );
   
-      if (orderStatus === 'COMPLETADO') {
-        return;
-      }
-  
-      // Actualiza la orden en el backend como "Entregado"
-      await updateOrderToBackend(orderId, 'ENTREGADO');
+      // Actualiza la orden en el backend
+      await updateOrderToBackend(orderId, backendStatus);
     } catch (error) {
-      console.error('Error al actualizar la orden:', error);
+      console.error('Error al manejar la acción de la orden:', error);
     }
   };
 
   const takeOrderMatch = useMatch("/order");
   const orderListsMatch = useMatch("/order-list");
-  
+
   return (
     <div className={style.orderList}>
       <div className={style.navbar}>
@@ -114,15 +117,16 @@ export function OrderList({ user }) {
         > Lista de Órdenes
         </Link>
       </div>
-      <div className={style.orderListTitle}>Órdenes</div>
-      <h2>{user ? `Hola Mesero ${user.userName}` : 'Hola Mesero'}</h2>
-      <img src={update} alt="updateOrders" className={style.updateIcon} onClick={() => refreshOrderList()} />
+      <h2 style={{ marginTop: '50px' }}>{user ? `Hola Mesero ${user.userName}` : 'Hola Mesero'}</h2>
+      <h1 className={style.orderListTitle}>Órdenes</h1>
+      <img
+        src={update}
+        alt="updateOrders"
+        className={style.updateIcon}
+        onClick={() => refreshOrderList()}
+      />
       <div className={style.orderCardsSection}>
-        {!orderList ? (
-          <div className={style.loadingSpinner}></div>
-        ) : orderList.length === 0 ? (
-          "No hay órdenes"
-        ) : (
+        {orderList.length > 0 && !loading && (
           orderList.map((order) => (
             <OrderCard
               key={order._id}
@@ -132,6 +136,11 @@ export function OrderList({ user }) {
           ))
         )}
       </div>
+      {loading && <div className={style.loadingSpinner}></div>}
+
+      {orderList.length === 0 && !loading && (
+        <p className={style.noOrdersText}>No hay órdenes</p>
+      )}
     </div>
   );
 }

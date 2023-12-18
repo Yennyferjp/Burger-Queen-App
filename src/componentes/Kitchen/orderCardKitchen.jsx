@@ -26,9 +26,9 @@ function OrderCardKitchen({ order, updateOrderList }) {
       title: 'Confirmar Entrega',
       text: '¿Estás seguro de que la orden está lista para ser entregada?',
       showCancelButton: true,
-      confirmButtonColor: '#D889CC93',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, lista para entregar',
+      confirmButtonColor: '#62335b',
+      cancelButtonColor: '#EC2569',
+      confirmButtonText: 'La orden ya esta lista',
       cancelButtonText: 'Cancelar',
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -38,7 +38,7 @@ function OrderCardKitchen({ order, updateOrderList }) {
         setStatus('LISTO PARA ENTREGAR');
 
         // Llama a la función para actualizar la orden en la base de datos
-        await updateOrderToBackend(order._id, 'LISTO PARA ENTREGAR');
+        await updateOrderToBackend(order._id, 'LISTO PARA ENTREGAR', elapsedTime);
 
         // Llama a la función para actualizar la lista de órdenes en el componente padre
         updateOrderList(order._id, 'LISTO PARA ENTREGAR');
@@ -46,7 +46,14 @@ function OrderCardKitchen({ order, updateOrderList }) {
         Swal.fire({
           icon: 'success',
           title: 'Preparación Completada',
-          text: 'La orden está lista para ser entregada.',
+          html: `<p class="${style.sweetAlertTable}"><strong>Mesa # ${order.table}</strong></p>
+                 <p class="${style.sweetAlertTime}">Tiempo transcurrido: ${formatTime(elapsedTime)}</p>`,
+          customClass: {
+            container: style.sweetAlertContainer,
+            title: style.sweetAlertTitle,
+            content: style.sweetAlertContent,
+            confirmButton: style.sweetAlertConfirmButton,
+          },
         });
       } else if (status === 'LISTO PARA ENTREGAR') {
         updateOrderList(order._id, 'LISTO PARA ENTREGAR');
@@ -62,6 +69,8 @@ function OrderCardKitchen({ order, updateOrderList }) {
     return `${formattedMinutes}:${formattedSeconds}`;
   };
 
+  const buttonColorClass = status === 'EN PREPARACIÓN' ? style.preparationButton : style.deliveryButton;
+
   useEffect(() => {
     return () => {
       clearInterval(timer);
@@ -71,30 +80,30 @@ function OrderCardKitchen({ order, updateOrderList }) {
   return (
     <div className={style.orderCardKitchen}>
       <div className={style.cardHeader}>
-        <h4>{`Mesa # ${order.table}`}</h4>
+        <h4 className={style.h4Mesa}>{`Mesa # ${order.table}`}</h4>
         {status === "LISTO PARA ENTREGAR" && <img src={check} alt="check" className={style.checkIcon} />}
+        {status === "EN PREPARACIÓN" && (
+          <p className={style.elapsedTime}>{`Tiempo transcurrido: ${formatTime(elapsedTime)}`}</p>
+        )}
       </div>
-      <hr></hr>
+      <hr style={{ borderColor: '#F7DC34' }} />
       <div className={style.orderSection}>
         {order.products && order.products.map((product, index) => (
           <div className={style.productQuantity} key={index}>
-            <h2> {product.product.name} </h2>
-            <h2> {product.qty} </h2>
+            <h2 className={style.productName}> ✧ {product.product.name} </h2>
+            <h2 className={style.productqty}> {product.qty} </h2>
           </div>
         ))}
       </div>
-      {status === "PENDIENTE" && (
-        <button className={style.orderStatus} onClick={startPreparation}>
-          PREPARAR
+      {status === "EN PREPARACIÓN" && (
+        <button className={`${style.orderStatus} ${buttonColorClass}`} onClick={stopPreparation}>
+          LISTO PARA ENTREGAR
         </button>
       )}
-      {status === "EN PREPARACIÓN" && (
-        <>
-          <p>{`Tiempo transcurrido: ${formatTime(elapsedTime)}`}</p>
-          <button className={style.orderStatus} onClick={stopPreparation}>
-            LISTO PARA ENTREGAR
-          </button>
-        </>
+      {status === "PENDIENTE" && (
+        <button className={style.deliveryButton} onClick={startPreparation}>
+          PREPARAR
+        </button>
       )}
     </div>
   );

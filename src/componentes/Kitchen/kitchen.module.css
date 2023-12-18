@@ -7,6 +7,34 @@
   flex-direction: column;
 }
 
+.navbar {
+  padding: 10px 0 0 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbarLeft {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navbarImageLogo {
+  width: 142px;
+  height: 143.909px;
+  margin-left: 10px;
+}
+
+.navbarLogout {
+  color: #FFF;
+  font-family: Quicksand;
+  font-size: 22px;
+  font-style: normal;
+  line-height: normal;
+  cursor: pointer;
+  font-weight: bold;
+}
+
 h2 {
   color: #E6E6E6;
   text-align: center;

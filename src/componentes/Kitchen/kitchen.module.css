@@ -25,7 +25,7 @@ h2 {
   line-height: normal;
   margin-top: 70px;
   font-weight: 600;
-  margin-top: 25px;
+  margin-top: 5px;
 }
 
 .ordersContainer{
@@ -44,7 +44,7 @@ h2 {
 .orderCardsKitchen {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: 45px;
+  grid-column-gap: 25px;
 }
 
 @keyframes spin {
@@ -56,11 +56,17 @@ h2 {
   border: 4px solid rgba(0, 0, 0, 0.1);
   border-top: 4px solid #FFFFFF;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  margin-top: 50px;
-  animation: spin 2s linear infinite;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 50px;
+  height: 50px;
+  margin: 10% auto; 
+  animation: spin 8s linear infinite;
+}
+
+.noOrdersText {
+  font-family: Quicksand;
+  text-align: center;
+  font-weight: 400;
+  font-size: 30px;
+  color: #fff;
+  padding: 20px;
 }

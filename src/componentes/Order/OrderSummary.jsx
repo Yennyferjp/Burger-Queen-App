@@ -9,7 +9,8 @@ const OrderStatus = {
   PENDIENTE: 'PENDIENTE',
   EN_PREPARACION: 'EN PREPARACIÓN',
   LISTO_PARA_ENTREGAR: 'LISTO PARA ENTREGAR',
-  ENTREGADO: 'ENTREGADO'
+  ENTREGADO: 'ENTREGADO',
+  CANCELADO: 'ORDEN CANCELADA'
 };
 function OrderSummary({
   products,
@@ -33,7 +34,8 @@ function OrderSummary({
     } else {
       try {
         let newOrder = {
-          userId: 0, // No enviar desde el frontend, crear función en el auth middleware para extraer el id del usuario, ver cómo se hace para validar el rol
+          userId: '',
+          userName: '',
           client: customer,
           table: table,
           products: products.map((product) => ({

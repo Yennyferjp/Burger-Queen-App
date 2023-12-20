@@ -6,16 +6,14 @@ import Swal from 'sweetalert2';
 import style from "./order.module.css";
 import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, useMatch } from "react-router-dom";
+
 
 export function Order({ user }) {
   const [customer, setCustomer] = useState('');
   const [table, setTable] = useState('');
   const [products, setProducts] = useState([]);
   const [totalOrder, setTotalOrder] = useState(0);
-  // const [isOrderStarted, setIsOrderStarted] = useState(false);
-  // const [activeTab, setActiveTab] = useState(1);
 
   const addProductToOrder = (product) => {
     console.log(product);
@@ -62,14 +60,11 @@ export function Order({ user }) {
         cancelButtonText: 'Cancelar',
       }).then((result) => {
         if (result.isConfirmed) {
-          // Limpiar la orden local
           setProducts([]);
           setTotalOrder(0);
-  
-          // Restablecer campos customer y table
           setCustomer('');
           setTable('');
-  
+
           Swal.fire('Orden eliminada', 'La orden se ha eliminado correctamente', 'success');
         }
       });
@@ -86,7 +81,7 @@ export function Order({ user }) {
       setTable('');
       setProducts([]);
       setTotalOrder(0);
-  
+
       Swal.fire('Enviando Pedido', 'El pedido se ha enviado correctamente a cocina', 'success');
     }
   };
@@ -100,59 +95,43 @@ export function Order({ user }) {
     setIsOrderStarted(true);
   };
 
-  const [activeButton, setActiveButton] = useState('Tomar orden');
-
-  const changeActiveCategory = (category) => {
-    setActiveButton(category);
-  }
-
-  // const handleTabClick = (tab) => {
-  //   if (tab === 1) {
-  //     setActiveTab('Ordenar');
-  //   } else if (tab === 2) {
-  //     setActiveTab('Lista de Órdenes');
-  //   }
-  // };
+  const takeOrderMatch = useMatch("/order");
+  const orderListsMatch = useMatch("/order-list");
 
   return (
     <div>
-      <div className="navbar-products">
-        <nav>
-          <div className="navbar-left">
+      <div className={style.takeOrder}>
+        <div className={style.navbar}>
+          <div className={style.navbarLeft}>
             <img
               src={logout}
-              alt="logout"
-              className="navbar-image-logout"
+              alt={style.logout}
+              className={style.navbarImageLogout}
             />
-            <p className="navbar-logout" onClick={handleLogoutClick}>
+            <p className={style.navbarLogout} onClick={handleLogoutClick}>
               Salir
             </p>
           </div>
-          <div className="navbar-right">
+          <div className={style.navbarRight}>
             <img
               src={logo}
               alt="Imagen 2"
-              className="navbar-image-logo"
+              className={style.navbarImageLogo}
             />
           </div>
-        </nav>
+        </div>
       </div>
       <div className={style.interfaceCategories} id="interface-buttons">
         <Link
           to="/order"
-          className={`${style['btn-take-order']} 
-          ${activeButton === 'Tomar orden' ? style['active'] : ''}`}
-          onClick={() => {
-            changeActiveCategory('Tomar orden');
-          }}> Tomar orden
+          className={`${style['btnTakeOrder']} 
+          ${takeOrderMatch !== null ? style['activeButton'] : ''}`}
+        > Tomar orden
         </Link>
         <Link
           to="/order-list"
-          className={`${style['btn-order-list']} 
-          ${activeButton === 'Lista de Órdenes' ? style['active'] : ''}`}
-          onClick={() => {
-            changeActiveCategory('Lista de Órdenes');
-          }}
+          className={`${style['btnOrderList']} 
+          ${orderListsMatch !== null ? style['activeButton'] : ''}`}
         > Lista de Órdenes
         </Link>
       </div>

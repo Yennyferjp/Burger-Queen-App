@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import style from "./OrderList.module.css";
 import Swal from 'sweetalert2';
-import { Link } from "react-router-dom";
 import update from "./images/update.png";
 import { getOrdersFromBackend, updateOrderToBackend } from "../../services/orders-services";
 import OrderCard from './OrderCard';
 import logout from "./images/flecha-logout.png";
 import logo from "./images/logo_bq.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, useMatch } from "react-router-dom";
 import { getUserInfo } from '../../services/auth-services';
 
 export function OrderList() {
@@ -80,47 +79,42 @@ export function OrderList() {
     }
   };
 
+  const takeOrderMatch = useMatch("/order");
+  const orderListsMatch = useMatch("/order-list");
+
   return (
     <div className={style.orderList}>
       <div className={style.navbar}>
-        <nav>
-          <div className="navbar-left">
+          <div className={style.navbarLeft}>
             <img
               src={logout}
               alt="logout"
-              className="navbar-image-logout" />
-            <p className="navbar-logout"
-              onClick={handleLogoutClick}>
+              className={style.navbarImageLogout}
+            />
+            <p className={style.navbarLogout} onClick={handleLogoutClick}>
               Salir
             </p>
           </div>
           <div className={style.navbarLogoOrder}>
-            <img src={logo} alt="Imagen 2" className="navbar-image-logo" />
+            <img
+              src={logo}
+              alt="Imagen 2"
+              className={style.navbarImageLogo}
+            />
           </div>
-        </nav>
       </div>
       <div className={style.interfaceCategories} id="interface-buttons">
-        <Link
+      <Link
           to="/order"
-          className={`${style['btn-take-order']} 
-          ${activeButton === 'Tomar orden' ? style['active'] : ''}`}
-          onClick={() => {
-            changeActiveCategory('Tomar orden');
-          }}
-        >
-          {' '}
-          Tomar órden
+          className={`${style['btnTakeOrder']} 
+          ${takeOrderMatch !== null ? style['activeButton'] : ''}`}
+          > Tomar orden
         </Link>
         <Link
           to="/order-list"
-          className={`${style['btn-order-list']} 
-          ${activeButton === 'Lista de Órdenes' ? style['active'] : ''}`}
-          onClick={() => {
-            changeActiveCategory('Lista de Órdenes');
-          }}
-        >
-          {' '}
-          Lista de Órdenes
+          className={`${style['btnOrderList']} 
+          ${orderListsMatch !== null ? style['activeButton'] : ''}`}
+        > Lista de Órdenes
         </Link>
       </div>
       <h2 style={{ marginTop: '50px' }}>{user ? `Hola Mesero ${user.userName}` : 'Hola Mesero'}</h2>

@@ -61,27 +61,26 @@ export function Kitchen() {
 
   return (
     <div>
-      <div className="navbar-products">
-        <nav>
-          <div className="navbar-left">
+      <div className={style.navbarProducts}>
+      <div className={style.navbar}>
+          <div className={style.navbarLeft}>
             <img
               src={logout}
               alt="logout"
-              className="navbar-image-logout"
+              className={style.navbarImageLogout}
             />
-            <p className="navbar-logout"
-              onClick={handleLogoutClick}>
+            <p className={style.navbarLogout} onClick={handleLogoutClick}>
               Salir
             </p>
           </div>
-          <div className="navbar-right">
+          <div className={style.navbarRight}>
             <img
               src={logo}
               alt="Imagen 2"
-              className="navbar-image-logo"
+              className={style.navbarImageLogo}
             />
           </div>
-        </nav>
+        </div>
       </div>
       <div className={style.ordersContainer}>
         <h2 style={{ margin: '5px' }}>{user ? `Hola Chef ${user.userName}` : 'Hola Chef'}</h2>

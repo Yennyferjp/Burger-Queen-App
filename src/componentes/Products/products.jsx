@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import Swal from "sweetalert2";
 import Modal from "react-modal";
+import style from "./products.module.css";
 import { useNavigate } from "react-router-dom";
-import "./products.css";
 import { Link, useMatch } from "react-router-dom";
 import {
   addProductToBackend,
   getProductsFromBackend,
   updateProductToBackend,
   deleteProductFromBackend,
-  getTypeName,
   getTypes,
 } from "../../services/products-services";
 
@@ -353,81 +352,81 @@ export function Products() {
 
   return (
     <div>
-      <div className="navbar">
-        <div className="nav-products">
-          <div className="navbar-left">
+      <div className={style.navbar}>
+        <div className={style.navProducts}>
+          <div className={style.navbarLeft}>
             <img
               src={logout}
               alt="logout"
-              className="navbar-image-logout"
+              className={style.navbarImageLogout}
             />
-            <p className="navbar-logout" onClick={handleLogoutClick}>
+            <p className={style.navbarLogout} onClick={handleLogoutClick}>
               Salir
             </p>
           </div>
-          <div className="navbar-right">
+          <div className={style.navbarRight}>
             <img
               src={logo}
               alt="Imagen 2"
-              className="navbar-image-logo"
+              className={style.navbarImageLogo}
             />
           </div>
         </div>
       </div>
-      <div className={`navCategories`}>
+      <div className={style.navCategories}>
         <Link
           to="/users"
-          className={`nav-button ${usersMatch === 'Usuarios' ? style['active-button'] : ''}`}
+          className={`${style['navButton']} ${usersMatch !== null ? style['activeButton'] : ''}`}
         >Usuarios
         </Link>
         <Link
           to="/products"
-          className={`nav-button ${productsMatch === 'Productos' ? style['active-button'] : ''}`}
+          className={`${style['navButton']} ${productsMatch !== null ? style['activeButton'] : ''}`}
         >Productos
         </Link>
       </div>
       <div>
-        <h1 className="h1Products">Gestión de Productos</h1>
+        <h1 className={style.h1Products}>Gestión de Productos</h1>
 
         {/* Modal para agregar producto */}
         <Modal
           isOpen={isAddProductModalOpen}
           onRequestClose={closeAddProductModal}
           contentLabel="Agregar Producto"
-          className="custom-modal-addProduct"
+          className={style.customModalAddProduct}
           ariaHideApp={true}
         >
           {/* Botón "x" para cerrar el modal */}
-          <button className="close-modal-button" onClick={closeAddProductModal}>
+          <button className={style.closeModalButton} onClick={closeAddProductModal}>
             &times;
           </button>
-          <h1 className="h1ProductsModal">Agregar Producto</h1>
-          <div className="form-group">
-            <label className="label-style">Nombre:</label>
+          <h1 className={style.h1ProductsModal}>Agregar Producto</h1>
+          <div className={style.formGroup}>
+            <label className={style.labelStyle}>Nombre:</label>
             <input
               type="text"
               placeholder="Nombre"
               value={productName}
               onChange={(e) => setProductName(e.target.value)}
-              className="input-field"
+              className={style.inputField}
             />
           </div>
-          <div className="form-group">
-            <label className="label-style">Precio:</label>
+          <div className={style.formGroup}>
+            <label className={style.labelStyle}>Precio:</label>
             <input
               type="number"
               value={productPrice}
               placeholder="Precio"
               onChange={(e) => setProductPrice(new Number(e.target.value))}
-              className="input-field"
+              className={style.inputField}
             />
           </div>
-          <div className="form-group">
-            <label className="label-style">Tipo:</label>
+          <div className={style.formGroup}>
+            <label className={style.labelStyle}>Tipo:</label>
             <select
               value={productType}
               onChange={(e) => setProductType(e.target.value)}
-              className="input-field"
+              className={style.inputField}
             >
               <option value="">Selecciona una opción</option>
               {getTypes().map((item, index) =>
@@ -436,37 +435,36 @@ export function Products() {
                 </option>)}
             </select>
           </div>
-          <div className="form-group">
-            <label className="label-style" htmlFor="fileInput">
+          <div className={style.formGroup}>
+            <label className={style.labelStyle} htmlFor="fileInput">
               Imagen:
             </label>
-            <div className="custom-file-container">
+            <div className={style.customFileContainer}>
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleFileChange}
                 id="fileInput"
                 style={{ display: 'none' }}
-              // ref={productImageRef}
               />
-              <label htmlFor="fileInput" className="custom-file-upload">
+              <label htmlFor="fileInput" className={style.customFileUploadAdd}>
               {productImage ? 'Archivo seleccionado' : 'Seleccionar archivo'}
               </label>
               {productImage && (
-                <div className="img-name">{productImage.name}</div>
+                <div className={style.imgName}>{productImage.name}</div>
               )}
             </div>
           </div>
 
-          <button className="btn-saveChanges" onClick={addNewProduct}>
+          <button className={style.btnSaveChanges} onClick={addNewProduct}>
             Guardar
           </button>
 
         </Modal>
       </div>
-      <div className="list-products">
+      <div className={style.listProducts}>
 
-        <table className="products-table">
+        <table className={style.productsTable}>
           <thead>
             <tr>
               <th>Nombre</th>
@@ -477,15 +475,15 @@ export function Products() {
           </thead>
           <tbody>
             {products.map((product, index) => (
-              <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
+              <tr key={index} className={index % 2 === 0 ? style.evenRow : style.oddRow}>
                 <td>{product.productName}</td>
                 <td>{product.productType}</td>
                 <td>{product.productPrice}</td>
                 <td>
-                  <div className="products-actions">
-                    <button onClick={() => deleteProduct(product.productId)} className="delete-btn"></button>
-                    <button onClick={() => openEditProductModal(index)} className="edit-btn"></button>
-                    <button onClick={() => openDetailsProductModal(index)} className="details-btn"></button>
+                  <div className={style.productsActions}>
+                    <button onClick={() => deleteProduct(product.productId)} className={style.deleteBtn}></button>
+                    <button onClick={() => openEditProductModal(index)} className={style.editBtn}></button>
+                    <button onClick={() => openDetailsProductModal(index)} className={style.detailsBtn}></button>
                   </div>
                 </td>
               </tr>
@@ -493,12 +491,12 @@ export function Products() {
           </tbody>
         </table>
       </div>
-      <div className="btn-routes">
-        <button onClick={openAddProductModal} className="btn-add-product">
+      <div className={style.btnRoutes}>
+        <button onClick={openAddProductModal} className={style.btnAddProduct}>
           <img
             src={iconAdd}
             alt="Icon add Product"
-            className="Icon-Add-Product"
+            className={style.IconAddProduct}
           />
           Nuevo
         </button>
@@ -510,61 +508,71 @@ export function Products() {
         isOpen={editProductModalIsOpen}
         onRequestClose={closeEditProductModal}
         contentLabel="Editar producto"
-        className="custom-modal-editProduct"
+        className={style.customModalEditProduct}
       >
-        <button className="close-modal-button" onClick={closeEditProductModal}>
+        <button className={style.closeModalButton} onClick={closeEditProductModal}>
           &times;
         </button>
 
-        <h1 className="h1Products">Editar producto</h1>
-        <div className="form-group">
-          <label className="label-style">Nombre:</label>
+        <h1 className={style.h1ProductsModal}>Editar producto</h1>
+        <div className={style.formGroup}>
+          <label className={style.labelStyle}>Nombre:</label>
           <input type="text"
             placeholder="Nombre"
             value={productName}
             onChange={(e) => setProductName(e.target.value)}
-            className="input-field"
+            className={style.inputField}
           />
         </div>
-        <div className="form-group">
-          <label className="label-style">Tipo:</label>
+        <div className={style.formGroup}>
+          <label className={style.labelStyle}>Tipo:</label>
           <select
             value={productType}
             onChange={(e) => setProductType(e.target.value)}
-            className="input-field"
+            className={style.inputField}
           >
             {getTypes().map((item, index) => <option key={index} value={item.key}>{item.type}</option>)}
           </select>
         </div>
-        <div className="form-group">
-          <label className="label-style">ID:</label>
+        <div className={style.formGroup}>
+          <label className={style.labelStyle}>ID:</label>
           <input type="text"
             placeholder="ID"
             value={productId}
             onChange={(e) => setProductId(e.target.value)}
-            className="input-field"
+            className={style.inputField}
           />
         </div>
-        <div className="form-group">
-          <label className="label-style">Precio:</label>
+        <div className={style.formGroup}>
+          <label className={style.labelStyle}>Precio:</label>
           <input type="text"
             placeholder="Precio"
             value={productPrice}
             onChange={(e) => setProductPrice(e.target.value)}
-            className="input-field"
+            className={style.inputField}
           />
         </div>
-        <div className="form-group">
-          <label className="label-style">Imagen:</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setProductImage(e.target.files[0])}
-            className="input-field"
-            ref={productImageRef}
-          />
-        </div>
-        <button className="btn-saveChanges" onClick={saveProductsChanges}>Guardar</button>
+        <div className={style.formGroup}>
+            <label className={style.labelStyle} htmlFor="fileInput">
+              Imagen:
+            </label>
+            <div className={style.customFileContainer}>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                id="fileInput"
+                style={{ display: 'none' }}
+              />
+              <label htmlFor="fileInput" className={style.customFileUploadEdit}>
+              {productImage ? 'Archivo seleccionado' : 'Seleccionar archivo'}
+              </label>
+              {productImage && (
+                <div className={style.imgName}>{productImage}</div>
+              )}
+            </div>
+          </div>
+        <button className={style.btnSaveChanges} onClick={saveProductsChanges}>Guardar</button>
       </Modal>
 
       {/* Modal para ver detalles del producto */}
@@ -572,32 +580,32 @@ export function Products() {
         isOpen={isDetailsProductModalOpen}
         onRequestClose={closeDetailsProductModal}
         contentLabel="Detalles del producto"
-        className="custom-modal-detailsProduct"
+        className={style.customModalDetailsProduct}
         ariaHideApp={true}
       >
-        <button className="close-modal-button" onClick={closeDetailsProductModal}>
+        <button className={style.closeModalButton} onClick={closeDetailsProductModal}>
           &times;
         </button>
-        <h1 className="h1Products">Detalles del producto</h1>
+        <h1 className={style.h1ProductsModal}>Detalles del producto</h1>
         <img
           src={`${BASE_URL}${productImage}`}
-          className="product-image" // cambiar por la del producto
+          className={style.productImage} // cambiar por la del producto
         />
-        <div className="form-group">
-          <label className="label-style">Nombre:</label>
-          <span className="product-details">
+        <div className={style.formGroup}>
+          <label className={style.labelStyle}>Nombre:</label>
+          <span className={style.productDetails}>
             {productName}
           </span>
         </div>
-        <div className="form-group">
-          <label className="label-style">Tipo:</label>
-          <span className="product-details">
+        <div className={style.formGroup}>
+          <label className={style.labelStyle}>Tipo:</label>
+          <span className={style.productDetails}>
             {productType}
           </span>
         </div>
-        <div className="form-group">
-          <label className="label-style">Precio:</label>
-          <span className="product-details">
+        <div className={style.formGroup}>
+          <label className={style.labelStyle}>Precio:</label>
+          <span className={style.productDetails}>
             {productPrice}
           </span>
         </div>

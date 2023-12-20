@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
-import "./users.css";
+import style from "./users.module.css";
 import { Link, useMatch } from "react-router-dom";
 import {
   addUserToBackend,
@@ -257,11 +257,11 @@ export function Users() {
         try {
           // Eliminar el usuario en el backend
           await deleteUserFromBackend(userId);
-  
+
           // Actualizar la lista de usuarios localmente
           const updatedUsers = users.filter((user) => user._id !== userId);
           setUsers(updatedUsers);
-  
+
           Swal.fire({
             icon: "success",
             title: "Usuario Eliminado",
@@ -284,99 +284,114 @@ export function Users() {
       }
     });
   }
-  
+
   // Realiza la redirección a la ruta de login cuando se hace clic en "Salir"
   const navigate = useNavigate();
   const handleLogoutClick = () => {
     navigate("/login");
   };
 
-  const usuariosMatch = useMatch("/users");
-  const productosMatch = useMatch("/products");
+  const usersMatch = useMatch("/users");
+  const productsMatch = useMatch("/products");
 
   // Renderizar la interfaz de usuario
   return (
     <div>
       {/* Navbar */}
-      <div className="navbar-user">
+      <div className={style.navbarUser}>
         <nav>
-          <div className="navbar-left">
+          <div className={style.navbarLeft}>
             <img
               src={logout}
               alt="logout"
-              className="navbar-logout" onClick={handleLogoutClick}
+              className={style.navbarLogout} onClick={handleLogoutClick}
             />
-            <p className="navbar-logout" onClick={handleLogoutClick} >
+            <p className={style.navbarLogout} onClick={handleLogoutClick} >
               Salir
             </p>
           </div>
-          <div className="navbar-right">
+          <div className={style.navbarRight}>
             <img
               src={logo}
               alt="Imagen 2"
-              className="navbar-image-logo"
+              className={style.navbarImageLogo}
             />
           </div>
         </nav>
       </div>
-      <div >
+      <div>
+        <div className={style.navCategories}>
+          <Link
+            to="/users"
+            className={`${style['navButton']} ${usersMatch !== null ? style['activeButton'] : ''}`}
+          >Usuarios
+          </Link>
+          <Link
+            to="/products"
+            className={`${style['navButton']} ${productsMatch !== null ? style['activeButton'] : ''}`}
+          >Productos
+          </Link>
+        </div>
 
-        <h1 className="h1Users">Gestión de Usuarios</h1>
+        <h1 className={style.h1Users}>Gestión de Usuarios</h1>
         {/* Modal para agregar usuario */}
         <Modal
           isOpen={isAddModalOpen}
           onRequestClose={closeAddModal}
           contentLabel="Agregar Usuario"
-          className="custom-modal-adduser"
+          className={style.customModalAddUser}
           ariaHideApp={true}
         >
           {/* Botón "x" para cerrar el modal */}
-          <button className="close-modal-button" onClick={closeAddModal}>
+          <button className={style.closeModalButton} onClick={closeAddModal}>
             &times;
           </button>
-          <h1 className="h1Users">Agregar Usuario</h1>
-          <div className="form-group">
-            <label className="label-style">Nombre:</label>
+          <h1 className={style.h1UsersModal}>Agregar Usuario</h1>
+          <div className={style.formGroup}>
+            <label className={style.labelStyle}>Nombre:</label>
             <input
               type="text"
               placeholder="Nombre"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="input-field"
+              className={style.inputField}
             />
           </div>
-          <div className="form-group">
-            <label className="label-style">Correo:</label>
+          <div className={style.formGroup}>
+            <label className={style.labelStyle}>Correo:</label>
             <input
               type="text"
               value={email}
               placeholder="Correo"
               onChange={(e) => setEmail(e.target.value)}
-              className="input-field"
+              className={style.inputField}
             />
           </div>
-          <div className="form-group">
-            <label className="label-style">Rol:</label>
+          <div className={style.formGroup}>
+            <label className={style.labelStyle}>Rol:</label>
             <select
               value={role}
               onChange={(e) => setRol(e.target.value)}
-              className="input-field"
-            >
-              {getRoles().map((item, index) => <option key={index} value={item.key}>{item.role}</option>)}
+              className={style.inputField}
+            > <option value="">Selecciona una opción</option>
+              {getRoles().map((item, index) =>
+                <option key={index} value={item.key}>
+                  {item.role}
+                </option>)}
             </select>
           </div>
-          <div className="form-group">
-            <label className="label-style">Contraseña:</label>
+          <div className={style.formGroup}>
+            <label className={style.labelStyle}>Contraseña:</label>
             <input
               type="text"
               value={password}
               placeholder="Contraseña"
               onChange={(e) => setPassword(e.target.value)}
-              className="input-field"
+              className={style.inputField}
             />
           </div>
           <div>
-            <label className="label-style">Activo:</label>
+            <label className={style.labelStyle}>Activo:</label>
             <input
               type="checkbox"
               id="myCheckbox"
@@ -384,14 +399,14 @@ export function Users() {
               onChange={(e) => setActive(e.target.checked)}
             />
           </div>
-          <button className="btn-saveChanges" onClick={saveNewUser}>
+          <button className={style.btnSaveChanges} onClick={saveNewUser}>
             Guardar
           </button>
 
         </Modal>
       </div>
       <div>
-        <table className="users-table">
+        <table className={style.usersTable}>
           <thead>
             <tr>
               <th>Nombre</th>
@@ -403,15 +418,15 @@ export function Users() {
           </thead>
           <tbody>
             {users.map((user, index) => (
-              <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
+              <tr key={index} className={index % 2 === 0 ? style.evenRow : style.oddRow}>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{getRoleName(user.role)}</td>
                 <td>{user.active ? "Sí" : "No"}</td>
                 <td>
-                  <div className="users-actions">
-                    <button onClick={() => deleteUser(user._id)} className="delete-btn"></button>
-                    <button onClick={() => openModal(index)} className="edit-btn"></button>
+                  <div className={style.usersActions}>
+                    <button onClick={() => deleteUser(user._id)} className={style.deleteBtn}></button>
+                    <button onClick={() => openModal(index)} className={style.editBtn}></button>
                   </div>
                 </td>
               </tr>
@@ -420,78 +435,71 @@ export function Users() {
 
         </table>
       </div>
-      <div className="btn-routes">
+      <div className={style.btnRoutes}>
 
-        <button onClick={openAddModal} className="btn-add-user">
+        <button onClick={openAddModal} className={style.btnAddUser}>
           <img
             src={icon}
             alt="Icon Add User"
-            className="Icon-Add-User"
+            className={style.IconAddUser}
           />
           Nuevo
         </button>
-        <Link
-          to="/products"
-          className={`nav-button ${productosMatch ? "active-button" : ""}`}
-        >
-          Ir a Productos
-        </Link>
-
       </div>
       {/* Modal para editar usuario */}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Editar Usuario"
-        className="custom-modal-edituser"
+        className={style.customModalEditUser}
       >
         {/* Botón "x" para cerrar el modal */}
-        <button className="close-modal-button" onClick={closeModal}>
+        <button className={style.closeModalButton} onClick={closeModal}>
           &times;
         </button>
-        <h1 className="h1Users">Editar Usuario</h1>
-        <div className="form-group">
-          <label className="label-style">Nombre:</label>
+        <h1 className={style.h1UsersModal}>Editar Usuario</h1>
+        <div className={style.formGroup}>
+          <label className={style.labelStyle}>Nombre:</label>
           <input
             type="text"
             placeholder="Nombre"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="input-field"
+            className={style.inputField}
           />
         </div>
-        <div className="form-group">
-          <label className="label-style">Correo:</label>
+        <div className={style.formGroup}>
+          <label className={style.labelStyle}>Correo:</label>
           <input
             type="text"
             value={email}
             placeholder="Correo"
             onChange={(e) => setEmail(e.target.value)}
-            className="input-field"
+            className={style.inputField}
           />
         </div>
-        <div className="form-group">
-          <label className="label-style">Rol:</label>
+        <div className={style.formGroup}>
+          <label className={style.labelStyle}>Rol:</label>
           <select
             value={role}
             onChange={(e) => setRol(e.target.value)}
-            className="input-field"
+            className={style.inputField}
           >
             {getRoles().map((item, index) => <option key={index} value={item.key}>{item.role}</option>)}
           </select>
         </div>
 
-        <div className="form-group">
-          <label className="label-style">Contraseña:</label>
+        <div className={style.formGroup}>
+          <label className={style.labelStyle}>Contraseña:</label>
           <input type="text"
             value={password}
             placeholder="Contraseña"
             onChange={(e) => setPassword(e.target.value)}
-            className="input-field"
+            className={style.inputField}
           />
         </div>
         <div>
-          <label className="label-style">Activo:</label>
+          <label className={style.labelStyle}>Activo:</label>
           <input
             type="checkbox"
             id="myCheckboxEdit"
@@ -499,7 +507,7 @@ export function Users() {
             onChange={(e) => setActive(e.target.checked)}
           />
         </div>
-        <button className="btn-saveChanges" onClick={saveChanges}>Guardar</button>
+        <button className={style.btnSaveChanges} onClick={saveChanges}>Guardar</button>
       </Modal>
     </div>
   )
